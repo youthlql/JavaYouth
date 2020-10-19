@@ -1,3 +1,21 @@
+---
+title: 'Java并发体系-第二阶段-锁与同步-[2]'
+tags:
+  - Java并发
+  - 原理
+  - 源码
+categories:
+  - Java并发
+keywords: Java并发，原理，源码
+description: '万字系列长文讲解-Java并发体系-第二阶段,从C++和硬件方面讲解。'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
+top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+abbrlink: '8210870'
+date: 2020-10-19 22:10:58
+---
+
+
+
 # 可见性设计的硬件
 
 <img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Second_stage/0016.png">
@@ -64,7 +82,7 @@ isRunning = false; => 写volatile变量，就会通过执行一个内存屏障�
 
 ​	内存屏障是被插入两个CPU指令之间的一种指令，用来禁止处理器指令发生重排序（像屏障一样），从而保障有序性的。另外，为了达到屏障的效果，它也会使处理器写入、读取值之前，将写缓冲器的值写入高速缓存，清空无效队列，实现可见性。
 
- 	举例：将写缓冲器数据写入高速缓存，能够避免不同处理器之间不能访问写缓冲器而导致的可见性问题，以及有效地避免了存储转发问题；清空无效队列保证该处理器上高速缓存中不存在旧的副本，进而拿到最新数据
+​	举例：将写缓冲器数据写入高速缓存，能够避免不同处理器之间不能访问写缓冲器而导致的可见性问题，以及有效地避免了存储转发问题；清空无效队列保证该处理器上高速缓存中不存在旧的副本，进而拿到最新数据
 
 ## 基本内存屏障
 

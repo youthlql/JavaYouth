@@ -1,3 +1,21 @@
+---
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Third_stage/0001.png">title: 'Java并发体系-第三阶段-JUC并发包-[2]'
+tags:
+  - Java并发
+  - 原理
+  - 源码
+categories:
+  - Java并发
+keywords: Java并发，原理，源码
+description: 万字系列长文讲解-Java并发体系-第三阶段-JUC并发包。JUC在高并发编程中使用频率非常高，这里会详细介绍其用法。
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
+top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+abbrlink: 70c90e5d
+date: 2020-10-19 22:13:58
+---
+
+
+
 
 
 # Phaser工具
@@ -286,8 +304,10 @@ public class test {
 
 ### 注册
 
-    public int register()
-    public int bulkRegister(int parties)
+```java
+public int register()
+public int bulkRegister(int parties)
+```
 
 
 **register**
@@ -300,9 +320,11 @@ public class test {
 
 ### 到达
 
-    public int arrive()
-    public int arriveAndDeregister()
-    public int arriveAndAwaitAdvance()
+```java
+public int arrive()
+public int arriveAndDeregister()
+public int arriveAndAwaitAdvance()
+```
 
 **arrive**
 
@@ -319,53 +341,55 @@ public class test {
 
 **举例**
 
-    public class PhaserTest {
-    
-        private static final Random RANDOM = new Random();
-    
-        public static void main(String[] args) throws InterruptedException {
-            final Phaser phaser = new Phaser(5);
-    
-            for (int i = 0; i < 4; i++) {
-                new ArriveTask(i,phaser).start();
-            }
-            //等待全部任务进行完成
-            phaser.arriveAndAwaitAdvance();
-            System.out.println("The phase 1 work finish done.");
-    
+```java
+public class PhaserTest {
+
+    private static final Random RANDOM = new Random();
+
+    public static void main(String[] args) throws InterruptedException {
+        final Phaser phaser = new Phaser(5);
+
+        for (int i = 0; i < 4; i++) {
+            new ArriveTask(i,phaser).start();
         }
-    
-        private static class ArriveTask extends Thread{
-            private final Phaser phaser;
-    
-            private ArriveTask(int no,Phaser phaser) {
-                super(String.valueOf(no));
-    
-                this.phaser = phaser;
-            }
-    
-            @Override
-            public void run() {
-                System.out.println(getName() +  " start working. ");
-                threadSleep();
-                System.out.println(getName() + " The phase one is running.");
-                phaser.arrive();
-    
-                threadSleep();
-                System.out.println(getName() +  " keep to other thing. ");
-    
-            }
-        }
-    
-        private static void threadSleep()  {
-            try {
-                TimeUnit.SECONDS.sleep(RANDOM.nextInt(5));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    
+        //等待全部任务进行完成
+        phaser.arriveAndAwaitAdvance();
+        System.out.println("The phase 1 work finish done.");
+
     }
+
+    private static class ArriveTask extends Thread{
+        private final Phaser phaser;
+
+        private ArriveTask(int no,Phaser phaser) {
+            super(String.valueOf(no));
+
+            this.phaser = phaser;
+        }
+
+        @Override
+        public void run() {
+            System.out.println(getName() +  " start working. ");
+            threadSleep();
+            System.out.println(getName() + " The phase one is running.");
+            phaser.arrive();
+
+            threadSleep();
+            System.out.println(getName() +  " keep to other thing. ");
+
+        }
+    }
+
+    private static void threadSleep()  {
+        try {
+            TimeUnit.SECONDS.sleep(RANDOM.nextInt(5));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+```
 
 ### onAdvance()
 
@@ -387,8 +411,10 @@ protected boolean onAdvance(int phase, int registeredParties) {
 
 ### 监控子线程任务
 
-    public int awaitAdvance(int phase)
-    public int awaitAdvanceInterruptibly(int phase) throws InterruptedException
+```java
+public int awaitAdvance(int phase)
+public int awaitAdvanceInterruptibly(int phase) throws InterruptedException
+```
 
 
 *   相当于起到监控的作用
@@ -397,22 +423,26 @@ protected boolean onAdvance(int phase, int registeredParties) {
 
 **举例**
 
-    public static void main(String[] args) throws InterruptedException {
-        final Phaser phaser = new Phaser(4);
-    
-        for (int i = 0; i < 4; i++) {
-            new AwaitAdvance(i,phaser).start();
-        }
-        //等待全部任务进行完成
-        phaser.awaitAdvance(phaser.getPhase());
-        System.out.println("The phase 1 work finish done.");
+```java
+public static void main(String[] args) throws InterruptedException {
+    final Phaser phaser = new Phaser(4);
+
+    for (int i = 0; i < 4; i++) {
+        new AwaitAdvance(i,phaser).start();
     }
+    //等待全部任务进行完成
+    phaser.awaitAdvance(phaser.getPhase());
+    System.out.println("The phase 1 work finish done.");
+}
+```
 
 
 ### 强制关闭
 
-    public void forceTermination()
-    public boolean isTerminated()
+```java
+public void forceTermination()
+public boolean isTerminated()
+```
 
 
 *   强制关闭phaser，但是`如果线程陷入阻塞，不会唤醒`
@@ -422,7 +452,9 @@ protected boolean onAdvance(int phase, int registeredParties) {
 
 ### 获取阶段数
 
-    public final int getPhase()
+```java
+public final int getPhase()
+```
 
 
 *   返回当前相位数。 最大相位数为Integer.MAX_VALUE
@@ -430,22 +462,24 @@ protected boolean onAdvance(int phase, int registeredParties) {
 
 **举例**
 
-    public class PhaserTest {
-        public static void main(String[] args) {
-            final Phaser phaser = new Phaser(1);
-            System.out.println(phaser.getPhase());
-    
-            phaser.arriveAndAwaitAdvance();
-            System.out.println(phaser.getPhase());
-    
-            phaser.arriveAndAwaitAdvance();
-            System.out.println(phaser.getPhase());
-    
-            phaser.arriveAndAwaitAdvance();
-            System.out.println(phaser.getPhase());
-    
-        }
+```java
+public class PhaserTest {
+    public static void main(String[] args) {
+        final Phaser phaser = new Phaser(1);
+        System.out.println(phaser.getPhase());
+
+        phaser.arriveAndAwaitAdvance();
+        System.out.println(phaser.getPhase());
+
+        phaser.arriveAndAwaitAdvance();
+        System.out.println(phaser.getPhase());
+
+        phaser.arriveAndAwaitAdvance();
+        System.out.println(phaser.getPhase());
+
     }
+}
+```
 
 
 **结果**：
@@ -458,7 +492,9 @@ protected boolean onAdvance(int phase, int registeredParties) {
 
 ### 获取注册的数
 
-    public int getRegisteredParties()
+```java
+public int getRegisteredParties()
+```
 
 
 *   获得注册的线程数，相当于Countdown初始的的计数器
@@ -466,8 +502,10 @@ protected boolean onAdvance(int phase, int registeredParties) {
 
 ### 获得到达和未到达的数目
 
-    public int getArrivedParties()
-    public int getUnarrivedParties()
+```java
+public int getArrivedParties()
+public int getUnarrivedParties()
+```
 
 
 **getArrivedParties**
@@ -488,13 +526,15 @@ protected boolean onAdvance(int phase, int registeredParties) {
 
   Phaser 内部用一个 `state` 来管理状态变化，随着 parties 的增加，并发问题带来的性能影响会越来越严重。
 
-      /**
-       * 0-15: unarrived
-       * 16-31: parties，   所以一个 phaser 实例最大支持 2^16-1=65535 个 parties
-       * 32-62: phase，     31 位，那么最大值是 Integer.MAX_VALUE，达到最大值后又从 0 开始
-       * 63: terminated
-       */
-      private volatile long state;
+```java
+  /**
+   * 0-15: unarrived
+   * 16-31: parties，   所以一个 phaser 实例最大支持 2^16-1=65535 个 parties
+   * 32-62: phase，     31 位，那么最大值是 Integer.MAX_VALUE，达到最大值后又从 0 开始
+   * 63: terminated
+   */
+  private volatile long state;
+```
 
 
   > 通常我们在说 0-15 位这种，说的都是从低位开始的
@@ -507,21 +547,23 @@ protected boolean onAdvance(int phase, int registeredParties) {
 
   这里我们不讲源码，用通俗一点的语言表述一下。我们先写段代码构造一棵树：
 
-      Phaser root = new Phaser(5);
-      
-      Phaser n1 = new Phaser(root, 5);
-      Phaser n2 = new Phaser(root, 5);
-      
-      Phaser m1 = new Phaser(n1, 5);
-      Phaser m2 = new Phaser(n1, 5);
-      Phaser m3 = new Phaser(n1, 5);
-      
-      Phaser m4 = new Phaser(n2, 5);
+```java
+  Phaser root = new Phaser(5);
+  
+  Phaser n1 = new Phaser(root, 5);
+  Phaser n2 = new Phaser(root, 5);
+  
+  Phaser m1 = new Phaser(n1, 5);
+  Phaser m2 = new Phaser(n1, 5);
+  Phaser m3 = new Phaser(n1, 5);
+  
+  Phaser m4 = new Phaser(n2, 5);
+```
 
 
   根据上面的代码，我们可以画出下面这个很简单的图：
 
-  ![phaser](image/0002.png)
+ <img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Third_stage/0002.png">
 
   这棵树上有 7 个 phaser 实例，每个 phaser 实例在构造的时候，都指定了 parties 为 5，但是，对于每个拥有子节点的节点来说，每个子节点都是它的一个 party，我们可以通过 phaser.getRegisteredParties() 得到每个节点的 parties 数量：
 
@@ -535,18 +577,22 @@ protected boolean onAdvance(int phase, int registeredParties) {
 
   在上面代码的基础上，大家可以试一下下面的这个代码：
 
-      Phaser m5 = new Phaser(n2);
-      System.out.println("n2 parties: " + n2.getRegisteredParties());
-      m5.register();
-      System.out.println("n2 parties: " + n2.getRegisteredParties());
+```java
+  Phaser m5 = new Phaser(n2);
+  System.out.println("n2 parties: " + n2.getRegisteredParties());
+  m5.register();
+  System.out.println("n2 parties: " + n2.getRegisteredParties());
+```
 
 
   第一行代码中构造了 m5 实例，但是此时它的 parties == 0，所以对于父节点 n2 来说，它的 parties 依然是 6，所以第二行代码输出 6。第三行代码注册了 m5 的第一个 party，显然，第四行代码会输出 7。
 
   当子节点的 parties 降为 0 的时候，会从父节点中"剥离"，我们在上面的基础上，再加两行代码：
 
-      m5.arriveAndDeregister();
-      System.out.println("n2 parties: " + n2.getRegisteredParties());
+```java
+  m5.arriveAndDeregister();
+  System.out.println("n2 parties: " + n2.getRegisteredParties());
+```
 
 
   由于 m5 之前只有一个 parties，所以一次 arriveAndDeregister() 就会使得它的 parties 变为 0，此时第二行代码输出父节点 n2 的 parties 为 6。
@@ -1211,34 +1257,38 @@ public static ExecutorService newWorkStealingPool() {
 
 ## newScheduledThreadPool
 
-    public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
-        return new ScheduledThreadPoolExecutor(corePoolSize);
-    }
+```java
+public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
+    return new ScheduledThreadPoolExecutor(corePoolSize);
+}
+```
 
 
 *   创建的是一个定时的任务，每隔一段时间就会运行一次
 
 **首先可以对比的就是Timer这个类**
 
-    public class ExecutorsTest {
-    
-        public static void main(String[] args) throws InterruptedException {
-            Timer timer = new Timer();
-            final TimerTask task = new TimerTask() {
-                @Override
-                public void run() {
-                    System.out.println("=====" + System.currentTimeMillis());
-                    try {
-                        TimeUnit.SECONDS.sleep(2);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+```java
+public class ExecutorsTest {
+
+    public static void main(String[] args) throws InterruptedException {
+        Timer timer = new Timer();
+        final TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("=====" + System.currentTimeMillis());
+                try {
+                    TimeUnit.SECONDS.sleep(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            };
-            //1秒执行一次
-            timer.schedule(task,0,1000);
-        }
+            }
+        };
+        //1秒执行一次
+        timer.schedule(task,0,1000);
     }
+}
+```
 
 
 **结果**
@@ -1269,7 +1319,7 @@ public static ExecutorService newWorkStealingPool() {
 
 # ExecutorService
 
-```
+```java
 public class Video53 {
     public static void main(String[] args) {
         ExecutorService threadPool = new ThreadPoolExecutor(
@@ -1602,7 +1652,7 @@ public class ExecutorCompletionService<V> implements CompletionService<V> {
 
 **执行流程：**
 
-![image-20200914182032618](image/0004.png)
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Third_stage/0004.png">
 
 
 
@@ -2258,12 +2308,14 @@ public class Test_Accept {
 
 ### 组合两个任务，任务完成后做的操作
 
-    public CompletableFuture<Void> runAfterBoth(CompletionStage<?> other,
-                                                Runnable action)                                            
-    public CompletableFuture<Void> runAfterBothAsync(CompletionStage<?> other,
-                                                     Runnable action)
-    public CompletableFuture<Void> runAfterBothAsync(CompletionStage<?> other,
-                                                     Runnable action)
+```java
+public CompletableFuture<Void> runAfterBoth(CompletionStage<?> other,
+                                            Runnable action)                                            
+public CompletableFuture<Void> runAfterBothAsync(CompletionStage<?> other,
+                                                 Runnable action)
+public CompletableFuture<Void> runAfterBothAsync(CompletionStage<?> other,
+                                                 Runnable action)
+```
 
 
 
@@ -2317,12 +2369,14 @@ public class Test_runAfterEither {
 
 ### 组合两个任务，处理后，返回一个结果
 
-    public <U,V> CompletableFuture<V> thenCombine(CompletionStage<? extends U> other,
-                                                  BiFunction<? super T,? super U,? extends V> fn)
-    public <U,V> CompletableFuture<V> thenCombineAsync(CompletionStage<? extends U> other,
-                                                       BiFunction<? super T,? super U,? extends V> fn)
-    public <U,V> CompletableFuture<V> thenCombineAsync(CompletionStage<? extends U> other,
-                                                       BiFunction<? super T,? super U,? extends V> fn,, Executor executor)
+```java
+public <U,V> CompletableFuture<V> thenCombine(CompletionStage<? extends U> other,
+                                              BiFunction<? super T,? super U,? extends V> fn)
+public <U,V> CompletableFuture<V> thenCombineAsync(CompletionStage<? extends U> other,
+                                                   BiFunction<? super T,? super U,? extends V> fn)
+public <U,V> CompletableFuture<V> thenCombineAsync(CompletionStage<? extends U> other,
+                                                   BiFunction<? super T,? super U,? extends V> fn,, Executor executor)
+```
 
 
 ​    
@@ -2402,9 +2456,11 @@ Process finished with exit code 0
 
 #### 当执行完成时执行的操作
 
-    public CompletableFuture<T> whenComplete(BiConsumer<? super T,? super Throwable> action)
-    public CompletableFuture<T> whenCompleteAsync(BiConsumer<? super T,? super Throwable> action)
-    public CompletableFuture<T> whenCompleteAsync(BiConsumer<? super T,? super Throwable> action, Executor executor)
+```java
+public CompletableFuture<T> whenComplete(BiConsumer<? super T,? super Throwable> action)
+public CompletableFuture<T> whenCompleteAsync(BiConsumer<? super T,? super Throwable> action)
+public CompletableFuture<T> whenCompleteAsync(BiConsumer<? super T,? super Throwable> action, Executor executor)
+```
 
 
 **举例**
@@ -2459,19 +2515,21 @@ public class Test_whenComplete {
   public interface BiConsumer<T, U> {
       void accept(T t, U u);
    ｝
-  ```
-  
+```
 
-  
+
+
 * T是执行的结果，U是执行时产生的异常
 
 
 
 #### 级联操作
 
-    public <U> CompletableFuture<U> thenApply(Function<? super T,? extends U> fn)
-    public <U> CompletableFuture<U> thenApplyAsync(Function<? super T,? extends U> fn)
-    public <U> CompletableFuture<U> thenApplyAsync(Function<? super T,? extends U> fn,Executor executor)
+```java
+public <U> CompletableFuture<U> thenApply(Function<? super T,? extends U> fn)
+public <U> CompletableFuture<U> thenApplyAsync(Function<? super T,? extends U> fn)
+public <U> CompletableFuture<U> thenApplyAsync(Function<? super T,? extends U> fn,Executor executor)
+```
 
 
 **举例**
@@ -2520,28 +2578,32 @@ public interface Function<T, R> {
 
 #### 处理结果的操作
 
-    public <U> CompletableFuture<U> handle(BiFunction<? super T,Throwable,? extends U> fn)
-    public <U> CompletableFuture<U> handleAsync(BiFunction<? super T,Throwable,? extends U> fn)
-    public <U> CompletableFuture<U> handleAsync(BiFunction<? super T,Throwable,? extends U> fn,Executor executor)
+```java
+public <U> CompletableFuture<U> handle(BiFunction<? super T,Throwable,? extends U> fn)
+public <U> CompletableFuture<U> handleAsync(BiFunction<? super T,Throwable,? extends U> fn)
+public <U> CompletableFuture<U> handleAsync(BiFunction<? super T,Throwable,? extends U> fn,Executor executor)
+```
 
 
 **举例**
 
-    public class CompletableFutureTest {
-    
-        public static void main(String[] args) throws Exception {
-            CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> "Hello");
-    
-            CompletableFuture<Integer> future = completableFuture.handleAsync((s,t) -> {
-                String aaa =  t + " World !";
-                System.out.println(aaa);
-                return aaa.length();
-            });
-            System.out.println(future.get());
-            Thread.currentThread().join();
-        }
-    
+```java
+public class CompletableFutureTest {
+
+    public static void main(String[] args) throws Exception {
+        CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> "Hello");
+
+        CompletableFuture<Integer> future = completableFuture.handleAsync((s,t) -> {
+            String aaa =  t + " World !";
+            System.out.println(aaa);
+            return aaa.length();
+        });
+        System.out.println(future.get());
+        Thread.currentThread().join();
     }
+
+}
+```
 
 
 **结果**：
@@ -2561,27 +2623,31 @@ public interface Function<T, R> {
 
 #### 处理结果
 
-    public CompletableFuture<Void> thenAccept(Consumer<? super T> action)
-    public CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action)
-    public CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action,Executor executor)
+```java
+public CompletableFuture<Void> thenAccept(Consumer<? super T> action)
+public CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action)
+public CompletableFuture<Void> thenAcceptAsync(Consumer<? super T> action,Executor executor)
+```
 
 
 **举例**
 
-    public class CompletableFutureTest {
-    
-        public static void main(String[] args) throws Exception {
-            CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> "Hello");
-    
-            CompletableFuture<Void> future = completableFuture.thenAccept(t -> {
-                String aaa =  t + " World !";
-                System.out.println(aaa);
-            });
-            System.out.println(future.get());
-            Thread.currentThread().join();
-        }
-    
+```java
+public class CompletableFutureTest {
+
+    public static void main(String[] args) throws Exception {
+        CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(() -> "Hello");
+
+        CompletableFuture<Void> future = completableFuture.thenAccept(t -> {
+            String aaa =  t + " World !";
+            System.out.println(aaa);
+        });
+        System.out.println(future.get());
+        Thread.currentThread().join();
     }
+
+}
+```
 
 
 **结果**
@@ -2645,8 +2711,9 @@ Process finished with exit code -1
 
 #### 立马获取结果
 
-    public T getNow(T valueIfAbsent)
-
+```java
+public T getNow(T valueIfAbsent)
+```
 
 **举例**
 

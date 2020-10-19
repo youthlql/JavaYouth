@@ -1,3 +1,21 @@
+---
+title: 'Java并发体系-第二阶段-锁与同步-[3]'
+tags:
+  - Java并发
+  - 原理
+  - 源码
+categories:
+  - Java并发
+keywords: Java并发，原理，源码
+description: '万字系列长文讲解-Java并发体系-第二阶段,从C++和硬件方面讲解。'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
+top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+abbrlink: 113a3931
+date: 2020-10-19 22:10:58
+---
+
+
+
 # synchronized保证三大特性
 
 **synchronized保证原子性的原理**
@@ -75,7 +93,7 @@ synchronized的锁对象中有一个计数器（recursions变量）会记录线�
 
 ### synchronized不可中断演示
 
-```
+```java
 public class Test {
     private static Object obj = new Object();
     public static void main(String[] args) throws InterruptedException {
@@ -243,7 +261,7 @@ public class SyncTest {
 
 使用javap对其进行反汇编，部分信息如下
 
-```
+```java
 {
   public void syncBlock();
     descriptor: ()V
@@ -407,7 +425,7 @@ Mark Word用于存储对象自身的运行时数据，如哈希码（HashCode）
 
 ## 查看Java对象布局的方法
 
-```
+```java
 <dependency>    
 	<groupId>org.openjdk.jol</groupId>    
 	<artifactId>jol-core</artifactId>    
@@ -544,7 +562,7 @@ case 3：当其他线程进入同步块时，发现已经有偏向的线程了�
 
 我们看个demo，在该demo中重复3次获得锁。
 
-```
+```java
 synchronized(obj){
     synchronized(obj){
     	synchronized(obj){

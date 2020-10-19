@@ -7,7 +7,7 @@ tags:
 categories:
   - Java并发
 keywords: Java并发，原理，源码
-description: Java并发体系-第一阶段-多线程基础知识，后续会陆续出更深入的。
+description: 万字系列长文讲解Java并发-第一阶段-多线程基础知识。
 cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
 top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
 abbrlink: efc79183
@@ -181,7 +181,7 @@ public class ThreadTest1 {
 
 ### Runnable接口构造线程源码
 
-```
+```java
 /*下面是Thread类的部分源码*/
 
 //1.用Runnable接口创建线程时会进入这个方法
@@ -287,7 +287,7 @@ MyThread t2 = new MyThread(); //这个构造函数会默认调用Super();也就�
 
 
 
-```
+```java
 //代码从上往下顺序执行
 public Thread() {
         init(null, null, "Thread-" + nextThreadNum(), 0);
@@ -374,7 +374,7 @@ private void init(ThreadGroup g, Runnable target, String name,
 
 ### 最直观的代码描述
 
-```
+```java
 class Window extends Thread{
 
 
@@ -418,7 +418,7 @@ public class WindowTest {
 
 
 
-```
+```java
 class Window1 implements Runnable{
 
     private int ticket = 100;
@@ -645,7 +645,7 @@ public void run() {
 
 Java 线程在运行的生命周期中的指定时刻只可能处于下面 6 种不同状态的其中一个状态，这几个状态在Java源码中用枚举来表示。
 
-<img src="image/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0005.png">
 
 线程在生命周期中并不是固定处于某一个状态而是随着代码的执行在不同状态之间切换。Java 线程状态变迁如下图所示。
 
@@ -928,7 +928,7 @@ public static void main(String[] args) {
 
 ## join中断测试
 
-```
+```java
 Thread main = Thread.currentThread();
 Thread t2 = new Thread() {
     @Override

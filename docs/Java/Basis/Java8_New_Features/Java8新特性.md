@@ -1,3 +1,22 @@
+---
+title: 详解JDK8新特性
+tags:
+  - Java8
+  - JDK8
+  - 新特性
+categories:
+  - Java
+  - 新特性
+keywords: Java8，新特性，JDK8
+description: 详解JDK8出现的新特性。
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_Basis/javabasis_logo.png'
+top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+abbrlink: de3879ae
+date: 2020-10-19 22:15:58
+---
+
+
+
 # Java8新特性纵览
 
 > 本篇文章只讲解比较重要的
@@ -1456,7 +1475,7 @@ public class SuperClass {
 
 
 
-```
+```java
 public interface CompareB {
 	
 	default void method3(){

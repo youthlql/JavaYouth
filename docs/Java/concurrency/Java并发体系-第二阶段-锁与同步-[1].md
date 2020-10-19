@@ -1,3 +1,22 @@
+---
+title: 'Java并发体系-第二阶段-锁与同步-[1]'
+tags:
+  - Java并发
+  - 原理
+  - 源码
+categories:
+  - Java并发
+keywords: Java并发，原理，源码
+description: '万字系列长文讲解-Java并发体系-第二阶段,从C++和硬件方面讲解。'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
+top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+abbrlink: 230c5bb3
+date: 2020-10-19 22:09:58
+---
+
+
+
+
 > - 本阶段文章讲的略微深入，一些基础性问题不会讲解，如有基础性问题不懂，可自行查看我前面的文章，或者自行学习。
 > - 本篇文章比较适合校招和社招的面试，笔者在2020年面试的过程中，也确实被问到了下面的一些问题。
 
@@ -165,7 +184,7 @@ jcstress是java并发压测工具。https://wiki.openjdk.java.net/display/CodeTo
 
 
 
-```
+```java
 import org.openjdk.jcstress.annotations.*;
 import org.openjdk.jcstress.infra.results.I_Result;
 
@@ -576,7 +595,7 @@ volatile不保证原子性，只保证可见性和禁止指令重排
 
 
 
-```
+```java
 private static volatile SingletonDemo instance = null;
 
     private SingletonDemo() {

@@ -1,3 +1,21 @@
+---
+title: 'Java并发体系-第三阶段-JUC并发包-[1]'
+tags:
+  - Java并发
+  - 原理
+  - 源码
+categories:
+  - Java并发
+keywords: Java并发，原理，源码
+description: 万字系列长文讲解-Java并发体系-第三阶段-JUC并发包。JUC在高并发编程中使用频率非常高，这里会详细介绍其用法。
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
+top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+abbrlink: 5be45d9e
+date: 2020-10-19 22:13:58
+---
+
+
+
 # AtomicXXXFieldUpdater
 
 > 算是一个小补充
@@ -1080,8 +1098,10 @@ public class Video34 {
 
 ### 构造方法
 
-    public Semaphore(int permits)
-    public Semaphore(int permits , boolean fair)
+```java
+public Semaphore(int permits)
+public Semaphore(int permits , boolean fair)
+```
 
 
 *   `permits`：同一时间可以访问资源的线程数目
@@ -1089,16 +1109,18 @@ public class Video34 {
 
 ### 重要方法
 
-    public void acquire() throws InterruptedException
-    public void release()
+```java
+public void acquire() throws InterruptedException
+public void release()
+```
 
 
 * `acquire()`：**获取一个许可证**，如果许可证用完了，则陷入阻塞。可以被打断。
 
 * `release()`：**释放一个许可证**
 
-  acquire(int permits) 
-  public void release(int permits)
+  `acquire(int permits)` 
+  `public void release(int permits)`
 
 **acquire多个时，如果没有足够的许可证可用，那么当前线程将被禁用以进行线程调度**，并且处于休眠状态，直到发生两件事情之一：
 
@@ -1107,35 +1129,39 @@ public class Video34 {
 
 **release多个时，会使许可证增多，最终可能超过初始值**
 
-    public boolean tryAcquire(int permits)
-    public boolean tryAcquire(int permits,
-                              long timeout,
-                              TimeUnit unit)
-                       throws InterruptedException
+```java
+public boolean tryAcquire(int permits)
+public boolean tryAcquire(int permits,
+                          long timeout,
+                          TimeUnit unit)
+                   throws InterruptedException
+```
 
 
 *   尝试去拿，**拿到返回true**
 
 ### 其他方法
 
-    public int availablePermits()
+```java
+public int availablePermits()
+```
 
 
 * 返回此信号量中当前可用的许可数。
 
-  protected Collection<Thread> getQueuedThreads()
+  `protected Collection<Thread> getQueuedThreads()`
   public final int getQueueLength()
 
 * `getQueuedThreads`返回正在阻塞的线程集合
 
 * `getQueueLength`返回阻塞获取的线程数
 
-  public void acquireUninterruptibly()
-  public void acquireUninterruptibly(int permits)
+  `public void acquireUninterruptibly()`
+  `public void acquireUninterruptibly(int permits)`
 
 * 可以`不被打断`获取许可证
 
-  public int drainPermits()
+  `public int drainPermits()`
 
 * 获取当前全部的许可证目标
 
@@ -1300,7 +1326,7 @@ C	9
 
 ## Condition版生产者消费者
 
-```
+```java
 /**
  * @Author: youthlql-吕
  * @Date: 2019/9/26 15:03
