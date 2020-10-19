@@ -1,6 +1,6 @@
 > 1、文章会优先更新在Github和公总号里，个人博客可能会有延迟。
 >
-> 2、[个人博客](https://youthlql.gitee.io/)。如果想要良好的阅读体验，可以[Github在线阅读](https://blog.youthlql.vip/JavaYouth/)，或者[Gitee在线阅读](https://youthlql.gitee.io/JavaYouth)。
+> 2、如果想要良好的阅读体验，可以[Github在线阅读](https://blog.youthlql.vip/JavaYouth/)，或者[Gitee在线阅读](https://youthlql.gitee.io/JavaYouth)，[个人博客](https://youthlql.gitee.io/)。Gitee在线阅读和个人博客加载速度比较快。
 >
 > 3、转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境！
 >
@@ -10,13 +10,7 @@
 
 
 
-<p align="center">
-	<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/wx.png" width=80%>
-</p>
-
-
-
-
+<img src="image/wx.png" width=80%>
 
 
 
