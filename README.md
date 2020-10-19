@@ -1,2 +1,90 @@
-# JavaYouth
-主要是Java方面面试的知识，如并发源码，AQS源码，mysql常考面试，redsi,mq等等
+
+
+- [Java](#java)
+  - [基础](#基础)
+  - [容器](#容器)
+  - [并发](#并发)
+  - [JVM](#JVM)
+  - [各版本新特性](#各版本新特性)
+
+  
+
+- [计算机网络](#计算机网络)
+
+  
+
+- [ElasticSearch](#ElasticSearch)
+
+
+
+# Java
+
+## 基础
+
+1、总结【TODO】
+
+
+
+**重难点**
+
+1、[泛型详解【万字长文】](docs/Java/Basis/keyAndDifficultPoints/Generic/泛型.md) 
+
+
+
+## 容器
+
+1、HashMap源码讲解（JDK7和JDK8）【TODO】
+
+2、ConcurrentHashMap源码讲解（JDK7和JDK8）【TODO】
+
+
+
+## 并发
+
+> 这个系列全是万字长文，希望读者可以耐心看下去，相信会有很大收获。
+
+1、[Java并发体系-第一阶段-多线程基础知识](docs/Java/concurrency/Java并发体系-第一阶段-多线程基础知识.md)
+
+2、[Java并发体系-第二阶段-锁与同步-[1]](docs/Java/concurrency/Java并发体系-第二阶段-锁与同步-[1].md)
+
+3、[Java并发体系-第二阶段-锁与同步-[2]](docs/Java/concurrency/Java并发体系-第二阶段-锁与同步-[2].md)
+
+4、[Java并发体系-第二阶段-锁与同步-[3]](docs/Java/concurrency/Java并发体系-第二阶段-锁与同步-[3].md)
+
+5、[Java并发体系-第三阶段-JUC并发包-[1]](docs/Java/concurrency/Java并发体系-第三阶段-JUC并发包-[1].md)
+
+6、[Java并发体系-第三阶段-JUC并发包-[2]](docs/Java/concurrency/Java并发体系-第三阶段-JUC并发包-[2].md)
+
+
+
+AQS，阻塞队列源码还在准备中。预计12月前可以写的差不多
+
+
+
+## JVM
+
+【TODO】
+
+## 各版本新特性
+
+1、[Java8新特性](docs/Java/Basis/Java8_New_Features/Java8新特性.md)
+
+
+
+# 计算机网络
+
+**总结篇**
+
+1、[计算机网络-总结-秋招篇](docs/Computer_NetWork/计算机网络-总结.md)
+
+
+
+
+
+# ElasticSearch
+
+## 用法
+
+1、[ElasticSearch-入门](docs/ElasticSearch/usage/ElasticSearch-入门.md)
+
+2、[ElasticSearch-进阶](docs/ElasticSearch/usage/ElasticSearch-进阶.md)
