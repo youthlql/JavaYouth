@@ -1,3 +1,23 @@
+> 1、文章会优先更新在Github和公总号里，个人博客可能会有延迟。
+>
+> 2、[个人博客](https://youthlql.gitee.io/)。如果想要良好的阅读体验，可以[Github在线阅读](https://blog.youthlql.vip/JavaYouth/)，或者[Gitee在线阅读](https://youthlql.gitee.io/JavaYouth)。
+>
+> 3、转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境！
+>
+> 4、笔者会陆续更新，如果对你有所帮助，不妨点个star~。你的star是我创作的动力。
+
+
+
+
+
+<p align="center">
+	<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/wx.png" width=80%>
+</p>
+
+
+
+
+
 
 
 - [Java](#java)
