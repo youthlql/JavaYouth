@@ -10,7 +10,7 @@
 
 
 
-<img src="image/wx.png" width=80%>
+<p align="center"><img src="image/wx.png" width=80%></p>
 
 
 
