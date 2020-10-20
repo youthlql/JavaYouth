@@ -4,7 +4,9 @@
 >
 > 3、转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境！
 >
-> 4、笔者会陆续更新，如果对你有所帮助，不妨点个star~。你的star是我创作的动力。
+> 4、如果你要提交 issue 或者 pr 的话建议到 [Github](https://github.com/youthlql/JavaYouth) 提交。
+>
+> 5、笔者会陆续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个star~。你的star是我创作的动力。
 
 
 
