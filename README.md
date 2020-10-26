@@ -59,7 +59,7 @@
 
 ## 并发
 
-> 这个系列全是万字长文，希望读者可以耐心看下去，相信会有很大收获。
+> 这个系列基本全是万字长文，希望读者可以耐心看下去，相信会有很大收获。
 
 1、[Java并发体系-第一阶段-多线程基础知识](docs/Java/concurrency/Java并发体系-第一阶段-多线程基础知识.md)
 
@@ -72,6 +72,8 @@
 5、[Java并发体系-第三阶段-JUC并发包-[1]](docs/Java/concurrency/Java并发体系-第三阶段-JUC并发包-[1].md)
 
 6、[Java并发体系-第三阶段-JUC并发包-[2]](docs/Java/concurrency/Java并发体系-第三阶段-JUC并发包-[2].md)
+
+7、[Java并发体系-第四阶段-AQS源码解读-[1]](docs/Java/concurrency/Java并发体系-第四阶段-AQS源码解读-[1].md)
 
 
 
