@@ -12,7 +12,7 @@
 
 
 
-<p align="center"><img src="image/wx.png" width=80%></p>
+<p align="center"><img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/wx.png" width=80%></p>
 
 
 
