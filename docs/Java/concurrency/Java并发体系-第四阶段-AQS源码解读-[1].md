@@ -413,7 +413,7 @@ Process finished with exit code 0
 
 
 
-<img src="image/image-20201025174602173.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0011.png">
 
 AbstractOwnableSynchronizer
 AbstractQueuedLongSynchronizer
