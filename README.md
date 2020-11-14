@@ -101,6 +101,12 @@ AQS剩余部分，以及阻塞队列源码暂时先搁置一下。
 
 5、[JVM系列-第5章-堆](docs/Java/JVM/JVM系列-第5章-堆.md)
 
+6、[JVM系列-第6章-方法区](docs/Java/JVM/JVM系列-第6章-方法区.md)
+
+7、[JVM系列-第7章-对象的实例化内存布局与访问定位](docs/Java/JVM/JVM系列-第7章-对象的实例化内存布局与访问定位.md)
+
+
+
 ## 各版本新特性
 
 1、[Java8新特性](docs/Java/Basis/Java8_New_Features/Java8新特性.md)
