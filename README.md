@@ -105,6 +105,12 @@ AQS剩余部分，以及阻塞队列源码暂时先搁置一下。
 
 7、[JVM系列-第7章-对象的实例化内存布局与访问定位](docs/Java/JVM/JVM系列-第7章-对象的实例化内存布局与访问定位.md)
 
+8、[JVM系列-第8章-执行引擎](docs/Java/JVM/JVM系列-第8章-执行引擎.md)
+
+9、[JVM系列-第9章-StringTable(字符串常量池)](docs/Java/JVM/JVM系列-第9章-StringTable(字符串常量池).md)
+
+
+
 
 
 ## 各版本新特性
