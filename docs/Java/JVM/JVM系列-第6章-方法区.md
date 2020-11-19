@@ -10,6 +10,7 @@ keywords: JVM，虚拟机。
 description: JVM系列-第6章-方法区。
 cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/logo.png'
 top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+abbrlink: 136cd965
 date: 2020-11-13 19:38:42
 ---
 
@@ -24,7 +25,7 @@ date: 2020-11-13 19:38:42
 
 ThreadLocal：如何保证多个线程在并发环境下的安全性？典型场景就是数据库连接管理，以及会话管理。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0001.png">
 
 **栈、堆、方法区的交互关系**
 
@@ -35,7 +36,7 @@ ThreadLocal：如何保证多个线程在并发环境下的安全性？典型场
 3.  真正的 person 对象存放在 Java 堆中
 4.  在 person 对象中，有个指针指向方法区中的 person 类型数据，表明这个 person 对象是用方法区中的 Person 类 new 出来的
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0002.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0002.png">
 
 方法区的理解
 --------
@@ -47,7 +48,7 @@ ThreadLocal：如何保证多个线程在并发环境下的安全性？典型场
 1.  《Java虚拟机规范》中明确说明：尽管所有的方法区在逻辑上是属于堆的一部分，但一些简单的实现可能不会选择去进行垃圾收集或者进行压缩。但对于HotSpotJVM而言，方法区还有一个别名叫做Non-Heap（非堆），目的就是要和堆分开。
 3.  所以，**方法区可以看作是一块独立于Java堆的内存空间**。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0003.png">
 
 
 
@@ -87,7 +88,7 @@ public class MethodAreaDemo {
 
 简单的程序，加载了1600多个类
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0004.png">
 
 
 
@@ -103,7 +104,7 @@ public class MethodAreaDemo {
 5.  永久代、元空间二者并不只是名字变了，内部结构也调整了
 6.  根据《Java虚拟机规范》的规定，如果方法区无法满足新的内存分配需求时，将抛出OOM异常
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0005.png">
 
 
 
@@ -120,7 +121,7 @@ public class MethodAreaDemo {
 2.  -XX:MaxPermsize来设定永久代最大可分配空间。32位机器默认是64M，64位机器模式是82M
 3.  当JVM加载的类信息容量超过了这个值，会报异常OutofMemoryError:PermGen space。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0006.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0006.png">
 
 ### JDK8及以后(元空间)
 
@@ -228,11 +229,11 @@ Exception in thread "main" java.lang.OutOfMemoryError: Metaspace
 
 #### 概念
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0007.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0007.png">
 
 《深入理解Java虚拟机》书中对方法区（Method Area）存储内容描述如下：它用于存储已被虚拟机加载的**类型信息、常量、静态变量、即时编译器编译后的代码缓存**等。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0008.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0008.png">
 
 
 
@@ -714,7 +715,7 @@ public static int count;
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0009.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0009.png">
 
 1.  方法区，内部包含了运行时常量池
 2.  字节码文件，内部包含了常量池。（之前的字节码文件中已经看到了很多Constant pool的东西，这个就是常量池）
@@ -728,7 +729,7 @@ public static int count;
 1.  一个有效的字节码文件中除了包含类的版本信息、字段、方法以及接口等描述符信息外。还包含一项信息就是**常量池表**（**Constant Pool Table**），包括各种字面量和对类型、域和方法的符号引用。
 2.  字面量： 10 ， “我是某某”这种数字和字符串都是字面量
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0010.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0010.png">
 
 **为什么需要常量池？**
 
@@ -749,7 +750,7 @@ public static int count;
 2.  比如说我们这个文件中有6个地方用到了"hello"这个字符串，如果不用常量池，就需要在6个地方全写一遍，造成臃肿。我们可以将"hello"等所需用到的结构信息记录在常量池中，并通过**引用的方式**，来加载、调用所需的结构
 4.  这里的代码量其实很少了，如果代码多的话，引用的结构将会更多，这里就需要用到常量池了。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0011.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0011.png">
 
 **常量池中有啥？**
 
@@ -924,69 +925,69 @@ SourceFile: "MethodAreaDemo.java"
 
 1、初始状态
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0012.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0012.png">
 
 2、首先将操作数500压入操作数栈中
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0013.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0013.png">
 
 3、然后操作数 500 从操作数栈中取出，存储到局部变量表中索引为 1 的位置
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0014.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0014.png">
 
 4、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0015.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0015.png">
 
 5、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0016.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0016.png">
 
 
 
 6、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0017.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0017.png">
 
 7、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0018.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0018.png">
 
 8、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0019.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0019.png">
 
 9、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0020.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0020.png">
 
 10、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0021.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0021.png">
 
 11、图片写错了是#25和#26（获得System类）
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0022.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0022.png">
 
 12、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0023.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0023.png">
 
 13、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0024.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0024.png">
 
 15、执行加法运算后，将计算结果放在操作数栈顶
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0025.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0025.png">
 
 16、就是真正的打印
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0026.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0026.png">
 
 17、
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0027.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0027.png">
 
 
 
@@ -1021,7 +1022,7 @@ SourceFile: "MethodAreaDemo.java"
 
 方法区由永久代实现，使用 JVM 虚拟机内存（虚拟的内存）
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0028.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0028.png">
 
 
 
@@ -1029,7 +1030,7 @@ SourceFile: "MethodAreaDemo.java"
 
 方法区由永久代实现，使用 JVM 虚拟机内存
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0029.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0029.png">
 
 
 
@@ -1037,7 +1038,7 @@ SourceFile: "MethodAreaDemo.java"
 
 方法区由元空间实现，使用物理机本地内存
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0030.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0030.png">
 
 
 
@@ -1095,15 +1096,15 @@ public class StaticFieldTest {
 
 JDK6环境下
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0031.png" alt="image-20201113224231761" />
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0031.png" alt="image-20201113224231761" />
 
 JDK7环境下
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0032.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0032.png">
 
 JDK8环境
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0033.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0033.png">
 
 
 
@@ -1150,7 +1151,7 @@ public class StaticObjTest {
 
 4、测试发现：三个对象的数据在内存中的地址都落在Eden区范围内，所以结论：**只要是对象实例必然会在Java堆中分配**。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0034.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0034.png">
 
 > 1、0x00007f32c7800000(Eden区的起始地址)    ----   0x00007f32c7b50000(Eden区的终止地址)  
 >
@@ -1162,7 +1163,7 @@ public class StaticObjTest {
 
 5、接着，找到了一个引用该staticObj对象的地方，是在一个java.lang.Class的实例里，并且给出了这个实例的地址，通过Inspector查看该对象实例，可以清楚看到这确实是一个java.lang.Class类型的对象实例，里面有一个名为staticobj的实例字段：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0035.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0035.png">
 
 从《Java虚拟机规范》所定义的概念模型来看，所有Class相关的信息都应该存放在方法区之中，但方法区该如何实现，《Java虚拟机规范》并未做出规定，这就成了一件允许不同虚拟机自己灵活把握的事情。JDK7及其以后版本的HotSpot虚拟机选择把静态变量与类型在Java语言一端的映射Class对象存放在一起，**存储于Java堆之中**，从我们的实验中也明确验证了这一点
 
@@ -1217,7 +1218,7 @@ public class StaticObjTest {
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0036.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0036.png">
 
 
 
@@ -1271,7 +1272,7 @@ public class BufferTest {
 
 直接占用了 1G 的本地内存
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0037.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0037.jpg">
 
 
 
@@ -1281,13 +1282,13 @@ public class BufferTest {
 
 原来采用BIO的架构，在读写本地文件时，我们需要从用户态切换成内核态
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0038.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0038.png">
 
 **直接缓冲区（NIO）**
 
 NIO 直接操作物理磁盘，省去了中间过程
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0039.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0039.png">
 
 ### 直接内存与 OOM
 
@@ -1351,7 +1352,7 @@ Exception in thread "main" java.lang.OutOfMemoryError: Direct buffer memory
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_006/0040.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_006/0040.jpg">
 
 
 
