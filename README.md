@@ -1,12 +1,12 @@
-> 1、文章会优先更新在Github和公总号里，个人博客可能会有延迟。
+> 1、文章可能会优先更新在[Github](https://github.com/youthlql/JavaYouth)，[个人博客](https://imlql.cn/)，公众号。其它平台会晚一段时间。
 >
-> 2、如果Github很卡，可以在[Gitee](https://gitee.com/youthlql/JavaYouth)浏览，或者[Gitee在线阅读](https://youthlql.gitee.io/JavaYouth)，[个人博客](https://youthlql.gitee.io/)。Gitee在线阅读和个人博客加载速度比较快。
+> 2、如果Github很卡，可以在[Gitee](https://gitee.com/youthlql/JavaYouth)浏览，或者[Gitee在线阅读](https://youthlql.gitee.io/JavaYouth)，[个人博客](https://imlql.cn/)。Gitee在线阅读和个人博客加载速度比较快。
 >
 > 3、转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境！
 >
 > 4、如果你要提交 issue 或者 pr 的话建议到 [Github](https://github.com/youthlql/JavaYouth) 提交。
 >
-> 5、笔者会陆续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个star~。你的star是我创作的动力。
+> 5、笔者会陆续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**。你的**Star**是我创作的动力。
 
 
 
@@ -113,9 +113,9 @@ AQS剩余部分，以及阻塞队列源码暂时先搁置一下。
 
 11、[JVM系列-第11章-垃圾回收相关概念](docs/Java/JVM/JVM系列-第11章-垃圾回收相关概念.md)
 
+12、[JVM系列-第12章-垃圾回收器](docs/Java/JVM/JVM系列-第12章-垃圾回收器.md)
 
-
-
+> 内存与垃圾回收篇完结
 
 
 
