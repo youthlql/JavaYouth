@@ -6,10 +6,11 @@ tags:
 categories:
   - 分布式配置中心
   - Apollo
-keywords: JVM，虚拟机。
-description: JVM系列-第2章-类加载子系统。
+keywords: Apollo，配置中心。
+description: Apollo简单入门及和SpringBoot集成。
 cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/Apollo/logo.png'
 top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+abbrlink: 10d32fba
 date: 2020-12-29 11:31:58
 ---
 
