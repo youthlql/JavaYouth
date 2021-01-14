@@ -950,7 +950,7 @@ public class StringNewTest {
  *         String s = new StringBuilder("shkstart").toString().intern();
  *
  */
-public class StringIntern {
+public class 	StringIntern {
     public static void main(String[] args) {
 
         String s = new String("1");
@@ -970,7 +970,7 @@ public class StringIntern {
          4、所以在JDK7后续版本中，s3和s4指向的完全是同一个地址。
          */
         String s3 = new String("1") + new String("1");//pos_1
-
+	    s3.intern();
         
         String s4 = "11";//s4变量记录的地址：使用的是上一行代码代码执行时，在常量池中生成的"11"的地址
         System.out.println(s3 == s4);//jdk6：false  jdk7/8：true
