@@ -183,9 +183,9 @@ public class HelloApp {
 
 **符号引用**
 
-*   反编译 class 文件后可以查看符号引用
+*   反编译 class 文件后可以查看符号引用，下面带# 的就是符号引用
 
-![image-20200727155223643](image/aHR0cDovL2hleWdvLm9zcy1jbi1zaGFuZ2hhaS5hbGl5dW5jcy5jb20vaW1hZ2VzL2ltYWdlLTIwMjAwNzI3MTU1MjIzNjQzLnBuZw)
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_002/0023.png"/>
 
 ### 初始化阶段
 
