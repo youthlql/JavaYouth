@@ -10,6 +10,7 @@ keywords: JVM，虚拟机。
 description: JVM系列-第12章-垃圾回收器。
 cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/logo.png'
 top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+abbrlink: 7706d61d
 date: 2020-11-19 18:33:24
 ---
 
@@ -303,7 +304,7 @@ Serial 回收器：串行回收
 
 
 
-PaeNew 回收器：并行回收
+ParNew 回收器：并行回收
 -----------------
 
 
@@ -643,8 +644,17 @@ G1中提供了三种垃圾回收模式：YoungGC、Mixed GC和Full GC，在不�
   
 4.  一个Region有可能属于Eden，Survivor或者Old/Tenured内存区域。但是一个Region只可能属于一个角色。图中的E表示该Region属于Eden内存区域，S表示属于Survivor内存区域，O表示属于Old内存区域。图中空白的表示未使用的内存空间。
   
-5.  G1垃圾收集器还增加了一种新的内存区域，叫做Humongous内存区域，如图中的H块。主要用于存储大对象，如果超过1.5个Region，就放到H。
+5.  G1垃圾收集器还增加了一种新的内存区域，叫做Humongous内存区域，如图中的H块。主要用于存储大对象，如果超过0.5个Region，就放到H。
   
+  
+  
+  > 纠错：尚硅谷视频里这里写的是超过1.5个region。根据[官方文档](https://www.oracle.com/technetwork/tutorials/tutorials-1876574.html):  **The G1 Garbage Collector Step by Step**
+  >
+  > As shown regions can be allocated into Eden, survivor, and old generation regions. In addition, there is a fourth type of object known as Humongous regions. These regions are designed to hold objects that are 50% the size of a standard region or larger. They are stored as a set of contiguous regions. Finally the last type of regions would be the unused areas of the heap.
+  >
+  > 翻译：
+  >
+  > 如图所示，可以将区域分配到Eden，幸存者和旧时代区域。 此外，还有第四种类型的物体被称为巨大区域。 这些区域旨在容纳标准区域大小的50％或更大的对象。 它们存储为一组连续区域。 最后，最后一种区域类型是堆的未使用区域。
 
 <img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0018.png">
 
