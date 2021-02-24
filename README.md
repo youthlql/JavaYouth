@@ -9,14 +9,10 @@
 > 5、笔者会陆续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**。你的**Star**是我创作的动力。
 >
 > 6、目前在北京实习【时间大概是2020/12月底---2021/3月初】，等实习完了会恢复更新。
->
-> 7、公众号目前暂不更新，等忙完这段时间再来操办。
 
 
 
 
-
-<p align="center"><img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/wx.png" width=80%></p>
 
 
 
