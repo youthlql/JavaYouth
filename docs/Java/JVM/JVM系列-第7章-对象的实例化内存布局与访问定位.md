@@ -8,8 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第7章-对象的实例化内存布局与访问定位。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/logo.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/logo.png'
 abbrlink: debff71a
 date: 2020-11-14 19:38:42
 ---
@@ -37,7 +36,7 @@ date: 2020-11-14 19:38:42
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_007/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_007/0001.png">
 
 ### 对象创建的方式
 
@@ -212,7 +211,7 @@ class Account{
 对象的内存布局
 ---------
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_007/0002.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_007/0002.png">
 
 
 
@@ -243,7 +242,7 @@ class Account{
 
 图解内存布局
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_007/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_007/0003.png">
 
 
 
@@ -252,7 +251,7 @@ class Account{
 
 **JVM是如何通过栈帧中的对象引用访问到其内部的对象实例呢？**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_007/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_007/0004.png">
 
 定位，通过栈上reference访问
 
@@ -263,7 +262,7 @@ class Account{
 1.  缺点：在堆空间中开辟了一块空间作为句柄池，句柄池本身也会占用空间；通过两次指针访问才能访问到堆中的对象，效率低
 2.  优点：reference中存储稳定句柄地址，对象被移动（垃圾收集时移动对象很普遍）时只会改变句柄中实例数据指针即可，reference本身不需要被修改
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_007/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_007/0005.png">
 
 
 
@@ -272,4 +271,4 @@ class Account{
 1.  优点：直接指针是局部变量表中的引用，直接指向堆中的实例，在对象实例中有类型指针，指向的是方法区中的对象类型数据
 2.  缺点：对象被移动（垃圾收集时移动对象很普遍）时需要修改 reference 的值
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_007/0006.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_007/0006.png">

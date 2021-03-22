@@ -9,8 +9,7 @@ categories:
   - 用法
 keywords: ElasticSearch,全文检索
 description: ElasticSearch-进阶篇，ElasticSearch的一些实战用法，集成SpringBoot。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/ElasticSearch/logo.jpg'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/ElasticSearch/logo.jpg'
 abbrlink: 50e81c79
 date: 2020-02-08 18:06:23
 ---
@@ -431,7 +430,7 @@ Post：http://localhost:9200/xc_test/doc/3
 ```json
 {
 	"name": "spring cloud实战",
-	"description": "本课程主要从四个章节进行讲解： 1.微服务架构入门 2.spring cloud 基础入门 3.实战Spring Boot 4.注册中心eureka。",
+	"description": "本课程主要从四个章节进行讲解： 1.微服务架构入门 2.spring cloud 基础入门 3.实战SpringBoot 4.注册中心eureka。",
 	"studymodel": "201001",
 	"price": 5.6
 }
@@ -1730,3 +1729,4 @@ Post： http://127.0.0.1:9200/xc_course/doc/_search
 
     }
 ```
+

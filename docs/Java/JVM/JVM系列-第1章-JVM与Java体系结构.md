@@ -5,10 +5,10 @@ tags:
   - 虚拟机
 categories:
   - JVM
+  - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第1章-JVM与Java体系结构。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/logo.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/logo.png'
 abbrlink: 8c954c6
 date: 2020-11-02 11:51:56
 ---
@@ -38,7 +38,7 @@ date: 2020-11-02 11:51:56
 3.  新项目上线，对各种JVM参数设置一脸茫然，直接默认吧然后就JJ了。
 4.  每次面试之前都要重新背一遍JVM的一些原理概念性的东西，然而面试官却经常问你在实际项目中如何调优VM参数，如何解决GC、OOM等问题，一脸懵逼。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0001.png">
 
 大部分Java开发人员，除了会在项目中使用到与Java平台相关的各种高精尖技术，对于Java技术的核心Java虚拟机了解甚少。
 
@@ -50,7 +50,7 @@ date: 2020-11-02 11:51:56
 1.  一些有一定工作经验的开发人员，打心眼儿里觉得SSM、微服务等上层技术才是重点，基础技术并不重要，这其实是一种本末倒置的“病态”。
 2.  如果我们把核心类库的API比做数学公式的话，那么Java虚拟机的知识就好比公式的推导过程。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0002.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0002.png">
 
 - 计算机系统体系对我们来说越来越远，在不了解底层实现方式的前提下，通过高级语言很容易编写程序代码。但事实上计算机并不认识高级语言。
 
@@ -87,7 +87,7 @@ Java VS C++
 1.  垃圾收集机制为我们打理了很多繁琐的工作，大大提高了开发的效率，但是，垃圾收集也不是万能的，懂得JVM内部的内存结构、工作机制，是设计高扩展性应用和诊断运行时问题的基础，也是Java工程师进阶的必备能力。
 2.  C++语言需要程序员自己来分配内存和回收内存，对于高手来说可能更加舒服，但是对于普通开发者，如果技术实力不够，很容易造成内存泄漏。而Java全部交给JVM进行内存分配和回收，这也是一种趋势，减少程序员的工作量。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0003.png">
 
 ## 什么人需要学JVM？
 
@@ -103,26 +103,26 @@ Java VS C++
 
 **英文文档规范**：https://docs.oracle.com/javase/specs/index.html
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0004.png">
 
 **中文书籍：**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0005.png">
 
 > 周志明老师的这本书**非常推荐看**，不过只推荐看第三版，第三版较第二版更新了很多，个人觉得没必要再看第二版。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0006.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0006.png">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0007.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0007.png">
 
 TIOBE排行榜
 -----------
 
 **TIOBE 排行榜**：https://www.tiobe.com/tiobe-index/
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0008.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0008.png">
 
 - 世界上没有最好的编程语言，只有最适用于具体应用场景的编程语言。
 - 目前网上一直流传Java被python，go撼动Java第一的地位。学习者不需要太担心，Java强大的生态圈，也不是说是朝夕之间可以被撼动的。
@@ -148,14 +148,14 @@ Java-跨平台的语言
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0009.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0009.png">
 
 JVM-跨语言的平台
 ------
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0010.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0010.png">
 
 
 
@@ -187,7 +187,7 @@ JVM-跨语言的平台
 2.  自己动手写一个Java虚拟机，难吗？
 3.  天下事有难易乎？为之，则难者亦易矣；不为，则易者亦难矣
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0011.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0011.png">
 
 Java发展重大事件
 ------------
@@ -215,7 +215,7 @@ Java发展重大事件
 
 ## Open JDK和Oracle JDK
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0012.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0012.png">
 
 - 在JDK11之前，Oracle JDK中还会存在一些Open JDK中没有的，闭源的功能。但在JDK11中，我们可以认为Open JDK和Oracle JDK代码实质上已经达到完全一致的程度了。
 - 主要的区别就是两者更新周期不一样
@@ -258,11 +258,11 @@ JVM的位置
 
 JVM是运行在操作系统之上的，它与硬件没有直接的交互
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0013.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0013.png">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0014.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0014.png">
 
 
 
@@ -275,7 +275,7 @@ JVM的整体结构
 
    
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0015.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0015.png">
 
 
 
@@ -284,7 +284,7 @@ Java代码执行流程
 
 凡是能生成被Java虚拟机所能解释、运行的字节码文件，那么理论上我们就可以自己设计一套语言了
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/chapter_001/0016.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_001/0016.png">
 
 
 

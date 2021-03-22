@@ -8,9 +8,9 @@ categories:
   - HashMap
 keywords: Java集合，HashMap。
 description: HashMap-JDK8源码讲解及常见面试题。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_Basis/logo.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
-date: 2020-11-1 10:22:05
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/logo.png'
+abbrlink: cbc5672a
+date: 2020-11-01 10:22:05
 ---
 
 
@@ -27,7 +27,7 @@ date: 2020-11-1 10:22:05
 
 在JDK8中，优化了HashMap的数据结构，引入了红黑树。即HashMap的数据结构：数组+链表+红黑树。HashMap变成了这样。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK8/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK8/0001.png">
 
 ### 为什么要引入红黑树
 
@@ -146,16 +146,22 @@ date: 2020-11-1 10:22:05
    
    //与红黑树相关的参数
    
-   //单链表(桶)的树化阈值：即 链表转成红黑树的阈值，在存储数据时，当链表长度 > 该值时，则将链表转换成红黑树
+   /*
+   1、单链表(桶)的树化阈值：即 链表转成红黑树的阈值，在存储数据时，当链表长度 > 该值时，
+   则将链表转换成红黑树
+   */
    static final int TREEIFY_THRESHOLD = 8; 
 
 	/*
-   1、桶的链表还原阈值：即 红黑树转为链表的阈值，当在扩容（resize（））时（此时HashMap的数据存储位置会重新计	    算），在重新计算存储位置后，当原有的红黑树内节点数量 < 6时，则将 红黑树转换成链表
+   1、桶的链表还原阈值：即 红黑树转为链表的阈值，当在扩容（resize（））时（此时HashMap的数据
+   存储位置会重新计算），在重新计算存储位置后，当原有的红黑树内节点数量 < 6时，则将 红黑树转换
+   成链表
 	*/
    static final int UNTREEIFY_THRESHOLD = 6;
 
    /*
-   1、最小树形化容量阈值：即 当哈希表中的容量 > 该值时，才允许树形化链表 （即 将链表 转换成红黑树）。否则，若  	（单链表）桶内元素太多时，则直接扩容，而不是树形化。
+   1、最小树形化容量阈值：即 当哈希表中的容量 > 该值时，才允许树形化链表 （即 将链表 转换成红黑树）。
+   否则，若 （单链表）桶内元素太多时，则直接扩容，而不是树形化。
    2、为了避免进行扩容、树形化选择的冲突，这个值不能小于 4 * TREEIFY_THRESHOLD
    */
    static final int MIN_TREEIFY_CAPACITY = 64;
@@ -205,8 +211,12 @@ public class HashMap<K,V>
         // 设置加载因子
         this.loadFactor = loadFactor;
 
-        // 设置扩容阈值
-        // 此处不是真正的阈值，仅仅只是将传入的容量大小转化为：>传入容量大小的最小的2的幂，该阈值后面会重新计算
+    
+        /*
+        1、设置扩容阈值
+        2、此处不是真正的阈值，仅仅只是将传入的容量大小转化为：>传入容量大小的最小的2的幂，
+        该阈值后面会重新计算
+        */
         this.threshold = tableSizeFor(initialCapacity); 
 
     }
@@ -342,7 +352,8 @@ Process finished with exit code 0
         
         
         /*
-        1、若哈希表的数组tab为空，则通过resize()进行初始化，所以，初始化哈希表的时机就是第1次调用put函数时，		  即调用resize() 初始化创建。
+        1、若哈希表的数组tab为空，则通过resize()进行初始化，所以，初始化哈希表的时机就是第1次
+        调用put函数时，即调用resize() 初始化创建。
         */
         if ((tab = table) == null || (n = tab.length) == 0)
             n = (tab = resize()).length;
@@ -358,12 +369,13 @@ Process finished with exit code 0
         
         else {
             Node<K,V> e; K k;
-           //判断 table[i]的元素的key是否与需插入的key一样，若相同则直接用新value覆盖旧value【即更新操作】
+           //判断 table[i]的元素的key是否与需插入的key一样，若相同则直接用新value覆盖旧value
+            //【即更新操作】
             if (p.hash == hash &&
                 ((k = p.key) == key || (key != null && key.equals(k))))
                 e = p;
             
-            //继续判断：需插入的数据结构是否为红黑树 or 链表。若是红黑树，则直接在树中插入 or 更新键值对     
+            //继续判断：需插入的数据结构是否为红黑树or链表。若是红黑树，则直接在树中插入or更新键值对     
             else if (p instanceof TreeNode)
                 /*
                 1、putTreeVal作用：向红黑树插入 or 更新数据（键值对）
@@ -377,9 +389,10 @@ Process finished with exit code 0
             else {
                 /*
                 过程：
-                1、遍历table[i]，判断Key是否已存在：采用equals()对比当前遍历节点的key 与 需插入数据的					key：若已存在，则直接用新value覆盖旧value
-       		    2、遍历完毕后仍无发现上述情况，则直接在链表尾部插入数据(尾插法)
-       			3、新增节点后，需判断链表长度是否>8（8 = 桶的树化阈值）：若是，则把链表转换为红黑树
+                1、遍历table[i]，判断Key是否已存在：采用equals()对比当前遍历节点的key 与
+                需插入数据的key：若已存在，则直接用新value覆盖旧value
+       		   2、遍历完毕后仍无发现上述情况，则直接在链表尾部插入数据(尾插法)
+       		   3、新增节点后，需判断链表长度是否>8（8 = 桶的树化阈值）：若是，则把链表转换为红黑树
                 */
                 for (int binCount = 0; ; ++binCount) {
                     //对于2情况的操作  尾插法插入尾部
@@ -432,7 +445,8 @@ Process finished with exit code 0
            int h;
           /*
           1、当key = null时，hash值 = 0，所以HashMap的key可为null      
-	      2、当key ≠ null时，则通过先计算出 key的 hashCode()（记为h），然后对哈希码进行扰动处理。高位参与			  低位的运算：h ^ (h >>> 16) 
+	      2、当key ≠ null时，则通过先计算出 key的 hashCode()（记为h），然后对哈希码进行扰动处理。
+	      高位参与低位的运算：h ^ (h >>> 16) 
           */
           return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
             
@@ -442,7 +456,7 @@ Process finished with exit code 0
 
 JDK8 hash的运算原理：高位参与低位运算，使得hash更加均匀。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK8/0002.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK8/0002.png">
 
 
 
@@ -555,7 +569,7 @@ JDK8 hash的运算原理：高位参与低位运算，使得hash更加均匀。
 
 JDK8扩容时，数据在数组下标的计算方式
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK8/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK8/0003.png">
 
 * `JDK8`根据此结论作出的新元素存储位置计算规则非常简单，提高了扩容效率。
 

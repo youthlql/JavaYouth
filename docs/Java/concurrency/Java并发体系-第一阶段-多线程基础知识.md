@@ -6,10 +6,10 @@ tags:
   - 源码
 categories:
   - Java并发
+  - 原理
 keywords: Java并发，原理，源码
 description: 万字系列长文讲解Java并发-第一阶段-多线程基础知识。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/logo_1.png'
 abbrlink: efc79183
 date: 2020-10-05 22:40:58
 ---
@@ -31,13 +31,13 @@ date: 2020-10-05 22:40:58
 概念：进程可进一步细化为线程，是一个程序内部的一条执行路径。
 说明：线程作为CPU调度和执行的单位，每个线程拥独立的运行栈和程序计数器(pc)，线程切换的开销小。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/First_stage/0001.png">
 
 
 
 补充：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0002.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/First_stage/0002.png">
 
 进程可以细化为多个线程。
 每个线程，拥有自己独立的：栈、程序计数器
@@ -96,7 +96,10 @@ public class ThreadTest {
         //问题一：我们不能通过直接调用run()的方式启动线程。
 //        t1.run();
 
-        //问题二：再启动一个线程，遍历100以内的偶数。不可以还让已经start()的线程去执行。会报IllegalThreadStateException
+        /*
+        问题二：再启动一个线程，遍历100以内的偶数。不可以还让已经start()的线程去执行。
+        会报IllegalThreadStateException
+        */    
 //        t1.start();
         //我们需要重新创建一个线程的对象
         MyThread t2 = new MyThread();
@@ -158,7 +161,11 @@ public class ThreadTest1 {
         //4. 将此对象作为参数传递到Thread类的构造器中，创建Thread类的对象
         Thread t1 = new Thread(mThread);
         t1.setName("线程1");
-        //5. 通过Thread类的对象调用start():① 启动线程 ②调用当前线程的run()-->调用了Runnable类型的target的run()
+
+        /*
+        5. 通过Thread类的对象调用start():① 启动线程 ②调用当前线程的run()-->
+        调用了Runnable类型的target的run()
+        */
         t1.start();
 
         //再启动一个线程，遍历100以内的偶数
@@ -260,7 +267,8 @@ private void init(ThreadGroup g, Runnable target, String name,
         tid = nextThreadID();
     }
 
-/*如果你是实现了runnable接口，那么在上面的代码中target便不会为null，那么最终就会通过重写的规则去调用真正实现了Runnable接口(你之前传进来的那个Runnable接口实现类)的类里的run方法*/
+/*如果你是实现了runnable接口，那么在上面的代码中target便不会为null，那么最终就会通过重写的
+规则去调用真正实现了Runnable接口(你之前传进来的那个Runnable接口实现类)的类里的run方法*/
 @Override
     public void run() {
     
@@ -273,7 +281,7 @@ private void init(ThreadGroup g, Runnable target, String name,
 1、多线程的设计之中，使用了代理设计模式的结构，用户自定义的线程主体只是负责项目核心功能的实现，而所有的辅助实现全部交由Thread类来处理。
 2、在进行Thread启动多线程的时候调用的是start()方法，而后找到的是run()方法，但通过Thread类的构造方法传递了一个Runnable接口对象的时候，那么该接口对象将被Thread类中的target属性所保存，在start()方法执行的时候会调用Thread类中的run()方法。而这个run()方法去调用实现了Runnable接口的那个类所重写过run()方法，进而执行相应的逻辑。多线程开发的本质实质上是在于多个线程可以进行同一资源的抢占，那么Thread主要描述的是线程，而资源的描述是通过Runnable完成的。如下图所示：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/First_stage/0003.png">
 
 
 
@@ -361,7 +369,8 @@ private void init(ThreadGroup g, Runnable target, String name,
         tid = nextThreadID();
     }
 
-/*由于这里是通过继承Thread类来实现的线程，那么target这个东西就是Null。但是因为你继承了Runnable接口并且重写了run()，所以最终还是调用子类的run()*/
+/*由于这里是通过继承Thread类来实现的线程，那么target这个东西就是Null。但是因为你继承
+了Runnable接口并且重写了run()，所以最终还是调用子类的run()*/
  @Override
     public void run() {
         if (target != null) {
@@ -635,7 +644,7 @@ public void run() {
 
 1、如果直接调用run()方法，相当于就是简单的调用一个普通方法。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/First_stage/0004.png">
 
 2、run()的调用是在start0()这个Native C++方法里调用的
 
@@ -645,11 +654,11 @@ public void run() {
 
 Java 线程在运行的生命周期中的指定时刻只可能处于下面 6 种不同状态的其中一个状态，这几个状态在Java源码中用枚举来表示。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/First_stage/0005.png">
 
 线程在生命周期中并不是固定处于某一个状态而是随着代码的执行在不同状态之间切换。Java 线程状态变迁如下图所示。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0006.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/First_stage/0006.png">
 
 >  图中 wait到 runnable状态的转换中，`join`实际上是`Thread`类的方法，但这里写成了`Object`。
 
@@ -690,7 +699,7 @@ public static void main(String[] args) {
 
 2、当JVM启动后，实际有多个线程，但是至少有一个非守护线程（比如main线程）。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0007.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/First_stage/0007.png">
 
 - Finalizer：GC守护线程
 
@@ -780,7 +789,8 @@ public static void main(String[] args) {
 }
 
 /*
-设置该线程为守护线程必须在启动它之前。如果t.start()之后，再t.setDaemon(true);会抛出IllegalThreadStateException
+设置该线程为守护线程必须在启动它之前。如果t.start()之后，再t.setDaemon(true);
+会抛出IllegalThreadStateException
 */
 ```
 
@@ -872,7 +882,108 @@ public static void main(String[] args) throws InterruptedException {
 
 # 中断
 
-记住中断只是一个状态，Java的方法可以选择对这个中断进行响应，也可以选择不响应。响应的意思就是写相对应的代码执行相对应的操作，不响应的意思就是什么代码都不写。
+1、Java 中的中断和操作系统的中断还不一样，这里就按照**状态**来理解吧，不要和操作系统的中断联系在一起
+
+2、记住中断只是一个状态，Java的方法可以选择对这个中断进行响应，也可以选择不响应。响应的意思就是写相对应的代码执行相对应的操作，不响应的意思就是什么代码都不写。
+
+## 几个方法
+
+```java
+// Thread 类中的实例方法，持有线程实例引用即可检测线程中断状态
+public boolean isInterrupted() {}
+
+/*
+1、Thread 中的静态方法，检测调用这个方法的线程是否已经中断
+2、注意：这个方法返回中断状态的同时，会将此线程的中断状态重置为 false
+如果我们连续调用两次这个方法的话，第二次的返回值肯定就是 false 了
+*/
+public static boolean interrupted() {}
+
+// Thread 类中的实例方法，用于设置一个线程的中断状态为 true
+public void interrupt() {}
+```
+
+
+
+
+
+## 小tip
+
+
+
+```java
+public static boolean interrupted()
+
+public boolean isInterrupted()//这个会清除中断状态
+
+```
+
+为什么要这么设置呢？原因在于：
+
+* interrupted()是一个静态方法，可以在Runnable接口实例中使用
+* isInterrupted()是一个Thread的实例方法，在重写Thread的run方法时使用
+
+
+
+```java
+public class ThreadInterrupt {
+    public static void main(String[] args) throws InterruptedException {
+        Thread t1 = new Thread(() -> {
+            System.out.println(Thread.interrupted());
+        });  //这个new Thread用的是runnable接口那个构造函数
+
+        Thread t2 = new Thread(){
+            @Override
+            public void run() {
+                System.out.println(isInterrupted());
+            }
+        };//这个new Thread用的就是Thread的空参构造
+
+    }
+}
+
+```
+
+也就是说接口中不能调用Thread的实例方法，只能通过静态方法来判断是否发生中断
+
+
+
+## 重难点
+
+当然，中断除了是线程状态外，还有其他含义，否则也不需要专门搞一个这个概念出来了。
+
+> 初学者肯定以为 thread.interrupt() 方法是用来暂停线程的，主要是和它对应中文翻译的“中断”有关。中断在并发中是常用的手段，请大家一定好好掌握。可以将中断理解为线程的状态，它的特殊之处在于设置了中断状态为 true 后，这几个方法会感知到：
+>
+> 1. wait(), wait(long), wait(long, int), join(), join(long), join(long, int), sleep(long), sleep(long, int)
+>
+>    这些方法都有一个共同之处，方法签名上都有`throws InterruptedException`，这个就是用来响应中断状态修改的。
+>
+> 2. 如果线程阻塞在 InterruptibleChannel 类的 IO 操作中，那么这个 channel 会被关闭。
+>
+> 3. 如果线程阻塞在一个 Selector 中，那么 select 方法会立即返回。
+>
+> 对于以上 3 种情况是最特殊的，因为他们能自动感知到中断（这里说自动，当然也是基于底层实现），**并且在做出相应的操作后都会重置中断状态为 false**。然后执行相应的操作（通常就是跳到 catch 异常处）。
+>
+> 如果不是以上3种情况，那么，线程的 interrupt() 方法被调用，会将线程的中断状态设置为 true。
+>
+> 那是不是只有以上 3 种方法能自动感知到中断呢？不是的，如果线程阻塞在 LockSupport.park(Object obj) 方法，也叫挂起，这个时候的中断也会导致线程唤醒，但是唤醒后不会重置中断状态，所以唤醒后去检测中断状态将是 true。
+
+> 资料:  [Oracle官方文档](https://docs.oracle.com/javase/specs/index.html)    --->   [ The Java® Language Specification Java SE 8 Edition](https://docs.oracle.com/javase/specs/jls/se8/html/index.html)   --->   第17章 Threads and Locks
+
+
+
+## InterruptedException
+
+它是一个特殊的异常，不是说 JVM 对其有特殊的处理，而是它的使用场景比较特殊。通常，我们可以看到，像 Object 中的 wait() 方法，ReentrantLock 中的 lockInterruptibly() 方法，Thread 中的 sleep() 方法等等，这些方法都带有 `throws InterruptedException`，我们通常称这些方法为阻塞方法（blocking method）。
+
+阻塞方法一个很明显的特征是，它们需要花费比较长的时间（不是绝对的，只是说明时间不可控），还有它们的方法结束返回往往依赖于外部条件，如 wait 方法依赖于其他线程的 notify，lock 方法依赖于其他线程的 unlock等等。
+
+当我们看到方法上带有 `throws InterruptedException` 时，我们就要知道，这个方法应该是阻塞方法，我们如果希望它能早点返回的话，我们往往可以通过中断来实现。 
+
+除了几个特殊类（如 Object，Thread等）外，感知中断并提前返回是通过轮询中断状态来实现的。我们自己需要写可中断的方法的时候，就是通过在合适的时机（通常在循环的开始处）去判断线程的中断状态，然后做相应的操作（通常是方法直接返回或者抛出异常）。当然，我们也要看到，如果我们一次循环花的时间比较长的话，那么就需要比较长的时间才能**感知**到线程中断了。
+
+
+
 
 ## wait()中断测试
 
@@ -912,17 +1023,9 @@ public static void main(String[] args) {
 > 注释掉e.printStackTrace();的输出
 >
 > false						//pos_4
-> true						 //pos_5	   t.isInterrupted()之后会立即清除中断状态
+> true						 //pos_5	   
 > wait响应中断			//pos_1
-> false						 //pos_3		因为pos_5清除了中断状态，所以这里检测到就是flase，没有被中断过
-
-* 当该线程在wait()、join()、sleep(long, int)状态时，如果被打断，则会收到一个异常提醒。因为这些方法都抛出了
-
-  ```throws InterruptedException```  这个异常，通过try catch可以做相应的处理。
-
-* 但是只要线程被打断，无论哪个方法都可以通过`isInterrupted()`方法检测到打断的状态。
-
-
+> false						 //pos_3		
 
 
 
@@ -953,47 +1056,6 @@ try {
 ```
 
 1、pos_2这里join的是main线程，所以pos_1这里需要中断main线程，才能收到中断信息。
-
-
-
-## 两个判断中断状态的方法
-
-
-
-```java
-public static boolean interrupted()
-
-public boolean isInterrupted()//这个会清除中断状态
-
-```
-
-为什么要这么设置呢？原因在于：
-
-* interrupted()是一个静态方法，可以在Runnable接口实例中使用
-* isInterrupted()是一个Thread的实例方法，在重写Thread的run方法时使用
-
-
-
-```java
-public class ThreadInterrupt {
-    public static void main(String[] args) throws InterruptedException {
-        Thread t1 = new Thread(() -> {
-            System.out.println(Thread.interrupted());
-        });  //这个new Thread用的是runnable接口那个构造函数
-
-        Thread t2 = new Thread(){
-            @Override
-            public void run() {
-                System.out.println(isInterrupted());
-            }
-        };//这个new Thread用的就是Thread的空参构造
-
-    }
-}
-
-```
-
-也就是说接口中不能调用Thread的实例方法，只能通过静态方法来判断是否发生中断
 
 
 
@@ -1494,13 +1556,10 @@ volatile自己虽然不能保证原子性，但是和CAS结合起来就可以保
 
 ## CAS 是什么？
 
-- CAS：比较并交换<compareAndSet>,它是一条 CPU 并发原语
-  		 它的功能是判断内存某个位置的值是否为预期值，如果是则更改为新的值，这个过程是原子性的。
+- CAS：比较并交换compareAndSet,它是一条 CPU 并发原语，它的功能是判断内存某个位置的值是否为预期值，如果是则更改为新的值，这个过程是原子性的。
   
-- 例: AtomicInteger 的 compareAndSet('期望值','设置值') 方法
-  		 期望值与目标值一致时，修改目标变量为设置值
-        		 期望值与目标值不一致时，返回 false 和最新主存的变量值
-
+- 例: AtomicInteger 的 compareAndSet('期望值','设置值') 方法，期望值与目标值一致时，修改目标变量为设置值，期望值与目标值不一致时，返回 false 和最新主存的变量值
+  
 - CAS 的底层原理
   	例: AtomicInteger.getAndIncrement()
     	调用 Unsafe 类中的 CAS 方法，JVM 会帮我们实现出 CAS 汇编指令
@@ -1515,7 +1574,7 @@ volatile自己虽然不能保证原子性，但是和CAS结合起来就可以保
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0009.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/First_stage/0009.png">
 
 
 
@@ -1723,7 +1782,7 @@ public Unsafe getUnsafe() throws IllegalAccessException {
 
 Unsafe的功能如下图：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/First_stage/0008.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/First_stage/0008.png">
 
 ## CAS相关
 

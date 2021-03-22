@@ -9,8 +9,7 @@ categories:
   - 用法
 keywords: ElasticSearch,全文检索
 description: ElasticSearch-入门篇，适合做入门，或者知识回顾。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/ElasticSearch/logo.jpg'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/ElasticSearch/logo.jpg'
 abbrlink: 7f60dde9
 date: 2020-02-03 13:11:45
 ---
@@ -47,7 +46,7 @@ date: 2020-02-03 13:11:45
 
 下图是ElasticSearch的索引结构，下边黑色部分是物理结构，上边黄色部分是逻辑结构，逻辑结构也是为了更好的  去描述ElasticSearch的工作原理及去使用物理结构中的索引文件。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/ElasticSearch/Introduction/0001.png" width=80%>
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/ElasticSearch/Introduction/0001.png" width=80%>
 
 逻辑结构部分是一个倒排索引表：
 
@@ -59,11 +58,11 @@ date: 2020-02-03 13:11:45
 
 如下：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/ElasticSearch/Introduction/0002.png" width=40%>
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/ElasticSearch/Introduction/0002.png" width=40%>
 
 现在，如果我们想搜到`quick brown`我们只需要查找包含每个词条的文档：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/ElasticSearch/Introduction/0003.png" width=80%>
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/ElasticSearch/Introduction/0003.png" width=80%>
 
 两个文档都匹配，但是第一个文档比第二个匹配度更高。如果我们使用仅计算匹配词条数量的简单 相似性算法 ， 那么，我们可以说，对于我们查询的相关性来讲，第一个文档比第二个文档更佳
 
@@ -237,7 +236,7 @@ http://localhost:9200/xc_course/doc/4028e58161bcf7f40161bcf8b77c0000
 
 使用postman测试：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/ElasticSearch/Introduction/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/ElasticSearch/Introduction/0004.png">
 
 
 

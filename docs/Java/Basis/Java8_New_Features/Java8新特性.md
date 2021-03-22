@@ -5,12 +5,11 @@ tags:
   - JDK8
   - 新特性
 categories:
-  - Java
+  - Java基础
   - 新特性
 keywords: Java8，新特性，JDK8
 description: 详解JDK8出现的新特性。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_Basis/logo.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/logo.png'
 abbrlink: de3879ae
 date: 2020-10-19 22:15:58
 ---
@@ -21,7 +20,7 @@ date: 2020-10-19 22:15:58
 
 > 本篇文章只讲解比较重要的
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_Basis/Java8_New_Features/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/Java8_New_Features/0001.png">
 
 
 
@@ -112,12 +111,15 @@ import java.util.function.Consumer;
  * 3. Lambda表达式的使用：（分为6种情况介绍）
  * <p>
  * 总结：
- * ->左边：lambda形参列表的参数类型可以省略(类型推断)；如果lambda形参列表只有一个参数，其一对()也可以省略
- * ->右边：lambda体应该使用一对{}包裹；如果lambda体只有一条执行语句（可能是return语句），省略这一对{}和return关键字
+ * ->左边：lambda形参列表的参数类型可以省略(类型推断)；如果lambda形参列表只有一个参数，其一对()也
+ * 可以省略
+ * ->右边：lambda体应该使用一对{}包裹；如果lambda体只有一条执行语句（可能是return语句），省略这一
+ 对{}和return关键字
  * <p>
  * 4.Lambda表达式的本质：作为函数式接口的实例
  * <p>
- * 5. 如果一个接口中，只声明了一个抽象方法，则此接口就称为函数式接口。我们可以在一个接口上使用 @FunctionalInterface 注解，
+ * 5. 如果一个接口中，只声明了一个抽象方法，则此接口就称为函数式接口。我们可以在一个接口上
+ 使用 @FunctionalInterface 注解，
  * 这样做可以检查它是否是一个函数式接口。
  * <p>
  * 6. 所以以前用匿名实现类表示的现在都可以用Lambda表达式来写。
@@ -306,13 +308,13 @@ public class LambdaTest1 {
 
 **核心函数式接口**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_Basis/Java8_New_Features/0002.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/Java8_New_Features/0002.png">
 
 
 
 **其它函数式接口**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_Basis/Java8_New_Features/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/Java8_New_Features/0003.png">
 
 
 
@@ -900,7 +902,7 @@ Stream到底是什么呢？
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_Basis/Java8_New_Features/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/Java8_New_Features/0004.png">
 
 
 
@@ -999,7 +1001,10 @@ public class StreamAPITest1 {
         list.stream().limit(3).forEach(System.out::println);
         System.out.println();
 
-//        skip(n) —— 跳过元素，返回一个扔掉了前 n 个元素的流。若流中元素不足 n 个，则返回一个空流。与 limit(n) 互补
+        /*
+        skip(n) —— 跳过元素，返回一个扔掉了前 n 个元素的流。若流中元素不足 n 个，
+        则返回一个空流。与 limit(n) 互补
+        */
         list.stream().skip(3).forEach(System.out::println);
 
         System.out.println();
@@ -1019,7 +1024,10 @@ public class StreamAPITest1 {
     //映射
     @Test
     public void test2(){
-//        map(Function f)——接收一个函数作为参数，将元素转换成其他形式或提取信息，该函数会被应用到每个元素上，并将其映射成一个新的元素。
+        /*
+        map(Function f)——接收一个函数作为参数，将元素转换成其他形式或提取信息，该函数会被应
+        用到每个元素上，并将其映射成一个新的元素。
+        */
         List<String> list = Arrays.asList("aa", "bb", "cc", "dd");
         list.stream().map(str -> str.toUpperCase()).forEach(System.out::println);
 
@@ -1035,8 +1043,10 @@ public class StreamAPITest1 {
             s.forEach(System.out::println);
         });
         System.out.println();
-//        flatMap(Function f)——接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连接成一个流。
-        //flatMap一层遍历即可拿到想要的结果
+        /*
+        flatMap(Function f)——接收一个函数作为参数，将流中的每个值都换成另一个流，然后把所有流连
+        接成一个流。flatMap一层遍历即可拿到想要的结果
+        */
         Stream<Character> characterStream = list.stream().flatMap(StreamAPITest1::fromStringToStream);
         characterStream.forEach(System.out::println);
 
@@ -1171,7 +1181,7 @@ public class StreamAPITest2 {
     //3-收集
     @Test
     public void test4(){
-//        collect(Collector c)——将流转换为其他形式。接收一个 Collector接口的实现，用于给Stream中元素做汇总的方法
+// collect(Collector c)——将流转换为其他形式。接收一个 Collector接口的实现，用于给Stream中元素做汇总的方法
 //        练习1：查找工资大于6000的员工，结果返回为一个List或Set
 
         List<Employee> employees = EmployeeData.getEmployees();
@@ -1209,7 +1219,7 @@ public class StreamAPITest2 {
 
 ## 常用API
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_Basis/Java8_New_Features/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/Java8_New_Features/0005.png">
 
 
 

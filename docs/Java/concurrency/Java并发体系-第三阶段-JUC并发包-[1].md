@@ -6,12 +6,12 @@ tags:
   - 源码
 categories:
   - Java并发
+  - 原理
 keywords: Java并发，原理，源码
 description: 万字系列长文讲解-Java并发体系-第三阶段-JUC并发包。JUC在高并发编程中使用频率非常高，这里会详细介绍其用法。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/logo_1.png'
 abbrlink: 5be45d9e
-date: 2020-10-19 22:13:58
+date: 2020-10-09 22:13:58
 ---
 
 
@@ -1869,7 +1869,7 @@ public class ForkJoinRecursiveAction {
 
 ForkJoinTask就是ForkJoinPool里面的每一个任务。他主要有两个子类：`RecursiveAction`和`RecursiveTask`。然后通过fork()方法去分配任务执行任务，通过join()方法汇总任务结果。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Third_stage/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Third_stage/0001.png">
 
 ## 小总结
 

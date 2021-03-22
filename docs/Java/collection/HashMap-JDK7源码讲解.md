@@ -8,9 +8,9 @@ categories:
   - HashMap
 keywords: Java集合，HashMap。
 description: HashMap-JDK7源码讲解。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_Basis/logo.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
-date: 2020-11-1 10:21:58
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/logo.png'
+abbrlink: f1f58db2
+date: 2020-11-01 10:21:58
 ---
 
 
@@ -202,7 +202,7 @@ hadoop2
 
 大致是这样的一个结构
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0001.png">
 
 - 每个链表就算哈希表的桶（bucket）
 - 链表的节点值就算一个键值对
@@ -294,7 +294,8 @@ public class HashMap<K,V>
 	
 
     /*
-    1、扩容阈值（threshold）：当哈希表的大小【就是上面的size】 ≥ 扩容阈值时，就会扩容哈希表（即扩充HashMap的	容量） 
+    1、扩容阈值（threshold）：当哈希表的大小【就是上面的size】 ≥ 扩容阈值时，就会扩容哈希表
+    （即扩充HashMap的容量） 
     2、扩容 = 对哈希表进行resize操作（即重建内部数据结构），从而哈希表将具有大约两倍的桶数
     3、扩容阈值 = 容量 x 加载因子
     */
@@ -397,7 +398,7 @@ static class Entry<K,V> implements Map.Entry<K,V> {
 
 `HashMap`中的数组元素 & 链表节点 采用 `Entry`类实现
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0001.png">
 
 1、一个正方形代表一个Entry对象，同时也代表一个键值对。
 
@@ -456,8 +457,10 @@ static class Entry<K,V> implements Map.Entry<K,V> {
         
         /*
         设置扩容阈值 = 初始容量
-        1、注意：此处不是真正的阈值，仅是为了接收参数初始容量大小（capacity）、加载因子(Load factor)，并没		有真正初始化哈希表，即初始化存储数组table
-        2、真正初始化哈希表（初始化存储数组table）是在第1次添加键值对时，即第1次调用put()时，下面会详细说明。
+        1、注意：此处不是真正的阈值，仅是为了接收参数初始容量大小（capacity）、加载因子(Load factor)，
+        并没有真正初始化哈希表，即初始化存储数组table
+        2、真正初始化哈希表（初始化存储数组table）是在第1次添加键值对时，即第1次调用put()时，下面会
+        详细说明。
         */
         threshold = initialCapacity;   
 
@@ -495,14 +498,17 @@ static class Entry<K,V> implements Map.Entry<K,V> {
 public V put(K key, V value) {
     	    	
     	/*  ①
-    	1、若哈希表未初始化（即 table为空)，则调用inflateTable方法，使用构造函数时设置的阈值(即初始容量)初		始化数组table 
+    	1、若哈希表未初始化（即 table为空)，则调用inflateTable方法，使用构造函数时设置的阈值
+    	(即初始容量)初始化数组table 
     	*/
         if (table == EMPTY_TABLE) {
             inflateTable(threshold);
         }
     	/*  ②
     	1、判断key是否为空值null
-		2、若key == null，则调用putForNullKey方法，putForNullKey方法最终将该键-值存放到数组table中的第1		  个位置，即table[0]。本质：key = Null时，hash值 = 0，故存放到table[0]中）该位置永远只有1个value，		  新传进来的value会覆盖旧的value
+		2、若key == null，则调用putForNullKey方法，putForNullKey方法最终将该键-值存放到数组
+		table中的第1个位置，即table[0]。本质：key = Null时，hash值 = 0，故存放到table[0]中）
+		该位置永远只有1个value，新传进来的value会覆盖旧的value
 		3、k != null往下走
     	*/
         if (key == null)
@@ -515,12 +521,14 @@ public V put(K key, V value) {
         int i = indexFor(hash, table.length);
     	
     	/*  ③
-    	1、通过遍历以该数组元素为头结点的链表，逐个判断是否发生hash冲突，同时判断该key对应的值是否已存在
+    	1、通过遍历以该数组元素为头结点的链表，逐个判断是否发生hash冲突，同时判断该key对应的值是
+    	否已存在
     	*/
         for (Entry<K,V> e = table[i]; e != null; e = e.next) {
             Object k;
             /* ④
-            1、如果发生了hash冲突，且key也相等。则用新value替换旧value(此时说明发生了更新的情况)，注意这里			 强调的是发生了hash冲突并且key也相等。
+            1、如果发生了hash冲突，且key也相等。则用新value替换旧value(此时说明发生了更新的情况)，
+            注意这里强调的是发生了hash冲突并且key也相等。
             */
             if (e.hash == hash && ((k = e.key) == key || key.equals(k))) {
                 V oldValue = e.value;
@@ -550,14 +558,16 @@ public V put(K key, V value) {
 
 private void inflateTable(int toSize) {
     /*
-	将传入的容量大小转化为：>传入容量大小的最小的2的次幂，即如果传入的是容量大小是18，那么转化后，初始化容量	  	  大小为32（即2的5次幂）
+	将传入的容量大小转化为：>传入容量大小的最小的2的次幂，即如果传入的是容量大小是18，那么转化后，
+	初始化容量大小为32（即2的5次幂）
 	*/	
     int capacity = roundUpToPowerOf2(toSize);
     
 	//重新计算阈值 threshold = 容量 * 加载因子  
     threshold = (int) Math.min(capacity * loadFactor, MAXIMUM_CAPACITY + 1);
     /*
-    使用计算后的初始容量（已经是2的次幂） 初始化数组table（作为数组长度）即 哈希表的容量大小 = 数组大小（长		度）
+    使用计算后的初始容量（已经是2的次幂） 初始化数组table（作为数组长度）即 哈希表的容量大小 = 
+    数组大小（长度）
     */
     table = new Entry[capacity];
     initHashSeedAsNeeded(capacity);
@@ -646,7 +656,8 @@ private V putForNullKey(V value) {
 ## indexFor()
 
 ```java
-//这里h & (length-1)的意思就是hash值与数组长度取模。只是因为数组长度是特殊的2的幂，所以这个等价关系刚好成立
+	//这里h & (length-1)的意思就是hash值与数组长度取模。只是因为数组长度是特殊的2的幂，
+	//所以这个等价关系刚好成立
 	static int indexFor(int h, int length) {
         // assert Integer.bitCount(length) == 1 : "length must be a non-zero power of 2";
         return h & (length-1);
@@ -758,15 +769,15 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 大概画了一下图：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0002.png"/>
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0002.png"/>
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0003.png">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0004.png">
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0005.png">
 
 
 
@@ -860,7 +871,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 **hashmap初始状态**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0006.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0006.png">
 
 
 
@@ -886,7 +897,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 **两个线程调用完毕之后，hashmap目前是这样的。**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0007.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0007.png">
 
 
 
@@ -907,9 +918,9 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 3、来看下此时内存里的状态
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0008.png"/>
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0008.png"/>
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0009.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0009.png">
 
 ## 步骤4
 
@@ -946,7 +957,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 2、线程2直接**扩容完毕**，那么完成后的状态是这样【假设e2和e3还是hash到同一个位置】
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0010.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0010.png">
 
 3、线程1还是原来的状态
 
@@ -956,11 +967,11 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 目前两个线程里的新数组是这样的
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0011.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0011.png">
 
 为了方便后面观看，我画成这样。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0012.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0012.png">
 
 
 
@@ -1004,7 +1015,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 也就变成了下面这个样子。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0013.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0013.png">
 
 
 
@@ -1050,7 +1061,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 执行完，变成这样。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0014.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0014.png">
 
 
 
@@ -1066,7 +1077,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 3、执行pos_3： newTable[i] = e得到  newTable1[3] == e2
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_collection/HashMap/JDK7/0015.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0015.png">
 
 这样就形成了循环链表，再get()数据就会陷入死循环。
 
@@ -1118,7 +1129,8 @@ void transfer(Entry[] newTable, boolean rehash) {
         //根据key值，通过hash（）计算出对应的hash值
         int hash = (key == null) ? 0 : hash(key);  
 
-        //根据hash值计算出对应的数组下标,遍历以该数组下标的数组元素为头结点的链表所有节点，寻找该key对应的值
+        //根据hash值计算出对应的数组下标,遍历以该数组下标的数组元素为头结点的链表所有节点，
+        //寻找该key对应的值
         for (Entry<K,V> e = table[indexFor(hash, table.length)];  e != null;  e = e.next) {  
 
             Object k;  

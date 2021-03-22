@@ -6,12 +6,12 @@ tags:
   - 源码
 categories:
   - Java并发
+  - 原理
 keywords: Java并发，原理，源码
 description: 万字系列长文讲解-Java并发体系-第三阶段-JUC并发包。JUC在高并发编程中使用频率非常高，这里会详细介绍其用法。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/logo_1.png'
 abbrlink: 70c90e5d
-date: 2020-10-19 22:13:58
+date: 2020-10-10 22:13:58
 ---
 
 
@@ -563,7 +563,7 @@ public int getUnarrivedParties()
 
   根据上面的代码，我们可以画出下面这个很简单的图：
 
- <img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Third_stage/0002.png">
+ <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Third_stage/0002.png">
 
   这棵树上有 7 个 phaser 实例，每个 phaser 实例在构造的时候，都指定了 parties 为 5，但是，对于每个拥有子节点的节点来说，每个子节点都是它的一个 party，我们可以通过 phaser.getRegisteredParties() 得到每个节点的 parties 数量：
 
@@ -896,32 +896,26 @@ Java 中的线程池是通过 Executor 框架实现的，该框架中用到了 E
 
 **七大参数**
 
-- corePoolSize
-  线程池中的常驻核心线程数
+- corePoolSize 线程池中的常驻核心线程数
   	 创建线程池后，当有请求任务进来，就安排池中的线程去执行请求任务
-  	 当线程池中的线程数目达到 corePoolSize 后，就会把到达的任务放到缓存队列中
-
+    	 当线程池中的线程数目达到 corePoolSize 后，就会把到达的任务放到缓存队列中
+  
 - maximumPoolSize
   线程池能够容纳同时执行的最大线程数，此值必须大于等于1
 
-- keepAliveTime
-  多余的空闲线程的存活时间
+- keepAliveTime 多余的空闲线程的存活时间
   	 当前线程池数量超过 corePoolSize 时，当空闲时间达到 keepAliveTime 值时，
-  		多余空闲线程会被销毁直到只剩下 corePoolSize 个线程为止
-
+    	多余空闲线程会被销毁直到只剩下 corePoolSize 个线程为止
+  
 - unit
   keepAliveTime 的单位
 
 - workQueue
   任务队列，被提交但尚未被执行的任务
 
-- threadFactory
-  表示生成线程池中工作线程的线程工厂<线程名字、线程序数...>
-  	 用于创建线程一般用默认的即可
-
-- handler
-  拒接策略，表示当队列满了并且工作线程大于等于线程池的最大线程数(maximumPoolSize)时
-  		 如何拒绝新的任务
+- threadFactory，表示生成线程池中工作线程的线程工厂<线程名字、线程序数...>，用于创建线程一般用默认的即可
+  
+- handler，拒接策略，表示当队列满了并且工作线程大于等于线程池的最大线程数(maximumPoolSize)时，如何拒绝新的任务
 
 
 
@@ -958,7 +952,7 @@ public class ThreadPoolDemo {
 
 ## 线程池的底层工作流程
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Third_stage/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Third_stage/0003.png">
 
 1、创建线程池后，等待请求任务
 
@@ -1652,7 +1646,7 @@ public class ExecutorCompletionService<V> implements CompletionService<V> {
 
 **执行流程：**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Third_stage/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Third_stage/0004.png">
 
 
 

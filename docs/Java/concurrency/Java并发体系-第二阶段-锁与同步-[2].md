@@ -6,19 +6,19 @@ tags:
   - 源码
 categories:
   - Java并发
+  - 原理
 keywords: Java并发，原理，源码
 description: '万字系列长文讲解-Java并发体系-第二阶段,从C++和硬件方面讲解。'
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/logo_1.png'
 abbrlink: '8210870'
-date: 2020-10-19 22:10:58
+date: 2020-10-07 22:10:58
 ---
 
 
 
 # 可见性设计的硬件
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Second_stage/0016.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0016.png">
 
 从硬件的级别来考虑一下可见性的问题
 
@@ -305,13 +305,13 @@ MESI协议规定了一组消息，就说各个处理器在操作内存数据的�
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Second_stage/0017.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0017.jpg">
 
 
 
 ## MESI-优化
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Second_stage/0018.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0018.png">
 
 ​	MESI协议如果每次写数据的时候都要发送invalidate消息等待所有处理器返回ack，然后获取独占锁后才能写数据，那可能就会导致性能很差了，因为这个对共享变量的写操作，实际上在硬件级别变成串行的了。所以为了解决这个问题，硬件层面引入了写缓冲器和无效队列
 
@@ -449,7 +449,7 @@ int b = c; //load
 
 ## 相关术语
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Second_stage/0019.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0019.png">
 
 
 
@@ -461,7 +461,7 @@ int b = c; //load
 
 **第一个机制是通过总线锁保证原子性。**如果多个处理器同时对共享变量进行读改写操作 （i++就是经典的读改写操作），那么共享变量就会被多个处理器同时进行操作，这样读改写操 作就不是原子的，操作完之后共享变量的值会和期望的不一致。举个例子，如果i=1，我们进行 两次i++操作，我们期望的结果是3，但是有可能结果是2，如图所示。 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Second_stage/0020.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0020.png">
 
 ​	原因可能是多个处理器同时从各自的缓存中读取变量i，分别进行加1操作，然后分别写入 系统内存中。那么，想要保证读改写共享变量的操作是原子的，就必须保证CPU1读改写共享 变量的时候，CPU2不能操作缓存了该共享变量内存地址的缓存。 
 

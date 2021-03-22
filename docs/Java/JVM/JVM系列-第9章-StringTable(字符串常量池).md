@@ -8,8 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第9章-StringTable(字符串常量池)。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/logo.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/logo.png'
 abbrlink: ee2ba71e
 date: 2020-11-16 12:38:02
 ---
@@ -167,11 +166,11 @@ str 的内容并没有变：“test ok” 位于字符串常量池中的另一�
 4.  在JDK7中，StringTable的长度默认值是60013，StringTablesize设置没有要求
 5.  在JDK8中，StringTable的长度默认值是60013，StringTable可以设置的最小值为1009
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0001.png">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0002.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0002.png">
 
 
 
@@ -277,11 +276,11 @@ String 的内存分配
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0003.png">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0004.png">
 
 
 
@@ -383,23 +382,23 @@ public class StringTest4 {
 
 1、程序启动时已经加载了 2293 个字符串常量
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0005.png">
 
 2、加载了一个换行符（println），所以多了一个
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0006.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0006.jpg">
 
 3、加载了字符串常量 “1”~“9”
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0007.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0007.jpg">
 
 4、加载字符串常量 “10”
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0008.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0008.jpg">
 
 5、之后的字符串"1" 到 "10"不会再次加载
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0009.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0009.png">
 
 
 
@@ -426,7 +425,7 @@ class Memory {
 
 分析运行时内存（foo() 方法是实例方法，其实图中少了一个 this 局部变量）
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0010.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0010.png">
 
 
 
@@ -494,7 +493,7 @@ class Memory {
 
 IDEA 反编译 class 文件后，来看这个问题
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0011.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0011.png">
 
 
 
@@ -930,7 +929,7 @@ public class StringNewTest {
 5.  `23 ldc #8 <b>` ：在字符串常量池中放入 “b”（如果之前字符串常量池中没有 “b” 的话）
 6.  `31 invokevirtual #9 <java/lang/StringBuilder.toString>` ：调用 StringBuilder 的 toString() 方法，会生成一个 String 对象
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0012.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0012.png">
 
 
 
@@ -989,13 +988,13 @@ JDK6 ：正常眼光判断即可
 *   new String() 即在堆中
 *   str.intern() 则把字符串放入常量池中
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0013.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0013.png">
 
 
 
 JDK7及后续版本，**注意大坑**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0014.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0014.png">
 
 
 
@@ -1054,11 +1053,11 @@ public class StringExer1 {
 
 **JDK6**
 
-![image-20201116113423492](https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0015.png)
+![image-20201116113423492](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0015.png)
 
 **JDK7/8**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0016.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0016.png">
 
 
 
@@ -1081,7 +1080,7 @@ public class StringExer1 {
 }
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0017.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0017.png">
 
 **练习3**
 
@@ -1170,11 +1169,11 @@ public class StringIntern2 {
 arr[i] = new String(String.valueOf(data[i % data.length]));
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0018.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0018.png">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0019.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0019.png">
 
 2、使用 intern() 方法：由于数组中字符串的引用都指向字符串常量池中的字符串，所以程序需要维护的 String 对象更少，内存占用也更低
 
@@ -1183,11 +1182,11 @@ arr[i] = new String(String.valueOf(data[i % data.length]));
 arr[i] = new String(String.valueOf(data[i % data.length])).intern();
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0020.png" >
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0020.png" >
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0021.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0021.png">
 
 
 
@@ -1219,11 +1218,11 @@ public class StringGCTest {
 *   Number of entries 和 Number of literals 明显没有 100000
 *   以上两点均说明 StringTable 区发生了垃圾回收
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0022.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0022.jpg">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_002/JVM/chapter_009/0023.jpg"/>
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.1.0/JVM/chapter_009/0023.jpg"/>
 
 
 

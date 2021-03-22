@@ -5,10 +5,11 @@ tags:
   - AQS源码
 categories:
   - Java并发
+  - 原理
 keywords: Java并发，AQS源码
 description: '万字系列长文讲解-Java并发体系-第四阶段-AQS源码解读-[1]。'
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/logo_1.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/logo_1.png'
+abbrlink: 92c4503d
 date: 2020-10-26 17:59:42
 ---
 
@@ -26,8 +27,8 @@ date: 2020-10-26 17:59:42
  * <p>
  * 可重入锁:
  * 1、可重复可递归调用的锁，在外层使用锁之后，在内层仍然可以使用，并且不发生死锁，这样的锁就叫做可重入锁。
- * 2、是指在同一个线程在外层方法获取锁的时候，再进入该线程的内层方法会自动获取锁(前提，锁对象得是同一个对象)，
- *   不会因为之前已经获取过还没释放而阻塞
+ * 2、是指在同一个线程在外层方法获取锁的时候，再进入该线程的内层方法会自动获取锁(前提，锁对象得是同一个
+ * 对象)，不会因为之前已经获取过还没释放而阻塞
  */
 public class ReEnterLockDemo {
 
@@ -307,8 +308,8 @@ LockSupport底层还是UNSAFE（前面讲过）。
 - 形象的理解
   线程阻塞需要消耗凭证(permit)，这个凭证最多只有1个。
   当调用park方法时
-      *如果有凭证，则会直接消耗掉这个凭证然后正常退出;
-      *如果无凭证，就必须阻塞等待凭证可用;
+      如果有凭证，则会直接消耗掉这个凭证然后正常退出;
+      如果无凭证，就必须阻塞等待凭证可用;
   而unpark则相反，它会增加一个凭证，但凭证最多只能有1个，累加无效。
 
 我们用LockSupport来测试下之前的异常场景
@@ -409,11 +410,11 @@ Process finished with exit code 0
 
 **技术翻译：**是用来构建锁或者其它同步器组件的重量级基础框架及整个JUC体系的基石， 通过内置的FIFO队列来完成资源获取线程的排队工作，并通过一个int类变量`state`表示持有锁的状态。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0001.png">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0011.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0011.png">
 
 AbstractOwnableSynchronizer
 AbstractQueuedLongSynchronizer
@@ -425,7 +426,7 @@ AbstractQueuedSynchronizer
 
 AQS是一个抽象的父类，可以将其理解为一个框架。基于AQS这个框架，我们可以实现多种同步器，比如下方图中的几个Java内置的同步器。同时我们也可以基于AQS框架实现我们自己的同步器以满足不同的业务场景需求。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0002.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0002.png">
 
 
 
@@ -433,7 +434,7 @@ AQS是一个抽象的父类，可以将其理解为一个框架。基于AQS这�
 
 加锁会导致阻塞：有阻塞就需要排队，实现排队必然需要有某种形式的队列来进行管理
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0003.png">
 
 1、抢到资源的线程直接使用办理业务，抢占不到资源的线程的必然涉及一种**排队等候机制**，抢占资源失败的线程继续去等待(类似办理窗口都满了，暂时没有受理窗口的顾客只能去候客区排队等候)，仍然保留获取锁的可能且获取锁流程仍在继续(候客区的顾客也在等着叫号，轮到了再去受理窗口办理业务）。
 
@@ -514,7 +515,7 @@ Node 的数据结构其实也挺简单的，就是 thread + waitStatus + pre + n
 
 ## AQS队列基本结构
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0004.png">
 
 注意排队队列，不包括head（也就是后文要说的哨兵节点）。
 
@@ -582,7 +583,7 @@ public class AQSDemo {
 
 以这样的一个实际例子说明。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0005.png">
 
 
 
@@ -643,7 +644,8 @@ public class AQSDemo {
     public final void acquire(int arg) { // 此时 arg == 1
         
         /*
-        1、首先调用tryAcquire(1)一下，名字上就知道，这个只是试一试。因为有可能直接就成功了呢，也就不需要进队  		   列排队了。
+        1、首先调用tryAcquire(1)一下，名字上就知道，这个只是试一试。因为有可能直接就成功了呢，也就不需要
+        进队列排队了。
         2、有可能成功的情况就是，在走到这一步的时候，前面占锁的线程刚好释放锁
         */
         if (!tryAcquire(arg) &&
@@ -712,7 +714,8 @@ public class AQSDemo {
 
     
 	/*
-	1、假设tryAcquire(arg) 返回false，那么代码将执行：acquireQueued(addWaiter(Node.EXCLUSIVE),    	arg)，这个方法，首先需要执行：addWaiter(Node.EXCLUSIVE)
+	1、假设tryAcquire(arg) 返回false，那么代码将执行：acquireQueued(addWaiter(Node.EXCLUSIVE),
+	arg)，这个方法，首先需要执行：addWaiter(Node.EXCLUSIVE)
 	2、此方法的作用是把线程包装成node，同时进入到队列中。参数mode此时是Node.EXCLUSIVE，代表独占模式
 	3、以下几行代码想把当前node加到链表的最后面去，也就是进到队列的最后
 	*/
@@ -728,7 +731,8 @@ public class AQSDemo {
             // 用CAS把自己设置为队尾, 如果成功后，tail == node 了，这个节点成为排队队列新的尾巴
             if (compareAndSetTail(pred, node)) { 
                 /*
-                1、进到这里说明设置成功，当前node==tail, 将自己与之前的队尾相连，上面已经有 node.prev = 				 pred，加上下面这句，也就实现了和之前的尾节点双向连接了
+                1、进到这里说明设置成功，当前node==tail, 将自己与之前的队尾相连，上面已经有
+                node.prev = pred，加上下面这句，也就实现了和之前的尾节点双向连接了
                 */
                 pred.next = node;
                 // 线程入队了，可以返回了
@@ -761,7 +765,7 @@ public class AQSDemo {
 
 2、C在if逻辑里准备入队，进行相应设置后，变成下面这样。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0006.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0006.png">
 
 
 
@@ -778,7 +782,8 @@ public class AQSDemo {
             Node t = tail;
             
            	/*
-           	1、进入这个分支，说明是队列为空的这种情况，那么就准备初始化一个空的节点（new Node()）作为排队队列			  的head。
+           	1、进入这个分支，说明是队列为空的这种情况，那么就准备初始化一个空的节点（new Node()）
+           	作为排队队列的head。
            	*/
             if (t == null) { // Must initialize
                 /*
@@ -786,15 +791,22 @@ public class AQSDemo {
                 2、还是一步CAS，因为可能是很多线程同时进来呢   
                 */
                 if (compareAndSetHead(new Node()))                    
-                    /*
-                    1、注意这里传的参数是new Node()，说明是一个空的节点（并不是我们B线程封装的节点，这                         个空节点只作为占位符，称作傀儡节点或者哨兵节点）。这个时候head节点的waitStatus==0, 看					new Node()构造方法就知道了。注意：new Node()虽然是空节点，但他不是null
-                    2、这个时候有了head，但是tail还是null，设置一下，把tail指向head，放心，马上就有线程要					 来了，到时候tail就要被抢了
-                    3、注意：这里只是设置了tail=head，这里可没return哦。所以，设置完了以后，继续for循环，					下次就到下面的else分支了
-                    */
+               /*
+                1、注意这里传的参数是new Node()，说明是一个空的节点（并不是我们B线程封装的节点，
+                这个空节点只作为占位符，称作傀儡节点或者哨兵节点）。这个时候head节点的waitStatus==0,
+                看new Node()构造方法就知道了。注意：new Node()虽然是空节点，但他不是null
+                2、这个时候有了head，但是tail还是null，设置一下，把tail指向head，放心，马上就有
+                线程要来了，到时候tail就要被抢了
+                3、注意：这里只是设置了tail=head，这里可没return哦。所以，设置完了以后，继续for
+                循环，下次就到下面的else分支了
+                */
                     tail = head;
             } else {             
                 /*
-                1、下面几行，和上一个方法 addWaiter 是一样的，只是这个套在无限循环里，就是将当前线程排到				 	队尾，有线程竞争的话排不上重复排，直到排上了再return 【这里看不懂的话就看下面的例子】               		 */
+                1、下面几行，和上一个方法 addWaiter 是一样的，只是这个套在无限循环里，就是将当前
+                线程排到队尾，有线程竞争的话排不上重复排，直到排上了再return 
+                【这里看不懂的话就看下面的例子】               
+                */
                 
                 node.prev = t;
                 if (compareAndSetTail(t, node)) {
@@ -819,7 +831,7 @@ public class AQSDemo {
 
 此时队列变成了下面的样子：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0007.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0007.png">
 
 3、然后if结束之后，继续空的for循环，B线程开始了第二轮循环。
 
@@ -831,11 +843,11 @@ public class AQSDemo {
 
 2、`node.prev = t`，进入if之后，让B节点的prev指针指向t，然后`compareAndSetTail(t, node)`设置尾节点
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0008.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0008.png">
 
 3、CAS设置尾节点成功之后，执行if里的逻辑
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0009.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0009.png">
 
 
 
@@ -851,7 +863,8 @@ public class AQSDemo {
             && acquireQueued(addWaiter(Node.EXCLUSIVE), arg)) 
          selfInterrupt();
     2、acquireQueued这个方法，参数node，经过addWaiter(Node.EXCLUSIVE)，此时已经进入排队队列队尾
-    3、注意一下：如果acquireQueued(addWaiter(Node.EXCLUSIVE), arg))返回true的话，意味着上面这段代码将     进入selfInterrupt()
+    3、注意一下：如果acquireQueued(addWaiter(Node.EXCLUSIVE), arg))返回true的话，意味着上面这段
+    代码将进入selfInterrupt()
     4、这个方法非常重要，真正的线程挂起，然后被唤醒后去获取锁，都在这个方法里了
 	*/
     final boolean acquireQueued(final Node node, int arg) {
@@ -861,10 +874,13 @@ public class AQSDemo {
             for (;;) {
                 final Node p = node.predecessor();             
                 /*
-                1、p == head 说明当前节点虽然进到了排队队列，但是是队列的第一个，因为它的前驱是head（或者说				 是哨兵节点，因为head指向了哨兵节点）
+                1、p == head 说明当前节点虽然进到了排队队列，但是是队列的第一个，因为它的前驱是head
+                （或者说是哨兵节点，因为head指向了哨兵节点）
                 2、注意，队列不包含head节点，head一般指的是占有锁的线程，head后面的才称为排队队列
                 3、所以当前节点可以去试抢一下锁
-                4、这里我们说一下，为什么可以去试试：它是排队队列队头，所以作为队头，可以去试一试能不能拿到					锁，因为可能之前的线程已经释放锁了。如果尝试成功，那它就不需要被挂起，直接拿锁，效率会高
+                4、这里我们说一下，为什么可以去试试：它是排队队列队头，所以作为队头，可以去试一试能不能
+                拿到锁，因为可能之前的线程已经释放锁了。如果尝试成功，那它就不需要被挂起，直接拿锁，
+                效率会高
                 5、tryAcquire已经分析过了, 忘记了请往前看一下，就是简单用CAS试操作一下state
                 */
                 if (p == head && tryAcquire(arg)) {
@@ -915,7 +931,9 @@ public class AQSDemo {
 
         /*
         1、前驱节点 waitStatus大于0 ，之前说过，大于0说明前驱节点取消了排队。
-        2、这里需要知道这点：进入阻塞队列排队的线程会被挂起，而唤醒的操作是由前驱节点完成的。所以下面这块代码说		的是将当前节点的prev指向waitStatus<=0的节点，简单说，就是为了找个好爹，因为你还得依赖它来唤醒呢，如		  果前驱节点取消了排队，找前驱节点的前驱节点做爹，往前遍历总能找到一个好爹的。
+        2、这里需要知道这点：进入阻塞队列排队的线程会被挂起，而唤醒的操作是由前驱节点完成的。所以
+        下面这块代码说的是将当前节点的prev指向waitStatus<=0的节点，简单说，就是为了找个好爹，因为你还
+        得依赖它来唤醒呢，如果前驱节点取消了排队，找前驱节点的前驱节点做爹，往前遍历总能找到一个好爹的。
         */
         if (ws > 0) {
             /*
@@ -935,8 +953,13 @@ public class AQSDemo {
             /*
             1、如果进入到这个分支意味着什么，前驱节点的waitStatus不等于-1和1，那也就是只可能是0，-2，-3
             在我们前面的源码中，都没有看到有设置waitStatus的，所以每个新的node入队时，waitStatu都是0
-            2、正常情况下，前驱节点是之前的 tail，那么它的 waitStatus 应该是 0，用CAS将前驱节点的					waitStatus设置为Node.SIGNAL(也就是-1)，表示我后面有节点需要被唤醒。
-            3、这里可以简单说下 waitStatus 中 SIGNAL(-1) 状态的意思，Doug Lea 注释的是：代表后继节点需要			   被唤醒。也就是说这个 waitStatus 其实代表的不是自己的状态，而是后继节点的状态，我们知道，每个 			node 在入队的时候，都会把前驱节点的状态改为 SIGNAL，然后阻塞，等待被前驱唤醒。这里涉及的是两个问			  题：有线程取消了排队、唤醒操作。其实本质是一样的，读者也可以顺着 “waitStatus代表后继节点的状态”     		 这种思路去看一遍源码。
+            2、正常情况下，前驱节点是之前的 tail，那么它的 waitStatus 应该是 0，用CAS将前驱节点
+            的waitStatus设置为Node.SIGNAL(也就是-1)，表示我后面有节点需要被唤醒。
+            3、这里可以简单说下 waitStatus 中 SIGNAL(-1) 状态的意思，Doug Lea 注释的是：代表后继
+            节点需要被唤醒。也就是说这个 waitStatus 其实代表的不是自己的状态，而是后继节点的状态，
+            我们知道，每个node 在入队的时候，都会把前驱节点的状态改为 SIGNAL，然后阻塞，等待被前驱唤醒。
+            这里涉及的是两个问 题：有线程取消了排队、唤醒操作。其实本质是一样的，读者也可以顺着 
+            “waitStatus代表后继节点的状态”这种思路去看一遍源码。
             */
             compareAndSetWaitStatus(pred, ws, Node.SIGNAL);
         }
@@ -993,11 +1016,15 @@ public class AQSDemo {
     }
 	/*
 	1、接下来说说如果shouldParkAfterFailedAcquire(p, node)返回false的情况
-    2、仔细看shouldParkAfterFailedAcquire(p, node)，我们可以发现，其实第一次进来的时候，一般都不会返回	true的，原因很简单，前驱节点的waitStatus=-1是依赖于后继节点设置的。也就是说，我都还没给前驱设置-1呢，怎么	  可能是true呢，但是要看到，这个方法是套在循环里的，所以第二次进来的时候状态就是-1了。
+    2、仔细看shouldParkAfterFailedAcquire(p, node)，我们可以发现，其实第一次进来的时候，一般都不会
+    返回true的，原因很简单，前驱节点的waitStatus=-1是依赖于后继节点设置的。也就是说，我都还没给前驱
+    设置-1呢，怎么可能是true呢，但是要看到，这个方法是套在循环里的，所以第二次进来的时候状态就是-1了。
 
     3、解释下为什么shouldParkAfterFailedAcquire(p, node)返回false的时候不直接挂起线程：
     主要是为了应对在经过这个方法后，node已经是head的直接后继节点了。
-    4、假设返回fasle的时候，node已经是head的直接后继节点了，但是你直接挂起了线程，就要走别人唤醒你的那几步代		码。那这里完全可以重新走一遍for循环，直接尝试下获取锁，可能会更快。注意是可能，不代表一定，因为你也无法确定		unparkSuccessor释放锁，通知后继节点这个方法执行的快慢。但是你多尝试一次获取锁，总归是快的。
+    4、假设返回fasle的时候，node已经是head的直接后继节点了，但是你直接挂起了线程，就要走别人唤醒你的那
+    几步代码。那这里完全可以重新走一遍for循环，直接尝试下获取锁，可能会更快。注意是可能，不代表一定，因为
+    你也无法确定unparkSuccessor释放锁，通知后继节点这个方法执行的快慢。但是你多尝试一次获取锁，总归是快的。
     	for (;;) {
             final Node p = node.predecessor();
             if (p == head && tryAcquire(arg)) {
@@ -1074,7 +1101,8 @@ private void unparkSuccessor(Node node) {
     if (ws < 0)
         compareAndSetWaitStatus(node, ws, 0);
     /*
-    1、下面的代码就是唤醒后继节点，但是有可能后继节点取消了等待（waitStatus==1）从队尾往前找，找到				waitStatus<=0的所有节点中排在最前面的
+    1、下面的代码就是唤醒后继节点，但是有可能后继节点取消了等待（waitStatus==1）从队尾往前找，
+    找到waitStatus<=0的所有节点中排在最前面的
     */
     Node s = node.next;
     if (s == null || s.waitStatus > 0) {
@@ -1169,7 +1197,7 @@ protected final void setExclusiveOwnerThread(Thread thread) {
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img/Java_concurrency/Source_code/Fourth_stage/0010.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Fourth_stage/0010.png">
 
 
 

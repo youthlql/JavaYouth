@@ -8,8 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第12章-垃圾回收器。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/JVM/logo.png'
-top_img: 'https://cdn.jsdelivr.net/gh/youthlql/lql_img/blog/top_img.jpg'
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/logo.png'
 abbrlink: 7706d61d
 date: 2020-11-19 18:33:24
 ---
@@ -45,7 +44,7 @@ GC 分类与性能指标
 
 **按线程数分（垃圾回收线程数），可以分为串行垃圾回收器和并行垃圾回收器。**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0001.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0001.png">
 
 1.  串行回收指的是在同一时间段内只允许有一个CPU用于执行垃圾回收操作，此时工作线程被暂停，直至垃圾收集工作结束。
     1.  在诸如单CPU处理器或者较小的应用内存等硬件平台不是特别优越的场合，串行回收器的性能表现可以超过并行回收器和并发回收器。所以，串行回收默认被应用在客户端的Client模式下的JVM中
@@ -61,7 +60,7 @@ GC 分类与性能指标
 1.  并发式垃圾回收器与应用程序线程交替工作，以尽可能减少应用程序的停顿时间。
 2.  独占式垃圾回收器（Stop the World）一旦运行，就停止应用程序中的所有用户线程，直到垃圾回收过程完全结束。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0002.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0002.png">
 
 
 
@@ -106,7 +105,7 @@ GC 分类与性能指标
 2.  这种情况下，应用程序能容忍较高的暂停时间，因此，高吞吐量的应用程序有更长的时间基准，快速响应是不必考虑的
 3.  吞吐量优先，意味着在单位时间内，STW的时间最短：0.2+0.2=0.4
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0003.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0003.png">
 
 
 
@@ -116,7 +115,7 @@ GC 分类与性能指标
     - 例如，GC期间100毫秒的暂停时间意味着在这100毫秒期间内没有应用程序线程是活动的
 2.  暂停时间优先，意味着尽可能让单次STW的时间最短：0.1+0.1 + 0.1+ 0.1+ 0.1=0.5，但是总的GC时间可能会长
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0004.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0004.png">
 
 
 
@@ -170,17 +169,17 @@ GC 分类与性能指标
 2.  并行回收器：ParNew、Parallel Scavenge、Parallel old
 3.  并发回收器：CMS、G1
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0005.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0005.png">
 
 **官方文档**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0006.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0006.jpg">
 
 
 
 **7款经典回收器与垃圾分代之间的关系**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0007.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0007.png">
 
 1.  新生代收集器：Serial、ParNew、Parallel Scavenge；
   
@@ -193,7 +192,7 @@ GC 分类与性能指标
 
 ### 垃圾收集器的组合关系
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0008.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0008.png">
 
 
 
@@ -252,11 +251,11 @@ jinfo -flag UseParallelOldGC 进程id
 
 JDK 8 中默认使用 ParallelGC 和 ParallelOldGC 的组合
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0009.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0009.png">
 
 #### JDK9
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0010.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0010.png">
 
 
 
@@ -282,7 +281,7 @@ Serial 回收器：串行回收
 
 这个收集器是一个单线程的收集器，“单线程”的意义：它只会使用一个CPU（串行）或一条收集线程去完成垃圾收集工作。更重要的是在它进行垃圾收集时，必须暂停其他所有的工作线程，直到它收集结束（Stop The World）
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0011.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0011.png">
 
 
 
@@ -314,7 +313,7 @@ ParNew 回收器：并行回收
 2.  ParNew 收集器除了采用**并行回收**的方式执行内存回收外，两款垃圾收集器之间几乎没有任何区别。ParNew收集器在年轻代中同样也是采用复制算法、"Stop-the-World"机制。
 3.  ParNew 是很多JVM运行在Server模式下新生代的默认垃圾收集器。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0012.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0012.png">
 
 1.  对于新生代，回收次数频繁，使用并行方式高效。
 2.  对于老年代，回收次数少，使用串行方式节省资源。（CPU并行需要切换线程，串行可以省去切换线程的资源）
@@ -362,7 +361,7 @@ Parallel 回收器：吞吐量优先
 5.  Parallel Old收集器采用了标记-压缩算法，但同样也是基于并行回收和"Stop-the-World"机制。
   
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0013.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0013.png">
 
 1.  在程序吞吐量优先的应用场景中，Parallel收集器和Parallel Old收集器的组合，在server模式下的内存回收性能很不错。
 2.  **在Java8中，默认是此垃圾收集器。**
@@ -419,7 +418,7 @@ CMS 回收器：低延迟
 
 ### CMS 工作原理（过程）
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0014.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0014.png">
 
 CMS整个过程比之前的收集器要复杂，整个过程分为4个主要阶段，即初始标记阶段、并发标记阶段、重新标记阶段和并发清除阶段。(涉及STW的阶段主要是：初始标记 和 重新标记)
 
@@ -439,7 +438,7 @@ CMS整个过程比之前的收集器要复杂，整个过程分为4个主要阶�
 3.  另外，由于在垃圾收集阶段用户线程没有中断，所以在CMS回收过程中，还应该确保应用程序用户线程有足够的内存可用。因此，CMS收集器不能像其他收集器那样等到老年代几乎完全被填满了再进行收集，**而是当堆内存使用率达到某一阈值时，便开始进行回收**，以确保应用程序在CMS工作过程中依然有足够的空间支持应用程序运行。要是CMS运行期间预留的内存无法满足程序需要，就会出现一次**“Concurrent Mode Failure”** 失败，这时虚拟机将启动后备预案：临时启用Serial old收集器来重新进行老年代的垃圾收集，这样停顿时间就很长了。
 4.  CMS收集器的垃圾收集算法采用的是**标记清除算法**，这意味着每次执行完内存回收后，由于被执行内存回收的无用对象所占用的内存空间极有可能是不连续的一些内存块，**不可避免地将会产生一些内存碎片**。那么CMS在为新对象分配内存空间时，将无法使用指针碰撞（Bump the Pointer）技术，而只能够选择空闲列表（Free List）执行内存分配。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0015.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0015.png">
 
 
 
@@ -559,11 +558,11 @@ G1 回收器：区域化分代式
 
 G1的分代，已经不是下面这样的了
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0016.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0016.png">
 
 G1的分区是这样的一个区域
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0017.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0017.png">
 
 **空间整合**
 
@@ -656,7 +655,7 @@ G1中提供了三种垃圾回收模式：YoungGC、Mixed GC和Full GC，在不�
   >
   > 如图所示，可以将区域分配到Eden，幸存者和旧时代区域。 此外，还有第四种类型的物体被称为巨大区域。 这些区域旨在容纳标准区域大小的50％或更大的对象。 它们存储为一组连续区域。 最后，最后一种区域类型是堆的未使用区域。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0018.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0018.png">
 
 
 
@@ -668,7 +667,7 @@ G1中提供了三种垃圾回收模式：YoungGC、Mixed GC和Full GC，在不�
 
 **Regio的细节**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0019.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0019.png">
 
 1.  每个Region都是通过指针碰撞来分配空间
 2.  G1为每一个Region设 计了两个名为TAMS（Top at Mark Start）的指针，把Region中的一部分空间划分出来用于并发回收过程中的新对象分配，并发回收时新分配的对象地址都必须要在这两个指针位置以上。
@@ -687,7 +686,7 @@ G1 GC的垃圾回收过程主要包括如下三个环节：
 *   混合回收（Mixed GC）
 *   （如果需要，单线程、独占式、高强度的Full GC还是继续存在的。它针对GC的评估失败提供了一种失败保护机制，即强力回收。）
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0020.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0020.png">
 
 顺时针，Young GC --> Young GC+Concurrent Marking --> Mixed GC顺序，进行垃圾回收
 
@@ -732,7 +731,7 @@ G1 GC的垃圾回收过程主要包括如下三个环节：
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0021.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0021.png">
 
 1.  在回收 Region 时，为了不进行全堆的扫描，引入了 Remembered Set
 2.  Remembered Set 记录了当前 Region 中的对象被哪个对象引用了
@@ -749,7 +748,7 @@ G1 GC的垃圾回收过程主要包括如下三个环节：
 2.  年轻代回收只回收Eden区和Survivor区
 3.  YGC时，首先G1停止应用程序的执行（Stop-The-World），G1创建回收集（Collection Set），回收集是指需要被回收的内存分段的集合，年轻代回收过程的回收集包含年轻代Eden区和Survivor区所有的内存分段。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0022.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0022.png">
 
 图的大致意思就是：
 
@@ -805,7 +804,7 @@ G1 GC的垃圾回收过程主要包括如下三个环节：
 
 当越来越多的对象晋升到老年代Old Region时，为了避免堆内存被耗尽，虚拟机会触发一个混合的垃圾收集器，即Mixed GC，该算法并不是一个Old GC，除了回收整个Young Region，还会回收一部分的Old Region。这里需要注意：是一部分老年代，而不是全部老年代。可以选择哪些Old Region进行收集，从而可以对垃圾回收的耗时时间进行控制。也要注意的是Mixed GC并不是Full GC。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0023.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0023.png">
 
 
 
@@ -855,11 +854,11 @@ G1 GC的垃圾回收过程主要包括如下三个环节：
 
 截止JDK1.8，一共有7款不同的垃圾收集器。每一款的垃圾收集器都有不同的特点，在具体使用的时候，需要根据具体的情况选用不同的垃圾收集器。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0034.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0034.jpg">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0024.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0024.png">
 
 
 
@@ -923,11 +922,11 @@ GC 日志分析
 
 2、这个只会显示总的GC堆的变化，如下：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0025.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0025.png">
 
 3、参数解析
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0026.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0026.png">
 
 
 
@@ -939,11 +938,11 @@ GC 日志分析
 
 2、输入信息如下
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0027.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0027.png">
 
 3、参数解析
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0028.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0028.png">
 
 
 
@@ -955,7 +954,7 @@ GC 日志分析
 
 2、输出信息如下
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0029.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0029.png">
 
 3、说明：日志带上了日期和时间
 
@@ -990,13 +989,13 @@ GC 日志分析
 
 #### Young GC 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0030.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0030.png">
 
 
 
 #### Full GC 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0031.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0031.png">
 
 
 
@@ -1030,11 +1029,11 @@ public class GCLogTest1 {
 
 1、首先我们会将3个2M的数组存放到Eden区，然后后面4M的数组来了后，将无法存储，因为Eden区只剩下2M的剩余空间了，那么将会进行一次Young GC操作，将原来Eden区的内容，存放到Survivor区，但是Survivor区也存放不下，那么就会直接晋级存入Old 区
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0032.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0032.png">
 
 2、然后我们将4M对象存入到Eden区中
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0033.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0033.png">
 
 老年代图画的有问题，free应该是4M
 
@@ -1057,7 +1056,7 @@ Process finished with exit code 0
 
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0035.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0035.jpg">
 
 与 JDK7 不同的是，JDK8 直接判定 4M 的数组为大对象，直接怼到老年区去了
 
@@ -1083,15 +1082,15 @@ GCViewer、GCEasy、GCHisto、GCLogViewer、Hpjmeter、garbagecat等
 
 在线分析网址：gceasy.io
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0036.jpg">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0036.jpg">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0037.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0037.png">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0038.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0038.png">
 
 
 
@@ -1127,7 +1126,7 @@ GCViewer、GCEasy、GCHisto、GCLogViewer、Hpjmeter、garbagecat等
 1.  停顿时间比其他几款收集器确实有了质的飞跃，但也未实现最大停顿时间控制在十毫秒以内的目标。
 2.  而吞吐量方面出现了明显的下降，总运行时间是所有测试收集器里最长的。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0039.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0039.png">
 
 
 
@@ -1157,7 +1156,7 @@ GCViewer、GCEasy、GCHisto、GCLogViewer、Hpjmeter、garbagecat等
 
 **吞吐量**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0040.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0040.png">
 
 max-JOPS：以低延迟为首要前提下的数据
 
@@ -1167,13 +1166,13 @@ critical-JOPS：不考虑低延迟下的数据
 
 **低延迟**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0041.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0041.png">
 
 在ZGC的强项停顿时间测试上，它毫不留情的将Parallel、G1拉开了两个数量级的差距。无论平均停顿、95%停顿、998停顿、99. 98停顿，还是最大停顿时间，ZGC都能毫不费劲控制在10毫秒以内。
 
 虽然ZGC还在试验状态，没有完成所有特性，但此时性能已经相当亮眼，用“令人震惊、革命性”来形容，不为过。未来将在服务端、大内存、低延迟应用的首选垃圾收集器。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0042.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0042.png">
 
 
 
@@ -1193,4 +1192,4 @@ critical-JOPS：不考虑低延迟下的数据
 
 AliGC是阿里巴巴JVM团队基于G1算法，面向大堆（LargeHeap）应用场景。指定场景下的对比：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lql_img_003/JVM/chapter_012/0043.png">
+<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/JVM/chapter_012/0043.png">
