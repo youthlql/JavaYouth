@@ -22,16 +22,17 @@
     window.$docsify = {
       name: 'JavaYouth',
       repo: 'https://github.com/youthlql/JavaYouth',
-      maxLevel: 4,//最大支持渲染的标题层级
+      maxLevel: 5,//最大支持渲染的标题层级
       coverpage: true,
       auto2top: true,//切换页面后是否自动跳转到页面顶部
+	  loadNavbar: true,//导航栏
       search: {
         //maxAge: 86400000, // 过期时间，单位毫秒，默认一天
         paths: 'auto',
         placeholder: '搜索',
         noData: '找不到结果',
         // 搜索标题的最大程级, 1 - 6
-        depth: 3,
+        depth: 4,
       },
       // 字数统计
       count: {
