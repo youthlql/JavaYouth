@@ -1421,7 +1421,7 @@ public class StringBuilderTest {
         s1.append("b");
         return s1;
     }
-    //s1的操作：是线程安全的（s1自己消亡了，最后返回的智商s1.toString的一个新对象）
+    //s1的操作：是线程安全的（s1自己消亡了，最后返回的只是s1.toString的一个新对象）
     public static String method4(){
         StringBuilder s1 = new StringBuilder();
         s1.append("a");

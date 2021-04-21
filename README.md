@@ -146,9 +146,11 @@ AQS剩余部分，以及阻塞队列源码暂时先搁置一下。
 
 ## 入门
 
-[Netty入门-第一话](docs/netty/introduction/Netty入门-第一话.md)
+[Netty入门-第一话](docs/netty/introduction/Netty入门-第一话.md)：第一话对BIO和NIO进行了讲解，为后续做准备
 
-[Netty入门-第二话](docs/netty/introduction/Netty入门-第二话.md)
+[Netty入门-第二话](docs/netty/introduction/Netty入门-第二话.md)：对Netty的架构进行了解析，主要是Reactor设计模式的多种解决方案。同时讲解了Netty的核心模块组件
+
+[Netty入门-第三话](docs/netty/introduction/Netty入门-第三话.md)：对前面两话一些迷惑的点进行细说，讲解handler调用机制，TCP粘包，以及用netty写一个十分简单的RPC
 
 # Apollo
 

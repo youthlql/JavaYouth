@@ -6,7 +6,7 @@ categories:
   - Netty
   - 入门
 keywords: Netty
-description: Netty入门-第二话。
+description: 对Netty的架构进行了解析，主要是Reactor设计模式的多种解决方案。同时讲解了Netty的核心模块组件。
 cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/netty/netty_logo.jpg'
 abbrlink: f846f3f
 date: 2021-04-15 14:21:58
@@ -866,6 +866,8 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 
 
 # Netty 核心模块组件
+
+> 各种东西看不懂，可以先看第三话，第三话我自认为用通俗的语言讲的还算清楚。
 
 ## Bootstrap、ServerBootstrap
 

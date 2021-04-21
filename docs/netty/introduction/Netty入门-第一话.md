@@ -6,7 +6,7 @@ categories:
   - Netty
   - 入门
 keywords: Netty
-description: Netty入门-第一话。
+description: 第一话对BIO和NIO进行了讲解，为后续做准备。
 cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/netty/netty_logo.jpg'
 abbrlink: 3f9283e7
 date: 2021-04-08 14:21:58
