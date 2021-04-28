@@ -1,13 +1,14 @@
+> 4月下旬和5月上旬，我的新电脑到了转移数据，加上也要毕业答辩了，暂时停更(或者不定期更新)。
+>
 > 1、文章可能会优先更新在[Github](https://github.com/youthlql/JavaYouth)，[个人博客](https://imlql.cn/)。其它平台会晚一段时间。[个人博客备用地址](https://youthlql.gitee.io/)
 >
-> 2、如果Github很卡，可以在[Gitee](https://gitee.com/youthlql/JavaYouth)浏览，或者[Gitee在线阅读](https://youthlql.gitee.io/JavaYouth)，[个人博客](https://imlql.cn/)。Gitee在线阅读和个人博客加载速度比较快。
+> 2、如果Github很卡，可以在[Gitee](https://gitee.com/youthlql/JavaYouth)浏览，或者[Gitee在线阅读](https://youthlql.gitee.io/JavaYouth)，[个人博客](https://imlql.cn/)。Gitee在线阅读和个人博客加载速度比较快。(Gitee Pages要维护3个月，我这段时间把它转移到github pages再弄个cdn)
 >
 > 3、转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境！
 >
 > 4、如果你要提交 issue 或者 pr 的话建议到 [Github](https://github.com/youthlql/JavaYouth) 提交。
 >
 > 5、笔者会陆续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**。你的**Star**是我创作的动力。
->
 
 
 
