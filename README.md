@@ -145,6 +145,10 @@ AQS剩余部分，以及阻塞队列源码暂时先搁置一下。
 
 
 
+# 设计模式【更新中】
+
+[1.设计模式-设计思想](docs/design_patterns/design_ideas/设计模式-设计思想.md)
+
 # Netty
 
 ## 入门
