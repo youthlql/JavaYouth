@@ -2,7 +2,7 @@
 
 > 1、文章可能会优先更新在[Github](https://github.com/youthlql/JavaYouth)，[个人博客](https://imlql.cn/)。其它平台会晚一段时间。[个人博客备用地址](https://youthlql.gitee.io/)
 >
-> 2、如果Github很卡，可以在[Gitee](https://gitee.com/youthlql/JavaYouth)浏览，或者[Gitee在线阅读](https://youthlql.gitee.io/JavaYouth)，[个人博客](https://imlql.cn/)。Gitee在线阅读和个人博客加载速度比较快。(Gitee Pages要维护3个月，我这段时间把它转移到github pages再弄个cdn)
+> 2、如果Github很卡，可以在[Gitee](https://gitee.com/youthlql/JavaYouth)浏览，或者[电子书在线阅读](https://imlql.cn/JavaYouth/#/)，[个人博客](https://imlql.cn/)。Gitee在线阅读和个人博客加载速度比较快。(Gitee Pages要维护3个月，我这段时间把它转移到github pages再弄个cdn【转移完成】)
 >
 > 3、转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境！
 >
