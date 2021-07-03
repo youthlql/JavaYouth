@@ -147,7 +147,7 @@ AQS剩余部分，以及阻塞队列源码暂时先搁置一下。
 
 
 
-# 设计模式【更新中-6.27更新】
+# 设计模式【更新中-7.4更新】
 
 [1.设计模式-设计思想](docs/design_patterns/design_ideas/设计模式-01.设计思想.md)
 
@@ -158,6 +158,10 @@ AQS剩余部分，以及阻塞队列源码暂时先搁置一下。
 [3.设计模式-创建型-单例](docs/design_patterns/creational/设计模式-03.01-创建型-单例.md)
 
 [3.设计模式-创建型-工厂&建造者&原型](docs/design_patterns/creational/设计模式-03.02-创建型-工厂&建造者&原型.md)
+
+[4.设计模式-结构型-代理&桥接&装饰器&适配器](docs/design_patterns/structural_type/设计模式-04.01-结构型-代理&桥接&装饰器&适配器.md)
+
+[4.设计模式-结构型-门面&组合&享元](docs/design_patterns/structural_type/设计模式-04.02-结构型-门面&组合&享元.md)
 
 
 
