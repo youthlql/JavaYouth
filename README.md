@@ -11,6 +11,8 @@
 > 5、笔者会陆续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**。你的**Star**是我创作的动力。
 >
 > 6、所有更新日志，写作计划，公告等均在此发布 ==> [时间轴](https://imlql.cn/timeline/)。
+>
+> 7、由于现在上班挺忙的，更新频率会下降。但是基本可以保证一个月一篇文章（我文章基本都是万字长文这种）。具体的看下[时间轴](https://imlql.cn/timeline/)
 
 
 
@@ -147,7 +149,7 @@ AQS剩余部分，以及阻塞队列源码暂时先搁置一下。
 
 
 
-# 设计模式【更新中-7.14更新】
+# 设计模式【8.2更新基本完毕】
 
 [1.设计模式-设计思想](docs/design_patterns/design_ideas/设计模式-01.设计思想.md)
 
@@ -165,7 +167,9 @@ AQS剩余部分，以及阻塞队列源码暂时先搁置一下。
 
 [5.设计模式-行为型-观察者&模板](docs/design_patterns/behavior_type/设计模式-05.01-行为型-观察者&模板.md)
 
+[5.设计模式-行为型-策略&职责链](docs/design_patterns/behavior_type/设计模式-05.02-行为型-策略&职责链.md)
 
+[5.设计模式-行为型-状态&迭代器](docs/design_patterns/behavior_type/设计模式-05.03-行为型-状态&迭代器.md)
 
 # Netty
 
