@@ -9,7 +9,7 @@ categories:
   - 操作系统
 keywords: 操作系统，IO，零拷贝
 description: 基本面试会问到的IO进行了详解，同时本篇文章也对面试以及平时工作中会看到的零拷贝进行了充分的解析。万字长文系列，读到就是赚到。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/os_logo.jpg'
+cover: 'https://unpkg.zhimg.com/youthlql@1.0.0/os/os_logo.jpg'
 abbrlink: e959db2e
 date: 2021-04-08 15:21:58
 ---
@@ -90,7 +90,7 @@ date: 2021-04-08 15:21:58
 4. 通过Reactor的方式，可以将用户线程轮询IO操作状态的工作统一交给handle_events事件循环进行处理。用户线程注册事件处理器之后可以继续执行做其他的工作（异步），而Reactor线程负责调用内核的select函数检查socket状态。当有socket被激活时(就是数据准备好的时候)，则通知相应的用户线程（或执行用户线程的回调函数），执行handle_event进行数据读取、处理的工作。
 5. 由于select函数是阻塞的，因此多路IO复用模型也被称为异步阻塞IO模型。注意，这里的所说的阻塞是指select函数执行时线程被阻塞，而不是指socket。(一般在使用IO多路复用模型时，socket都是设置为NONBLOCK的，不过这并不会产生影响，因为用户发起IO请求时，数据已经到达了，用户线程一定不会被阻塞。)
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0001.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0001.png">
 
 
 
@@ -196,7 +196,7 @@ date: 2021-04-08 15:21:58
 
 1. 来看一个标准设备（不是真实存在的，相当于一个逻辑上抽象的东西），通过它来帮助我们更好地理解设备交互的机制。可以看到一个包含两部分重要组件的设备。第一部分是向系统其他部分展现的硬件接口（interface）。同软件一样，硬件也需要一些接口，让系统软件来控制它的操作。因此，所有设备都有自己的特定接口以及典型交互的协议。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0002.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0002.png"/>
 
 2. 第2部分是它的内部结构（internal structure）。这部分包含设备相关的特定实现，负责具体实现设备展示给系统的抽象接口。
 
@@ -231,11 +231,11 @@ While (STATUS == BUSY);//wait until device is done with your request
 
 1. 没有中断时：进程1在CPU上运行一段时间（对应CPU那一行上重复的1），然后发出一个读取数据的I/O请求给磁盘。如果没有中断，那么操作系统就会简单自旋，不断轮询设备状态，直到设备完成I/O操作（对应其中的p）。当设备完成请求的操作后，进程1又可以继续运行。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0003.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0003.png"/>
 
 2. 有了中断后：中断允许计算与I/O重叠（overlap），这是提高CPU利用率的关键。我们利用中断并允许重叠，操作系统就可以在等待磁盘操作时做其他事情。
 
-   <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0004.png"/>
+   <img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0004.png"/>
 
    - 在这个例子中，在磁盘处理进程1的请求时，操作系统在CPU上运行进程2。磁盘处理完成后，触发一个中断，然后操作系统唤醒进程1继续运行。这样，在这段时间，无论CPU还是磁盘都可以有效地利用。
 
@@ -243,7 +243,7 @@ While (STATUS == BUSY);//wait until device is done with your request
 
 中断仍旧存在的缺点：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0005.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0005.png"/>
 
 IO过程简述：
 
@@ -268,7 +268,7 @@ IO过程简述：
 >
 > 标准协议还有一点需要我们注意。具体来说，如果使用编程的I/O将一大块数据传给设备，CPU又会因为琐碎的任务而变得负载很重，浪费了时间和算力，本来更好是用于运行其他进程。下面的时间线展示了这个问题：
 >
-> <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0006.png"/>
+> <img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0006.png"/>
 >
 > 进程1在运行过程中需要向磁盘写一些数据，所以它开始进行I/O操作，将数据从内存拷贝到磁盘（其中标示c的过程）。**拷贝结束后，磁盘上的I/O操作开始执行，此时CPU才可以处理其他请求。**
 
@@ -278,13 +278,13 @@ IO过程简述：
 >
 > DMA工作过程如下。为了能够将数据传送给设备，操作系统会通过编程告诉DMA引擎数据在内存的位置，要拷贝的大小以及要拷贝到哪个设备。在此之后，操作系统就可以处理其他请求了。当DMA的任务完成后，DMA控制器会抛出一个中断来告诉操作系统自己已经完成数据传输。修改后的时间线如下：
 >
-> <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0007.png"/>
+> <img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0007.png"/>
 >
 > 从时间线中可以看到，数据的拷贝工作都是由DMA控制器来完成的。因为CPU在此时是空闲的，所以操作系统可以让它做一些其他事情，比如此处调度进程2到CPU来运行。因此进程2在进程1再次运行之前可以使用更多的CPU。
 
 为了更好理解，看图：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0008.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0008.png"/>
 
 过程：
 
@@ -302,7 +302,7 @@ IO过程简述：
 
 场景：将磁盘上的文件读取出来，然后通过网络协议发送给客户端。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0009.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0009.png"/>
 
 1. 很明显发生了4次拷贝
 
@@ -326,7 +326,7 @@ IO过程简述：
 
 `read()` 系统调用的过程中会把内核缓冲区的数据拷贝到用户的缓冲区里，为了减少这一步开销，我们可以用 `mmap()` 替换 `read()` 系统调用函数。`mmap()` 系统调用函数会直接把内核缓冲区里的数据映射到用户空间，这样，操作系统内核与用户空间共享缓冲区，就不需要再进行任何的数据拷贝操作。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0010.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0010.png"/>
 
 总的来说mmap减少了一次数据拷贝，总共4次上下文切换，3次数据拷贝
 
@@ -336,7 +336,7 @@ IO过程简述：
 
 `Linux2.1` 版本提供了 `sendFile` 函数，其基本原理如下：数据根本不经过用户态，直接从内核缓冲区进入到 `SocketBuffer`
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0011.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0011.png"/>
 
 总的来说有2次上下文切换，3次数据拷贝。
 
@@ -344,7 +344,7 @@ IO过程简述：
 
 `Linux在2.4` 版本中，做了一些修改，避免了从内核缓冲区拷贝到 `Socketbuffer` 的操作，直接拷贝到协议栈，从而再一次减少了数据拷贝
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@master/os/IO_and_Zero-copy/0012.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.0/os/IO_and_Zero-copy/0012.png" />
 
 
 

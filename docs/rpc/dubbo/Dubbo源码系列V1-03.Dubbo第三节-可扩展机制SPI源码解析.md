@@ -1,0 +1,1179 @@
+---
+title: Dubbo源码系列V1-03.Dubbo第三节-可扩展机制SPI源码解析
+tags:
+  - Dubbo
+  - rpc
+categories:
+  - rpc
+  - Dubbo源码系列v1
+keywords: Dubbo，rpc
+description: Dubbo里面SPI是基础，大量用到了SPI
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/youthlql/img/dubbo.png'
+abbrlink: dbcfef47
+date: 2021-09-12 15:21:58
+---
+
+
+
+
+
+
+
+## 第三节: Dubbo的可扩展机制SPI源码解析
+
+
+
+### SPI的概念
+
+https://www.cnblogs.com/happyframework/archive/2013/09/17/3325560.html
+
+https://zhuanlan.zhihu.com/p/28909673
+
+spi的概念看上面两就行了，案例还是看我下面的举例，讲的比较通俗。
+
+### Java的SPI机制
+
+#### 项目目录
+
+```java
+spi-demo
+├── api-db-impl-mysql/
+|  ├── api-db-impl-mysql.iml
+|  ├── pom.xml
+|  ├── src/
+|  |  ├── main/
+|  |  |  ├── java/
+|  |  |  |  └── com/
+|  |  |  |     └── youthlql/
+|  |  |  |        └── mysql/
+|  |  |  |           └── MySQLSaveService.java
+|  |  |  └── resources/
+|  |  |     └── META-INF/
+|  |  |        └── services/
+|  |  |           └── com.youthlql.data.DataSaveService
+|  |  └── test/
+|  |     └── java/
+|  └── target/
+|     ├── classes/
+|     |  ├── com/
+|     |  |  └── youthlql/
+|     |  |     └── mysql/
+|     |  |        └── MySQLSaveService.class
+|     |  └── META-INF/
+|     |     └── services/
+|     |        └── com.youthlql.data.DataSaveService
+|     └── generated-sources/
+|        └── annotations/
+├── api-db-impl-redis/
+|  ├── api-db-impl-redis.iml
+|  ├── pom.xml
+|  ├── src/
+|  |  ├── main/
+|  |  |  ├── java/
+|  |  |  |  └── com/
+|  |  |  |     └── youthlql/
+|  |  |  |        └── redis/
+|  |  |  |           └── RedisSaveService.java
+|  |  |  └── resources/
+|  |  |     └── META-INF/
+|  |  |        └── services/
+|  |  |           └── com.youthlql.data.DataSaveService
+|  |  └── test/
+|  |     └── java/
+|  └── target/
+|     ├── classes/
+|     |  ├── com/
+|     |  |  └── youthlql/
+|     |  |     └── redis/
+|     |  |        └── RedisSaveService.class
+|     |  └── META-INF/
+|     |     └── services/
+|     |        └── com.youthlql.data.DataSaveService
+|     └── generated-sources/
+|        └── annotations/
+├── api-db-interface/
+|  ├── api-db-interface.iml
+|  ├── pom.xml
+|  ├── src/
+|  |  ├── main/
+|  |  |  ├── java/
+|  |  |  |  └── com/
+|  |  |  |     └── youthlql/
+|  |  |  |        └── data/
+|  |  |  |           └── DataSaveService.java
+|  |  |  └── resources/
+|  |  └── test/
+|  |     └── java/
+|  └── target/
+|     ├── classes/
+|     |  └── com/
+|     |     └── youthlql/
+|     |        └── data/
+|     |           └── DataSaveService.class
+|     └── generated-sources/
+|        └── annotations/
+├── app/
+|  ├── app.iml
+|  ├── pom.xml
+|  ├── src/
+|  |  ├── main/
+|  |  |  ├── java/
+|  |  |  |  └── com/
+|  |  |  |     └── youthlql/
+|  |  |  |        └── redis/
+|  |  |  |           └── MainTest.java
+|  |  |  └── resources/
+|  |  └── test/
+|  |     └── java/
+|  └── target/
+|     ├── classes/
+|     |  └── com/
+|     |     └── youthlql/
+|     |        └── redis/
+|     |           └── MainTest.class
+|     └── generated-sources/
+|        └── annotations/
+├── pom.xml
+└── spi-demo.iml
+
+```
+
+
+
+#### MainTest
+
+```java
+import com.youthlql.data.DataSaveService;
+
+import java.util.ServiceLoader;
+
+
+/**
+ * 1、 ServiceLoader：load（）指定一个接口，
+ *      他就会加载当前系统里面所有的这个接口的【指定实现】
+ * 2、SPI（Service Provider Interface）
+ *      接口工程---提供接口
+ *          ---- 实现工程1  ： 实现接口 【META-INF/services 创建文件  接口名作为文件名  实现类全路径作为文件内容】
+ *          ---- 实现工程2  ： 实现接口
+ *
+ *
+ *      客户端----引用 工程1、或者 工程2
+ *
+ *
+ *
+ */
+public class MainTest {
+
+    public static void main(String[] args) {
+
+        //1、加载 可用的接口实现
+        ServiceLoader<DataSaveService> load = ServiceLoader.load(DataSaveService.class);
+
+        //拿到实现进行调用
+        for (DataSaveService service : load) {
+            service.saveData("你好....");
+        }
+
+    }
+}
+```
+
+输出：
+
+```java
+MySQL保存了数据.......你好....
+Redis保存了数据.......你好....
+```
+
+Java的SPI机制会默认加载**类路径**下`META-INF/services`的东西
+
+#### DataSaveService
+
+```
+public interface DataSaveService {
+
+    void saveData(String data);
+}
+```
+
+#### MySQLSaveService
+
+```java
+public class MySQLSaveService implements DataSaveService {
+    @Override
+    public void saveData(String data) {
+        System.out.println("MySQL保存了数据......." + data);
+    }
+}
+```
+
+#### RedisSaveService
+
+```java
+public class RedisSaveService implements DataSaveService {
+    @Override
+    public void saveData(String data) {
+        System.out.println("Redis保存了数据......."+data);
+    }
+}
+```
+
+
+
+#### SPI文件示例
+
+api-db-impl-redis\src\main\resources\META-INF\services\com.youthlql.data.DataSaveService
+
+```txt
+com.youthlql.redis.RedisSaveService
+```
+
+
+
+api-db-impl-mysql\src\main\resources\META-INF\services\com.youthlql.data.DataSaveService
+
+```txt
+com.youthlql.mysql.MySQLSaveService
+```
+
+你没看错就是这么简单
+
+
+
+#### Java的SPI机制的作用
+
+我只需要规定接口就可以开放给任何人实现
+
+> META-INF\services下的文件，本文统称为**SPI文件**
+
+### Dubbo为什么要实现自己的SPI机制？
+
+> SPI机制，dubbo源码中大量用到，读者务必理解清楚。
+
+SPI文件里写了什么,java的`ServiceLoader`都会给你一次性加载完
+
+```java
+com.youthlql.RedCar
+com.youthlql.BlackCar
+com.youthlql,WhiteCar
+....    
+```
+
+`SpiTest.java`
+
+```java
+   public static void main(String[] args) {
+        ServiceLoader<Car> cars = ServiceLoader.load(Car.class);
+        for (Car car : cars) {
+            System.out.println(car.getCarName(null));
+        }
+   }
+```
+
+假设现在有一个需求，我们某一时刻只需要RedCar，某一时刻又需要BlackCar，就是说我们不想让它一次性加载完。
+
+spi文件我们可以这样写：
+
+```java
+red=com.youthlql.RedCar
+black=com.youthlql.BlackCar
+```
+
+`SpiTest.java`
+
+```java
+   public static void main(String[] args) {
+        ServiceLoader<Car> cars = ServiceLoader.load(Car.class,"red");
+        for (Car car : cars) {
+            System.out.println(car.getCarName(null));
+        }
+   }
+```
+
+因为这样的需求，就引出了dubbo想要实现的SPI的功能。
+
+
+
+前面介绍过Dubbo支持http协议，支持dubbo协议等等，实现这样的SPI之后。写代码时只需要在application.properties里直接指定你想要用的协议，需要http协议时就只加载对应的protocol的http实现类
+
+```properties
+dubbo.protocols.p1.id=dubbo1
+dubbo.protocols.p1.name=dubbo
+dubbo.protocols.p1.port=20881
+dubbo.protocols.p1.host=0.0.0.0
+
+dubbo.protocols.p2.id=http
+dubbo.protocols.p2.name=http
+dubbo.protocols.p2.port=8083
+dubbo.protocols.p2.host=0.0.0.0
+```
+
+  
+
+### Demo
+
+```java
+ExtensionLoader<Protocol> extensionLoader = ExtensionLoader.getExtensionLoader(Protocol.class);
+Protocol http = extensionLoader.getExtension("dubbo");
+System.out.println(http);
+```
+
+
+
+上面这个Demo就是Dubbo常见的写法，表示获取"dubbo"对应的Protocol扩展点。Protocol是一个接口。
+
+#### getExtensionLoader源码
+
+```java
+    private static final ConcurrentMap<Class<?>, ExtensionLoader<?>> EXTENSION_LOADERS = new ConcurrentHashMap<>();
+	//中间代码略...
+	public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> type) {
+        if (type == null) {
+            throw new IllegalArgumentException("Extension type == null");
+        }
+        if (!type.isInterface()) {
+            throw new IllegalArgumentException("Extension type (" + type + ") is not an interface!");
+        }
+        if (!withExtensionAnnotation(type)) {
+            throw new IllegalArgumentException("Extension type (" + type +
+                    ") is not an extension, because it is NOT annotated with @" + SPI.class.getSimpleName() + "!");
+        }
+
+        ExtensionLoader<T> loader = (ExtensionLoader<T>) EXTENSION_LOADERS.get(type);
+        if (loader == null) {
+            EXTENSION_LOADERS.putIfAbsent(type, new ExtensionLoader<T>(type));
+            loader = (ExtensionLoader<T>) EXTENSION_LOADERS.get(type);
+        }
+        return loader;
+    }
+```
+
+
+
+在ExtensionLoader类的内部有一个static的ConcurrentHashMap，用来缓存**某个接口类型所对应的ExtensionLoader实例**
+
+
+
+
+
+### ExtensionLoader源码
+
+- Exte nsionLoader表示某个接口的扩展点加载器，可以用来加载某个扩展点实例。  
+
+- 在ExtensionLoader中除开有上文的static的Map外，还有两个非常重要的属性：
+
+1. **Class<?> type：**表示当前ExtensionLoader实例是哪个接口的扩展点加载器
+
+2. **ExtensionFactory objectFactory：**扩展点工厂（对象工厂），可以获得某个对象
+
+   
+
+- **ExtensionLoader**和**ExtensionFactory**的区别在于：
+
+1.  ExtensionLoader最终所得到的对象是Dubbo SPI机制产生的
+2.  ExtensionFactory最终所得到的对象可能是Dubbo SPI机制所产生的，也可能是从Spring容器中所获得的对象
+
+  
+
+  
+
+- 在**ExtensionLoader**中有三个常用的方法：
+
+1.  **getExtension("dubbo")：**表示获取名字为dubbo的扩展点实例
+2.  **getAdaptiveExtension()：**表示获取一个自适应的扩展点实例
+3.  **getActivateExtension(URL url, String\[\] values, String group)：**表示一个可以被url激活的扩展点实例，后文详细解释
+
+  
+
+其中，什么是**自适应扩展点实例**？它其实就是当前这个接口的一个**代理对象。**
+
+  ```java
+  ExtensionLoader<Protocol> extensionLoader = ExtensionLoader.getExtensionLoader(Protocol.class);
+  Protocol protocol = extensionLoader.getExtension("dubbo");
+  ```
+
+
+
+  
+
+当我们调用上述代码，我们会将得到一个DubboProtocol的实例对象，但在getExtension()方法中，Dubbo会对DubboProtocol对象进行**依赖注入（也就是自动给属性赋值，属性的类型为一个接口，记为A接口），**这个时候，对于Dubbo来说它并不知道该给这个属性赋什么值，换句话说，Dubbo并不知道在进行依赖注入时该找一个什么的的扩展点对象给这个属性，这时就会预先赋值一个A接口的自适应扩展点实例，也就是A接口的一个代理对象。
+
+后续，在A接口的代理对象被真正用到时，才会结合URL信息找到真正的A接口对应的扩展点实例进行调用。
+
+  
+
+#### getExtension()
+
+在调用getExtension去获取一个扩展点实例后，会对实例进行缓存，下次再获取同样名字的扩展点实例时就会从缓存中拿了。
+
+ ```java
+     public T  getExtension(String name) {
+         if (StringUtils.isEmpty(name)) {
+             throw new IllegalArgumentException("Extension name == null");
+         }
+         // 获取默认扩展类
+         if ("true".equals(name)) {
+             return getDefaultExtension();
+         }
+ 
+         final Holder<Object> holder = getOrCreateHolder(name);
+         Object instance = holder.get();
+ 
+         // 如果有两个线程同时来获取同一个name的扩展点对象，那只会有一个线程会进行创建
+         if (instance == null) {
+             synchronized (holder) { // 一个name对应一把锁
+                 instance = holder.get();
+                 if (instance == null) {
+                     // 创建扩展点实例对象
+                     instance = createExtension(name);   // 创建扩展点对象
+                     holder.set(instance);
+                 }
+             }
+         }
+         return (T) instance;
+     }
+ 
+     private Holder<Object> getOrCreateHolder(String name) {
+         // Map<String, Object>
+         Holder<Object> holder = cachedInstances.get(name);
+         if (holder == null) {
+             cachedInstances.putIfAbsent(name, new Holder<>());
+             holder = cachedInstances.get(name);
+         }
+         return holder;
+     }
+ ```
+
+
+
+什么是默认的扩展类，就是像下面这样，在接口上指定了spi注解
+
+```java
+@SPI("red")
+public interface Car {
+    String getCarName);
+}
+```
+
+#### createExtension()
+
+```java
+    private T createExtension(String name) {
+       
+        //根据name获取扩展类  {name: Class}  key-Value    接口的所有实现类    
+        Class<?> clazz = getExtensionClasses().get(name);
+        if (clazz == null) {
+            throw findException(name);
+        }
+	   //当把当前接口的所有扩展点实现类都加载出来后也会进行缓存，下次需要加载时直接拿缓存中的。
+        try {
+            // 实例缓存
+            T instance = (T) EXTENSION_INSTANCES.get(clazz);
+            if (instance == null) {
+                // 创建实例
+                EXTENSION_INSTANCES.putIfAbsent(clazz, clazz.newInstance());
+                instance = (T) EXTENSION_INSTANCES.get(clazz);
+            }
+
+            //对生成出来的实例进行依赖注入（给实例的属性进行赋值）
+            injectExtension(instance);
+
+            // AOP:对依赖注入后的实例进行AOP（Wrapper）,把当前接口类的所有的Wrapper全部一层一层包裹在实例对象上
+            // 每包裹个Wrapper后，也会对Wrapper对象进行依赖注入
+            Set<Class<?>> wrapperClasses = cachedWrapperClasses;
+            if (CollectionUtils.isNotEmpty(wrapperClasses)) {
+                for (Class<?> wrapperClass : wrapperClasses) {
+                    instance = injectExtension((T) wrapperClass.getConstructor(type).newInstance(instance));
+                }
+            }
+		   //返回最终的Wrapper对象,debug一下你就会看到返回的不是redCar而是carWrapper
+            return instance;
+        } catch (Throwable t) {
+            throw new IllegalStateException("Extension instance (name: " + name + ", class: " +
+                    type + ") couldn't be instantiated: " + t.getMessage(), t);
+        }
+    }
+
+```
+
+> wrapper就相当于在你想要的对象外面再封一层，可以做一些事情，详见下面讲的AOP
+
+  
+
+#### getExtensionClasses()
+
+```java
+	/**
+     * 加载当前ExtensionLoader对象中指定的接口的所有扩展
+     * @return
+     */
+    private Map<String, Class<?>> getExtensionClasses() {
+        // cachedClasses是一个Holder对象，持有的就是一个Map<String, Class<?>>
+        // 为什么要多此一举，也是为了解决并发，Holder对象用来作为锁
+
+        Map<String, Class<?>> classes = cachedClasses.get();
+        if (classes == null) {
+            synchronized (cachedClasses) {
+                classes = cachedClasses.get();
+                if (classes == null) {
+                    classes = loadExtensionClasses(); // 加载、解析文件 Map
+                    cachedClasses.set(classes);
+                }
+            }
+        }
+        return classes;
+    }
+
+	/**
+     * synchronized in getExtensionClasses
+     * */
+    private Map<String, Class<?>> loadExtensionClasses() {
+        // cache接口默认的扩展类，也就是上面说的@SPI("red")注解标记的接口指定的名
+        cacheDefaultExtensionName();
+
+        Map<String, Class<?>> extensionClasses = new HashMap<>();
+        loadDirectory(extensionClasses, DUBBO_INTERNAL_DIRECTORY, type.getName());
+        loadDirectory(extensionClasses, DUBBO_INTERNAL_DIRECTORY, type.getName().replace("org.apache", "com.alibaba"));
+        loadDirectory(extensionClasses, DUBBO_DIRECTORY, type.getName());
+        loadDirectory(extensionClasses, DUBBO_DIRECTORY, type.getName().replace("org.apache", "com.alibaba"));
+        loadDirectory(extensionClasses, SERVICES_DIRECTORY, type.getName());
+        loadDirectory(extensionClasses, SERVICES_DIRECTORY, type.getName().replace("org.apache", "com.alibaba"));
+        return extensionClasses;
+    }
+
+    private static final String SERVICES_DIRECTORY = "META-INF/services/";
+
+    private static final String DUBBO_DIRECTORY = "META-INF/dubbo/";
+
+    private static final String DUBBO_INTERNAL_DIRECTORY = DUBBO_DIRECTORY + "internal/";
+```
+
+
+
+getExtensionClasses()是用来加载当前接口所有的扩展点实现类的，返回一个Map。之后可以从这个Map中按照指定的name获取对应的扩展点实现类。 
+
+Dubbo在加载一个接口的扩展点时，思路是这样的：
+
+1.  根据接口的全限定名去META-INF/dubbo/internal/目录下寻找对应的文件，调用loadResource方法进行加载
+2.  根据接口的全限定名去META-INF/dubbo/目录下寻找对应的文件，调用loadResource方法进行加载
+3.  根据接口的全限定名去META-INF/services/目录下寻找对应的文件，调用loadResource方法进行加载
+
+这里其实会设计到老版本兼容的逻辑，不解释了。
+
+#### loadDirectory()
+
+  ```java
+  private void loadDirectory(Map<String, Class<?>> extensionClasses, String dir, String type) {
+          String fileName = dir + type;
+          try {
+              // 根据文件中的内容得到urls， 每个url表示一个扩展    http=org.apache.dubbo.rpc.protocol.http.HttpProtocol
+              Enumeration<java.net.URL> urls;
+              ClassLoader classLoader = findClassLoader();
+              if (classLoader != null) {
+                  urls = classLoader.getResources(fileName);
+              } else {
+                  urls = ClassLoader.getSystemResources(fileName);
+              }
+              if (urls != null) {
+                  while (urls.hasMoreElements()) {
+                      java.net.URL resourceURL = urls.nextElement();
+                      // 遍历url进行加载,把扩展类添加到extensionClasses中
+                      loadResource(extensionClasses, classLoader, resourceURL);
+                  }
+              }
+          } catch (Throwable t) {
+              logger.error("Exception occurred when loading extension class (interface: " +
+                      type + ", description file: " + fileName + ").", t);
+          }
+      }
+  ```
+
+1. BootstrapClassLoader用于加载JAVA核心类库，也就是环境变量的%JRE_HOME%\lib下的rt.jar、resources.jar、charsets.jar等。在JVM启动时加入-Xbootclasspath参数，可以把对应路径也加载到Bootstrap的路径列表中来
+2. ExtentionClassLoader扩展类加载器，加载环境变量%JRE_HOME%\lib\ext目录下的class文件
+3. AppclassLoader加载**classpath**中的class类。
+
+#### loadResource()
+
+loadResource方法就是完成对文件内容的解析，按行进行解析，会解析出**"="**两边的内容，"="左边的内容就是扩展点的name，右边的内容就是扩展点实现类，并且会利用ExtensionLoader类的类加载器来加载扩展点实现类。然后调用loadClass方法对name和扩展点实例进行详细的解析，并且最终把他们放到Map中去。
+
+ ```java
+    private void loadResource(Map<String, Class<?>> extensionClasses, ClassLoader classLoader, java.net.URL resourceURL) {
+         try {
+             try (BufferedReader reader = new BufferedReader(new InputStreamReader(resourceURL.openStream(), StandardCharsets.UTF_8))) {
+                 String line;
+                 while ((line = reader.readLine()) != null) {
+                     final int ci = line.indexOf('#');
+                     if (ci >= 0) {
+                         line = line.substring(0, ci);
+                     }
+                     line = line.trim();
+                     if (line.length() > 0) {
+                         try {
+                             String name = null;
+                             int i = line.indexOf('=');
+                             if (i > 0) {
+                                 name = line.substring(0, i).trim();
+                                 line = line.substring(i + 1).trim();
+                             }
+                             if (line.length() > 0) {
+                                 // 加载类，并添加到extensionClasses中
+                                 loadClass(extensionClasses, resourceURL, Class.forName(line, true, classLoader), name);
+                             }
+                         } catch (Throwable t) {
+                             IllegalStateException e = new IllegalStateException("Failed to load extension class (interface: " + type + ", class line: " + line + ") in " + resourceURL + ", cause: " + t.getMessage(), t);
+                             exceptions.put(line, e);
+                         }
+                     }
+                 }
+             }
+         } catch (Throwable t) {
+             logger.error("Exception occurred when loading extension class (interface: " +
+                     type + ", class file: " + resourceURL + ") in " + resourceURL, t);
+         }
+     }
+ ```
+
+#### loadClass()
+
+  ```java
+      private void loadClass(Map<String, Class<?>> extensionClasses, java.net.URL resourceURL, Class<?> clazz, String name) throws NoSuchMethodException {
+          if (!type.isAssignableFrom(clazz)) {
+              throw new IllegalStateException("Error occurred when loading extension class (interface: " +
+                      type + ", class line: " + clazz.getName() + "), class "
+                      + clazz.getName() + " is not subtype of interface.");
+          }
+          /*
+          1.当前扩展点实现类上是否存在@Adaptive注解，如果存在则把该类认为是当前接口的默认自适应类
+          （接口代理类），并把该类存到cachedAdaptiveClass属性上。  
+          2.当前扩展点实现是否是一个当前接口的一个Wrapper类，如何判断的？就是看当前类中是否存在一
+          个构造方法，该构造方法只有一个参数，参数类型为接口类型，如果存在这一的构造方法，那么这个
+          类就是该接口的Wrapper类，如果是，则把该类添加到cachedWrapperClasses中去.
+          cachedWrapperClasses是一个set。
+          */
+          if (clazz.isAnnotationPresent(Adaptive.class)) {
+              cacheAdaptiveClass(clazz);
+          } else if (isWrapperClass(clazz)) {
+              cacheWrapperClass(clazz);
+          } else {
+              // 需要有无参的构造方法,没有会报错
+              clazz.getConstructor();
+  
+              /*
+              1. 本来应该这样写的 red=com.youthlql.RedCar
+              2.如果你前面的red这个name没写，像这样只写了个全类名com.youthlql.RedCar
+              3.默认会去com.youthlql.RedCar这个类上找有没有@Extension注解起名了【官方已经标记成废弃了】
+              */
+              if (StringUtils.isEmpty(name)) {
+                  name = findAnnotationName(clazz);
+                  if (name.length() == 0) {
+                      throw new IllegalStateException("No such extension name for the class " + clazz.getName() + " in the config " + resourceURL);
+                  }
+              }
+  			
+              //name可以配多个
+              String[] names = NAME_SEPARATOR.split(name);
+              if (ArrayUtils.isNotEmpty(names)) {
+                  //判断一下当前扩展点实现类上是否存在@Activate注解，如果存在，则把该类添加到cachedActivates中
+                  cacheActivateClass(clazz, names[0]);
+  
+                  //遍历多个name，把每个name和对应的实现类存到extensionClasses中去，extensionClasses就是上文所提到的map
+                  for (String n : names) {
+                      // clazz: name
+                      cacheName(clazz, n);
+                      // name: clazz
+                      saveInExtensionClass(extensionClasses, clazz, n);
+                  }
+              }
+          }
+      }
+  ```
+
+
+
+至此，加载类就走完了。回到createExtension(String name)方法中的逻辑，当前这个接口的所有扩展点实现类都扫描完了之后，就可以根据用户所指定的名字，找到对应的实现类了，然后进行实例化，然后进行IOC(依赖注入)和AOP。
+
+  
+
+### Dubbo中的IOC
+
+#### 什么是dubbo的IOC？
+
+```java
+package cn.imlql.ioc;
+
+import cn.imlql.spi.Car;
+
+public class BlackPerson implements Person {
+
+    private Car car;
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    @Override
+    public Car getCar() {
+        return car;
+    }
+}
+```
+
+
+
+```java
+package cn.imlql.ioc;
+
+import cn.imlql.spi.Car;
+import com.alibaba.dubbo.common.extension.SPI;
+
+@SPI
+public interface Person {
+
+    Car getCar();
+}
+```
+
+SPI文件：resources\META-INF\dubbo\cn.imlql.ioc.Person
+
+```java
+black=cn.imlql.ioc.BlackPerson
+```
+
+1. BlackPerson类中有个car属性,dubbo会把car属性通过set方法注入到BlackPerson中
+2. 但是具体注入哪一个，dubbo并不知道，person.getCar()这一步dubbo虽然不知道具体注入哪一个实现类对象，但是dubbo生成了一个代理对象给注入鉣了
+3. 真正需要确定是哪个car的实现类时候是调用car的方法的时候，通过URL这个东西来确定注入哪个car的实现类
+
+```java
+package cn.imlql.ioc;
+
+import com.alibaba.dubbo.common.URL;
+import com.alibaba.dubbo.common.extension.ExtensionLoader;
+
+/**
+ * <p>
+ * </p>
+ *
+ * @author https://github.com/youthlql
+ * @since 2021/9/4 - 20:08
+ */
+public class DubboIOCTest {
+    public static void main(String[] args) {
+        ExtensionLoader<Person> extensionLoader = ExtensionLoader.getExtensionLoader(Person.class);
+        Person person = extensionLoader.getExtension("black");  // BlackPerson
+
+        URL url = new URL("x", "localhost", 8080);
+        url = url.addParameter("car", "black");
+
+        System.out.println(person.getCar().getCarName(url));  // 代理逻辑
+    }
+}
+```
+
+
+
+#### injectExtension()
+
+上面提到过这个方法
+
+```java
+    private T injectExtension(T instance) {
+
+        if (objectFactory == null) {
+            return instance;
+        }
+
+        try {
+            //根据当前实例的类，找到这个类中的setter方法，进行依赖注入
+            for (Method method : instance.getClass().getMethods()) {
+                if (!isSetter(method)) {
+                    continue;
+                }
+
+                // 利用set方法注入
+
+                /**
+                 * Check {@link DisableInject} to see if we need auto injection for this property
+                 */
+                if (method.getAnnotation(DisableInject.class) != null) {
+                    continue;
+                }
+
+                //先分析出setter方法的参数类型pt
+                Class<?> pt = method.getParameterTypes()[0];   // Person接口
+                if (ReflectUtils.isPrimitives(pt)) {
+                    continue;
+                }
+
+                try {
+                    //再截取出setter方法所对应的属性名property，得到setxxx中的xxx
+                    String property = getSetterProperty(method);   // person
+
+                    //1.得到一个对象，这里就会从Spring容器或通过DubboSpi机制得到一个对象，比较特殊的是，
+                    //2.如果是通过DubboSpi机制得到的对象，是pt这个类型的一个自适应对象(代理对象)。
+                    //3.也就是说这里既可以从spring容器里拿到一个对象，也可以从dubbo里拿到一个代理对象
+                    Object object = objectFactory.getExtension(pt, property); // User.class, user
+                    if (object != null) {
+                        //再反射调用setter方法进行注入
+                        method.invoke(instance, object);
+                    }
+                } catch (Exception e) {
+                    logger.error("Failed to inject via method " + method.getName()
+                            + " of interface " + type.getName() + ": " + e.getMessage(), e);
+                }
+
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+        }
+        return instance;
+    }
+```
+
+objectFactory这个类是如何拿到Spring容器里的对象？
+
+```java
+//我们可以看到objectFactory是在这里赋值的
+
+private ExtensionLoader(Class<?> type) {
+    this.type = type;
+    // objectFactory表示当前ExtensionLoader内部的一个对象工厂，可以用来获取对象  AdaptiveExtensionFactory
+    objectFactory = (type == ExtensionFactory.class ? null : ExtensionLoader.getExtensionLoader(ExtensionFactory.class).getAdaptiveExtension());
+}
+```
+
+#### getAdaptiveExtension() 
+
+关键就是后面的`getAdaptiveExtension()`方法，点进去调用链是这样的
+
+```java
+getAdaptiveExtension() ---> createAdaptiveExtension() ---> getAdaptiveExtensionClass()
+```
+
+
+
+```java
+private Class<?> getAdaptiveExtensionClass() {
+    // 获取当前接口的所有扩展类
+    getExtensionClasses();
+    // 缓存了@Adaptive注解标记的类
+    if (cachedAdaptiveClass != null) {
+        return cachedAdaptiveClass;
+    }
+    // 如果某个接口没有手动指定一个Adaptive类(@Adaptive注解)，那么就自动生成一个Adaptive类
+    return cachedAdaptiveClass = createAdaptiveExtensionClass();
+}
+
+private Class<?> createAdaptiveExtensionClass() {
+    // cachedDefaultName表示接口默认的扩展类
+    String code = new AdaptiveClassCodeGenerator(type, cachedDefaultName).generate();
+
+    ClassLoader classLoader = findClassLoader();
+    org.apache.dubbo.common.compiler.Compiler compiler = ExtensionLoader.getExtensionLoader(org.apache.dubbo.common.compiler.Compiler.class).getAdaptiveExtension();
+    return compiler.compile(code, classLoader);
+}
+```
+
+1. getAdaptiveExtension()的作用就是获取标注了@Adaptive注解的factory工厂，ExtensionFactory的实现类中只有AdaptiveExtensionFactory标注了此注解
+2. 也就是说objectFactory就是AdaptiveExtensionFactory类型，并且调用了AdaptiveExtensionFactory的getExtension()方法
+
+
+
+#### AdaptiveExtensionFactory类
+
+```java
+@Adaptive
+public class AdaptiveExtensionFactory implements ExtensionFactory {
+
+    private final List<ExtensionFactory> factories;
+
+    public AdaptiveExtensionFactory() {
+        // 支持哪些ExtensionFactory (Spi, Spring)，从这里就把SpringExtensionFactory搞进来了
+        ExtensionLoader<ExtensionFactory> loader = ExtensionLoader.getExtensionLoader(ExtensionFactory.class);
+
+        List<ExtensionFactory> list = new ArrayList<ExtensionFactory>();
+
+        for (String name : loader.getSupportedExtensions()) { // spi, spring
+            list.add(loader.getExtension(name));
+        }
+        factories = Collections.unmodifiableList(list);
+    }
+
+    @Override
+    public <T> T getExtension(Class<T> type, String name) {
+        // 遍历两个ExtensionFactory，从ExtensionFactory中得到实例，只要从某个ExtensionFactory中获取到对象实例就可以了
+        for (ExtensionFactory factory : factories) {
+            T extension = factory.getExtension(type, name);  // 顺序是这样的SpringExtensionFactory,, SpiExtensionFactory
+            if (extension != null) {
+                return extension;
+            }
+        }
+        return null;
+    }
+
+}
+```
+
+#### SpringExtensionFactory类
+
+```java
+    // 从Spring容器中获取bean
+    // 先根据name拿，再根据类型拿
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T getExtension(Class<T> type, String name) {
+
+        //SPI should be get from SpiExtensionFactory
+        // 如果接口上存在SPI注解，就不从spring中获取对象实例了
+        if (type.isInterface() && type.isAnnotationPresent(SPI.class)) {
+            return null;
+        }
+
+        // 从ApplicationContext中获取bean, byname
+        for (ApplicationContext context : CONTEXTS) {
+            if (context.containsBean(name)) {
+                Object bean = context.getBean(name);
+                if (type.isInstance(bean)) {
+                    return (T) bean;
+                }
+            }
+        }
+```
+
+#### SpiExtensionFactory类
+
+```java
+public class SpiExtensionFactory implements ExtensionFactory {
+	//type就是属性的类型Car
+    @Override
+    public <T> T getExtension(Class<T> type, String name) {
+
+
+        // 接口上存在SPI注解
+        if (type.isInterface() && type.isAnnotationPresent(SPI.class)) {
+            //根据属性类型得到一个扩展点加载器
+            ExtensionLoader<T> loader = ExtensionLoader.getExtensionLoader(type);
+
+            if (!loader.getSupportedExtensions().isEmpty()) {
+                //这里就又回到了上面写过的getAdaptiveExtension方法
+                return loader.getAdaptiveExtension(); 
+            }
+        }
+        return null;
+    }
+
+}
+```
+
+
+
+dubbo生成的代理对象代码可以看下面的`自适应扩展点补充`，这里应该就知道为什么要用URL了
+
+
+
+```java
+public class DubboIOCTest {
+    public static void main(String[] args) {
+        ExtensionLoader<Person> extensionLoader = ExtensionLoader.getExtensionLoader(Person.class);
+        Person person = extensionLoader.getExtension("black");  // BlackPerson
+
+        URL url = new URL("x", "localhost", 8080);
+        url = url.addParameter("car", "black");
+
+        System.out.println(person.getCar().getCarName(url));  // 代理逻辑
+    }
+}
+```
+
+
+
+需要注意的是代理对象被代理的方法也要加@Adaptive注解，同时加URL参数，就像上面调用了car的getCarName方法，那么下面就长这样。如果不加的话会抛一个UnsupportedOperationException。具体的可以自己debug到生成代理对象那一步，然后把代理对象值复制到txt文件里自己看下
+
+```java
+@SPI
+public interface Car {
+
+    @Adaptive
+    String getCarName(URL url);
+    
+    //参数如果是自己定义的类，只要这个类里也有URL这个属性就可以
+    @Adaptive
+    String hello(MyClass myclass);
+}
+```
+
+### Dubbo中的AOP
+
+dubbo中也实现了一套非常简单的AOP，就是利用Wrapper，如果一个接口的扩展点中包含了多个Wrapper类，那么在实例化完某个扩展点后，就会利用这些Wrapper类对这个实例进行包裹，比如：现在有一个DubboProtocol的实例，同时对于Protocol这个接口还有很多的Wrapper，比如ProtocolFilterWrapper、ProtocolListenerWrapper，那么，当对DubboProtocol的实例完成了IOC之后，就会先调用new ProtocolFilterWrapper(DubboProtocol实例)生成一个新的Protocol的实例，再对此实例进行IOC，完了之后，会再调用new ProtocolListenerWrapper(ProtocolFilterWrapper实例)生成一个新的Protocol的实例，然后进行IOC，从而完成DubboProtocol实例的AOP。
+
+ ```java
+  private T createExtension(String name) {
+        
+         //根据name获取扩展类  {name: Class}  key-Value    接口的所有实现类    
+         Class<?> clazz = getExtensionClasses().get(name);
+         if (clazz == null) {
+             throw findException(name);
+         }
+ 	   //当把当前接口的所有扩展点实现类都加载出来后也会进行缓存，下次需要加载时直接拿缓存中的。
+         try {
+             // 实例缓存
+             T instance = (T) EXTENSION_INSTANCES.get(clazz);
+             if (instance == null) {
+                 // 创建实例
+                 EXTENSION_INSTANCES.putIfAbsent(clazz, clazz.newInstance());
+                 instance = (T) EXTENSION_INSTANCES.get(clazz);
+             }
+ 
+             //对生成出来的实例进行依赖注入（给实例的属性进行赋值）
+             injectExtension(instance);
+ 
+             // AOP:对依赖注入后的实例进行AOP（Wrapper）,把当前接口类的所有的Wrapper全部一层一层包裹在实例对象上
+             // 每包裹个Wrapper后，也会对Wrapper对象进行依赖注入
+             Set<Class<?>> wrapperClasses = cachedWrapperClasses;
+             if (CollectionUtils.isNotEmpty(wrapperClasses)) {
+                 for (Class<?> wrapperClass : wrapperClasses) {
+                     instance = injectExtension((T) wrapperClass.getConstructor(type).newInstance(instance));
+                 }
+             }
+ 		   //返回最终的Wrapper对象,debug一下你就会看到返回的不是redCar而是carWrapper
+             return instance;
+         } catch (Throwable t) {
+             throw new IllegalStateException("Extension instance (name: " + name + ", class: " +
+                     type + ") couldn't be instantiated: " + t.getMessage(), t);
+         }
+     }
+ 
+ ```
+
+
+
+### 自适应扩展点补充
+
+1. 上面提到的自适应扩展点对象，也就是某个接口的代理对象是通过Dubbo内部生成代理类，然后生成代理对象的。
+2. 额外的，在Dubbo中还设计另外一种机制来生成自适应扩展点，这种机制就是可以通过@Adaptive注解来指定某个类为某个接口的代理类，如果指定了，Dubbo在生成自适应扩展点对象时实际上生成的就是@Adaptive注解所注解的类的实例对象。
+
+#### createAdaptiveExtensionClass方法
+
+createAdaptiveExtensionClass方法就是Dubbo中默认生成Adaptive类实例的逻辑。说白了，这个实例就是当前这个接口的一个代理对象。比如下面的代码：
+
+```java
+ExtensionLoader<Protocol> extensionLoader = ExtensionLoader.getExtensionLoader(Protocol.class);
+Protocol protocol = extensionLoader.getAdaptiveExtension();
+```
+
+这个代码就是Protocol接口的一个代理对象，那么代理逻辑就是在**new** AdaptiveClassCodeGenerator(**type**, **cachedDefaultName**).generate()方法中。
+
+1.  type就是接口
+2.  cacheDefaultName就是该接口默认的扩展点实现的名字
+
+  
+
+再看个例子，Protocol接口的Adaptive类的代理：
+
+```java
+package org.apache.dubbo.rpc;
+import org.apache.dubbo.common.extension.ExtensionLoader;
+public class Protocol$Adaptive implements org.apache.dubbo.rpc.Protocol {
+    
+	public void destroy()  {
+		throw new UnsupportedOperationException("The method public abstract void org.apache.dubbo.rpc.Protocol.destroy() of interface org.apache.dubbo.rpc.Protocol is not adaptive method!");
+	}
+
+    public int getDefaultPort()  {
+		throw new UnsupportedOperationException("The method public abstract int org.apache.dubbo.rpc.Protocol.getDefaultPort() of interface org.apache.dubbo.rpc.Protocol is not adaptive method!");
+	}
+    
+	public org.apache.dubbo.rpc.Exporter export(org.apache.dubbo.rpc.Invoker arg0) throws org.apache.dubbo.rpc.RpcException {
+		if (arg0 == null) 
+            throw new IllegalArgumentException("org.apache.dubbo.rpc.Invoker argument == null");
+		if (arg0.getUrl() == null) 
+            throw new IllegalArgumentException("org.apache.dubbo.rpc.Invoker argument getUrl() == null");
+		
+        org.apache.dubbo.common.URL url = arg0.getUrl();
+		
+        String extName = ( url.getProtocol() == null ? "dubbo" : url.getProtocol() );
+
+        if(extName == null) 
+            throw new IllegalStateException("Failed to get extension (org.apache.dubbo.rpc.Protocol) name from url (" + url.toString() + ") use keys([protocol])");
+        
+        org.apache.dubbo.rpc.Protocol extension = (org.apache.dubbo.rpc.Protocol)ExtensionLoader.getExtensionLoader(org.apache.dubbo.rpc.Protocol.class).getExtension(extName);
+ 		
+        return extension.export(arg0);
+	}
+
+    public org.apache.dubbo.rpc.Invoker refer(java.lang.Class arg0, org.apache.dubbo.common.URL arg1) throws org.apache.dubbo.rpc.RpcException {
+
+        if (arg1 == null) throw new IllegalArgumentException("url == null");
+
+        org.apache.dubbo.common.URL url = arg1;
+
+        String extName = ( url.getProtocol() == null ? "dubbo" : url.getProtocol() );
+
+        if(extName == null) throw new IllegalStateException("Failed to get extension (org.apache.dubbo.rpc.Protocol) name from url (" + url.toString() + ") use keys([protocol])");
+
+        org.apache.dubbo.rpc.Protocol extension = (org.apache.dubbo.rpc.Protocol)ExtensionLoader.getExtensionLoader(org.apache.dubbo.rpc.Protocol.class).getExtension(extName);
+
+        return extension.refer(arg0, arg1);
+	}
+}
+```
+
+
+
+  
+
+可以看到，Protocol接口中有四个方法，但是只有export和refer两个方法进行代理。为什么？因为Protocol接口中在export方法和refer方法上加了@Adaptive注解。但是，不是只要在方法上加了@Adaptive注解就可以进行代理，还有其他条件，比如：
+
+1.  该方法如果是无参的，那么则会报错
+2.  该方法有参数，可以有多个，并且其中某个参数类型是URL，那么则可以进行代理
+3.  该方法有参数，可以有多个，但是没有URL类型的参数，那么则不能进行代理
+4.  该方法有参数，可以有多个，没有URL类型的参数，但是如果这些参数类型，对应的类中存在getUrl方法（返回值类型为URL），那么也可以进行代理
+
+  
+
+所以，可以发现，某个接口的Adaptive对象，在调用某个方法时，是通过该方法中的URL参数或者getURL方法，通过调用ExtensionLoader.getExtensionLoader(com.luban.Car.class).getExtension(extName);得到一个扩展点实例，然后调用该实例对应的方法。
+
+
+
+### Activate扩展点
+
+上文说到，每个扩展点都有一个name，通过这个name可以获得该name对应的扩展点实例，但是有的场景下，希望一次性获得多个扩展点实例
+
+#### demo
+
+```java
+ExtensionLoader<Filter> extensionLoader = ExtensionLoader.getExtensionLoader(Filter.class);
+URL url = new URL("http://", "localhost", 8080);
+url = url.addParameter("cache", "test");
+
+List<Filter> activateExtensions = extensionLoader.getActivateExtension(url, 
+                                                      new String[]{"validation"},
+                                                      CommonConstants.CONSUMER);
+for (Filter activateExtension : activateExtensions) {
+	System.out.println(activateExtension);
+}
+```
+
+
+
+会找到5个Filter
+
+```java
+org.apache.dubbo.rpc.filter.ConsumerContextFilter@4566e5bd
+org.apache.dubbo.rpc.protocol.dubbo.filter.FutureFilter@1ed4004b
+org.apache.dubbo.monitor.support.MonitorFilter@ff5b51f
+org.apache.dubbo.cache.filter.CacheFilter@25bbe1b6
+org.apache.dubbo.validation.filter.ValidationFilter@5702b3b1
+```
+
+前三个是通过CommonConstants.CONSUMER找到的
+
+CacheFilter是通过url中的参数找到的
+
+ValidationFilter是通过指定的name找到的
+
+  
+
+在一个扩展点类上，可以添加@Activate注解，这个注解的属性有：
+
+1.  String\[\] group()：表示这个扩展点是属于哪组的，这里组通常分为PROVIDER和CONSUMER，表示该扩展点能在服务提供者端，或者消费端使用
+2.  String\[\] value()：表示的是URL中的某个参数key，当利用getActivateExtension方法来寻找扩展点时，如果传入的url中包含的参数的所有key中，包括了当前扩展点中的value值，那么则表示当前url可以使用该扩展点。

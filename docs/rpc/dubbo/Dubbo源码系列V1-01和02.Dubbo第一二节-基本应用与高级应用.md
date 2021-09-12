@@ -1,0 +1,1040 @@
+---
+title: Dubbo源码系列V1-01和02.Dubbo第一二节-基本应用与高级应用
+tags:
+  - Dubbo
+  - rpc
+categories:
+  - rpc
+  - Dubbo源码系列v1
+keywords: Dubbo，rpc
+description: 前两节合成一节
+cover: 'https://cdn.jsdelivr.net/gh/youthlql/youthlql/img/dubbo.png'
+abbrlink: d3c530c4
+date: 2021-09-11 15:21:58
+---
+
+
+
+
+
+
+
+
+# Dubbo源码
+
+
+
+## 第一节: Dubbo框架介绍
+
+### 什么是RPC
+
+**维基百科**是这么定义RPC的：
+
+  
+
+> 在[分布式计算](https://zh.wikipedia.org/wiki/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%A1%E7%AE%97)**，远程过程调用**（英语：Remote Procedure Call，缩写为 RPC）是一个计算机通信[协议](https://zh.wikipedia.org/wiki/%E7%B6%B2%E7%B5%A1%E5%82%B3%E8%BC%B8%E5%8D%94%E8%AD%B0)。该协议允许运行于一台计算机的[程序](https://zh.wikipedia.org/wiki/%E7%A8%8B%E5%BA%8F)调用另一个[地址空间](https://zh.wikipedia.org/wiki/%E5%9C%B0%E5%9D%80%E7%A9%BA%E9%97%B4)（通常为一个开放网络的一台计算机）的[子程序](https://zh.wikipedia.org/wiki/%E5%AD%90%E7%A8%8B%E5%BA%8F)，而程序员就像调用本地程序一样，无需额外地为这个交互作用编程（无需关注细节）。RPC是一种服务器-客户端（Client/Server）模式，经典实现是一个通过**发送请求-接受回应**进行信息交互的系统。
+>
+> 
+>
+> 如果涉及的软件采用[面向对象编程](https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%BC%96%E7%A8%8B)，那么远程过程调用亦可称作**远程调用**或**远程方法调用**，例：[Java RMI](https://zh.wikipedia.org/wiki/Java_RMI)。
+
+  
+
+所以，对于Java程序员而言，RPC就是**远程方法调用**。
+
+  
+
+**远程方法调用**和**本地方法调用**是相对的两个概念，本地方法调用指的是进程内部的方法调用，而远程方法调用指的是两个进程内的方法相互调用。
+
+  
+
+如果实现远程方法调用，基本的就是通过网络，通过传输数据来进行调用。
+
+  
+
+所以就有了：
+
+1.  RPC over Http：基于Http协议来传输数据
+2.  PRC over Tcp：基于Tcp协议来传输数据
+
+  
+
+对于所传输的数据，可以交由RPC的双方来协商定义，但基本都会包括：
+
+1.  调用的是哪个类或接口
+2.  调用的是哪个方法，方法名和方法参数类型（考虑方法重载）
+3.  调用方法的入参
+
+  
+
+所以，我们其实可以看到RPC的自定义性是很高的，各个公司内部都可以实现自己的一套RPC框架，而**Dubbo**就是阿里所开源出来的一套RPC框架。
+
+  
+
+### 什么是Dubbo
+
+官网地址：[http://dubbo.apache.org/zh/](http://dubbo.apache.org/zh/)
+
+  
+
+目前，官网上是这么介绍的：**Apache Dubbo 是一款高性能、轻量级的开源 Java服务框架**
+
+在几个月前，官网的介绍是：**Apache Dubbo 是一款高性能、轻量级的开源 JavaRPC框架**
+
+  
+
+为什么会将**RPC**改为**服务**？
+
+  
+
+Dubbo一开始的定位就是RPC，专注于两个服务之间的调用。但随着微服务的盛行，除开**服务调用**之外，Dubbo也在逐步的涉猎服务治理、服务监控、服务网关等等，所以现在的Dubbo目标已经不止是RPC框架了，而是和Spring Cloud类似想成为了一个**服务**框架。
+
+  
+
+Dubbo网关参考：[https://github.com/apache/dubbo-proxy](https://github.com/apache/dubbo-proxy)（社区不是很活跃）
+
+  
+
+### 基本原理
+
+ <img src="https://unpkg.zhimg.com/youthlql@1.0.1/rpc/dubbo/v1/01_di_yi_jie/0001.png"/> 
+
+  
+
+### 开源RPC框架对比
+
+| 功能             | Hessian | Montan                       | rpcx   | gRPC              | Thrift        | Dubbo   | Dubbox   | Spring Cloud |
+| ---------------- | ------- | ---------------------------- | ------ | ----------------- | ------------- | ------- | -------- | ------------ |
+| 开发语言         | 跨语言  | Java                         | Go     | 跨语言            | 跨语言        | Java    | Java     | Java         |
+| 分布式(服务治理) | ×       | √                            | √      | ×                 | ×             | √       | √        | √            |
+| 多序列化框架支持 | hessian | √(支持Hessian2、Json,可扩展) | √      | × 只支持protobuf) | ×(thrift格式) | √       | √        | √            |
+| 多种注册中心     | ×       | √                            | √      | ×                 | ×             | √       | √        | √            |
+| 管理中心         | ×       | √                            | √      | ×                 | ×             | √       | √        | √            |
+| 跨编程语言       | √       | ×(支持php client和C server)  | ×      | √                 | √             | ×       | ×        | ×            |
+| 支持REST         | ×       | ×                            | ×      | ×                 | ×             | ×       | √        | √            |
+| 关注度           | 低      | 中                           | 低     | 中                | 中            | 中      | 高       | 中           |
+| 上手难度         | 低      | 低                           | 中     | 中                | 中            | 低      | 低       | 中           |
+| 运维成本         | 低      | 中                           | 中     | 中                | 低            | 中      | 中       | 中           |
+| 开源机构         | Caucho  | Weibo                        | Apache | Google            | Apache        | Alibaba | Dangdang | Apache       |
+
+## 第二节: Dubbo的基本应用与高级应用
+
+  
+
+官网：[http://dubbo.apache.org/zh/docs/v2.7/user/](http://dubbo.apache.org/zh/docs/v2.7/user/)
+
+管理台github地址：[https://github.com/apache/dubbo-admin](https://github.com/apache/dubbo-admin)
+
+  
+
+Dubbo提供了很多功能，这里我们只介绍几种比较重要的，其他功能可以去Dubbo官网上查看。
+
+  
+
+### 项目目录
+
+```java
+dubbo-youthlql-demo
+├── consumer/
+|  ├── consumer.iml
+|  ├── pom.xml
+|  └── src/
+|     ├── main/
+|     |  ├── java/
+|     |  |  └── com/
+|     |  |     └── youthlql/
+|     |  |        ├── consumer/
+|     |  |        |  ├── AsyncDubboConsumerDemo.java
+|     |  |        |  ├── CallbackDubboConsumerDemo.java
+|     |  |        |  ├── ClusterDubboConsumerDemo.java
+|     |  |        |  ├── DemoServiceListenerImpl.java
+|     |  |        |  ├── GenericDubboConsumerDemo.java
+|     |  |        |  ├── LoadBalanceDubboConsumerDemo.java
+|     |  |        |  ├── MockDubboConsumerDemo.java
+|     |  |        |  ├── StubDubboConsumerDemo.java
+|     |  |        |  └── TimeoutDubboConsumerDemo.java
+|     |  |        ├── controller/
+|     |  |        |  ├── ConsumerInterceptor.java
+|     |  |        |  └── HelloController.java
+|     |  |        └── DubboConsumerDemo.java
+|     |  └── resources/
+|     |     └── application.yml
+|     └── test/
+|        └── java/
+├── dubbo-youthlql-demo.iml
+├── interface/
+|  ├── interface.iml
+|  ├── pom.xml
+|  └── src/
+|     ├── main/
+|     |  ├── java/
+|     |  |  └── com/
+|     |  |     └── youthlql/
+|     |  |        ├── DemoService.java
+|     |  |        ├── DemoServiceListener.java
+|     |  |        ├── DemoServiceMock.java
+|     |  |        └── DemoServiceStub.java
+|     |  └── resources/
+|     └── test/
+|        └── java/
+├── pom.xml
+└── provider/
+   ├── pom.xml
+   ├── provider.iml
+   └── src/
+      ├── main/
+      |  ├── java/
+      |  |  └── com/
+      |  |     └── youthlql/
+      |  |        ├── DubboProviderDemo.java
+      |  |        ├── provider/
+      |  |        |  └── service/
+      |  |        |     ├── AsyncDemoService.java
+      |  |        |     ├── CallBackDemoService.java
+      |  |        |     ├── DefaultDemoService.java
+      |  |        |     ├── GenericDemoService.java
+      |  |        |     ├── RestDemoService.java
+      |  |        |     └── TimeoutDemoService.java
+      |  |        └── UpdateBeanPostProcessors.java
+      |  └── resources/
+      |     ├── application.properties
+      |     └── log4j.properties
+      └── test/
+         └── java/
+```
+
+
+
+项目目录要大概记住一下，后面代码层次大概心里有个数。
+
+### 负载均衡
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/loadbalance/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/loadbalance/)
+
+  
+
+1. 消费端就这样配置
+
+```java
+	@Reference(version = "default", loadbalance = "consistenthash")
+    private DemoService demoService;
+```
+
+2. 服务端就这样配置
+
+```java
+@Service(version = "default",loadbalance = "consistenthash")
+public class DefaultDemoService implements DemoService {
+...
+}
+```
+
+3.  如果在消费端和服务端都配置了负载均衡策略，以消费端为准。
+   - 上面两个配的是一致性hash算法。
+   - 根据消费者传的参数来进行hash，多次调用，如果参数一样，那么都会负载均衡到服务提供者的同一台机器上。
+
+
+
+
+
+> 这其中比较难理解的就是**最少活跃调用数**是如何进行统计的？讲道理，最少活跃数应该是在**服务提供者端**进行统计的，服务提供者统计**有多少个请求正在执行中**。但在Dubbo中，就是**不讲道理**，它是在消费端进行统计的，为什么能在消费端进行统计？
+
+逻辑是这样的：
+
+1.  每个消费者都会从注册中心（常用的是Zookeeper）缓存所调用服务的所有提供者信息到本地，比如记为p1、p2、p3三个服务提供者，每个提供者内都有一个属性记为active，默认位0
+2.  消费者在调用服务时，如果负载均衡策略是**leastactive**
+3.  消费者端会判断缓存的所有服务提供者的active，选择最小的，如果都相同，则随机
+4.  选出某一个服务提供者后，假设是p2，Dubbo就会对p2.active+1
+5.  然后真正发出请求调用该服务
+6.  消费端收到响应结果后，对p2.active-1
+7.  这样就完成了对某个服务提供者当前活跃调用数进行了统计，并且并不影响服务调用的性能
+8.  如果由服务提供者来统计调用数反而不好统计，因为服务提供者有多个，你无法确定是哪个服务提供者统计调用数，除非你放到zookeeper这种分布式共享的数据中心，但是这样的话，每个消费者都要请求zookeeper找到需要调用的那一台服务提供者机器然后加1，在调用结束后，还要在zookeeper上进行减1操作，zookeeper明显扛不住。
+9.  由服务消费者来统计调用数的话，虽然每个消费者都有自己的一套调用数数据，调用数数据可能不一样，但是经过长时间的调用后，每个消费者自己本地存的调用数据还是能够有差不多的趋势（这里的趋势不是指数据相等）。比如说p2响应很慢，堆积了很多请求，那么每个消费者在请求多次后，短时间内都不会再请求p2
+
+  
+
+### 服务超时
+
+在服务提供者和服务消费者上都可以配置服务超时时间，这两者是不一样的。
+
+消费者调用一个服务，分为三步：
+
+1.  消费者发送请求（网络传输）
+2.  服务端执行服务
+3.  服务端返回响应（网络传输）
+
+
+
+> 如果在服务端和消费端只在**其中一方**配置了timeout，那么没有歧义，表示消费端调用服务的超时时间，**消费端如果超过时间还没有收到响应结果，则消费端会抛超时异常**。但服务端不会抛异常，服务端在执行服务后，会检查**执行该服务**的时间，如果超过timeout，则会打印一个**超时日志**。服务会正常的执行完。
+
+  
+
+1. 如果在服务端和消费端各配了一个timeout，那就比较复杂了，假设
+   1. 服务执行为5s
+   2. 消费端timeout=3s
+   3. 服务端timeout=6s
+
+  ```java
+  //服务端
+  @Service(version = "timeout", timeout = 6000)
+  public class TimeoutDemoService implements DemoService {
+      ...
+  }
+  
+  //消费端
+  @Reference(version = "timeout", loadbalance = "roundrobin",timeout = 3000)
+  private DemoService demoService;
+  ```
+
+2. 那么消费端调用服务时，消费端会收到超时异常（因为消费端超时了），服务端一切正常（服务端没有超时）。
+3. 无论何种情况，服务端的timeout配置的作用是：如果服务执行时间超过这个timeout，仅仅只是打印一个超时日志。
+
+  
+
+  
+
+### 集群容错
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/fault-tolerent-strategy/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/fault-tolerent-strategy/)
+
+  
+
+> 集群容错表示：服务消费者在调用某个服务时，这个服务有多个服务提供者，在经过负载均衡后选出其中一个服务提供者之后进行调用，但调用报错后，Dubbo所采取的后续处理策略。后续处理策略就是会重试调用其它机器上的服务提供者，加上第一次调用默认是重试2次，总共调用3次。
+
+也是既可以在消费端配置，也可以在服务端配置
+
+```java
+@Reference(timeout = 1000, cluster = "failover")
+private DemoService demoService;
+```
+
+
+
+### 服务降级
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/service-downgrade/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/service-downgrade/)
+
+  
+
+1. 服务降级表示：服务消费者在调用某个服务提供者时，如果该服务提供者报错了，所采取的备选措施。
+
+2. 集群容错和服务降级的区别在于：
+   1. 集群容错是整个集群范围内的容错
+   2. 服务降级是单个服务提供者的自身容错
+
+3. 下面的mock就是一种容错，意思是服务调用失败后，直接返回123
+
+```java
+@Reference(version = "timeout", timeout = 1000, mock = "fail: return 123")
+private DemoService demoService;
+```
+
+4. mock如何返回对象这种复杂数据可以看官网。
+
+### 本地存根
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/local-stub/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/local-stub/)
+
+  
+
+本地存根，名字很抽象，但实际上不难理解，本地存根就是一段逻辑，这段逻辑是在服务消费端执行的，这段逻辑一般都是由服务提供者提供，服务提供者可以利用这种机制在服务消费者远程调用服务提供者之前或之后再做一些其他事情，比如结果缓存，请求参数验证等等。
+
+> consumer项目
+
+```java
+package com.youthlql.consumer;
+
+@EnableAutoConfiguration
+public class StubDubboConsumerDemo {
+
+
+    //    @Reference(version = "timeout", timeout = 1000, stub = "com.youthlql.DemoServiceStub")
+    @Reference(version = "timeout", timeout = 1000, stub = "true")
+    private DemoService demoService;
+
+    public static void main(String[] args) throws IOException {
+        ConfigurableApplicationContext context = SpringApplication.run(StubDubboConsumerDemo.class);
+
+        DemoService demoService = context.getBean(DemoService.class);
+
+        System.out.println((demoService.sayHello("周瑜")));
+        
+    }
+}
+```
+
+1. stub=true的是个默认配置
+2. 默认用接口的全限定类名+Stub去调用，也就是`com.youthlql.DemoServiceStub`
+3. 比如这个例子，当消费者去调用`demoService.sayHello("周瑜")`时，会首先调用`interface项目`下的`DemoServiceStub`的`sayHello`方法。如果调用失败就返回`"容错数据"`
+4. 如果找不到`com.youthlql.DemoServiceStub`就抛异常
+5. 注意`DemoServiceStub`这个类不一定需要写在interface项目里的，写在哪里都行，只要能通过pom.xml的maven依赖找到`com.youthlql.DemoServiceStub`你这个路径就行
+6. 也可以stub直接指定全类名，这样就可以每一个消费者都提供一个本地存根
+
+```java
+@Reference(version = "timeout", timeout = 1000, stub = "com.youthlql.DemoServiceStub")
+private DemoService demoService;
+```
+
+
+
+> interface项目
+
+```java
+package com.youthlql;
+
+public class DemoServiceStub implements DemoService {
+
+    private final DemoService demoService;
+
+    // 构造函数传入真正的远程代理对象
+    public DemoServiceStub(DemoService demoService){
+        this.demoService = demoService;
+    }
+
+    @Override
+    public String sayHello(String name) {
+        /**
+         * <p>
+         * 1.本地存根和服务降级有一些类似，不过本地存根比服务降级功能要强一点，比如你可以在这个
+         * 地方做一些事情
+         * 2.此代码在客户端（消费端）执行, 你可以在客户端做ThreadLocal本地缓存，把服务端返回的结果缓存到消费端。或预先验证参数是否合法，等等
+         * </p>
+         * @since 2021/8/7 - 17:41
+         */
+        try {
+            return demoService.sayHello(name); // safe  null
+        } catch (Exception e) {
+            // 你可以容错，可以做任何AOP拦截事项
+            return "容错数据";
+        }
+    }
+}
+```
+
+
+
+### 本地伪装
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/local-mock/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/local-mock/)
+
+  
+
+本地伪装就是Mock，Dubbo中Mock的功能相对于本地存根更简单一点，Mock其实就是Dubbo中的服务降级，不同的名词罢了
+
+  
+
+### 参数回调
+
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/callback-parameter/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/callback-parameter/)
+
+ 
+
+> - 参数回调方式与调用本地 callback 或 listener 相同，只需要在 Spring 的配置文件中声明哪个参数是 callback 类型即可。
+> - 参数回调的用途：Dubbo 将基于长连接生成反向代理，**这样就可以从服务器端调用客户端逻辑。**
+
+1. 首先，如果当前服务支持参数回调，意思就是：对于某个服务接口中的某个方法，如果想支持消费者在调用这个方法时能设置回调逻辑，那么该方法就需要提供一个入参用来表示回调逻辑。
+
+> interface项目
+
+```java
+package com.youthlql;
+
+import java.util.concurrent.CompletableFuture;
+
+public interface DemoService {
+    // 同步调用方法
+    String sayHello(String name);
+
+    // 异步调用方法
+    default CompletableFuture<String> sayHelloAsync(String name) {
+        return null;
+    };
+
+    // 添加回调
+    default String sayHello(String name, String key, DemoServiceListener listener) {
+        return null;
+    };
+}
+```
+
+> consumer项目
+
+```java
+package com.youthlql.consumer;
+
+@EnableAutoConfiguration
+public class CallbackDubboConsumerDemo {
+
+
+    @Reference(version = "callback")
+    private DemoService demoService;
+
+    public static void main(String[] args) throws IOException {
+        ConfigurableApplicationContext context = SpringApplication.run(CallbackDubboConsumerDemo.class);
+
+        DemoService demoService = context.getBean(DemoService.class);
+
+        // 用来进行callback
+        System.out.println(demoService.sayHello("周瑜", "d1", new DemoServiceListenerImpl()));
+        System.out.println(demoService.sayHello("周瑜", "d2", new DemoServiceListenerImpl()));
+        System.out.println(demoService.sayHello("周瑜", "d3", new DemoServiceListenerImpl()));
+    }
+
+}
+```
+
+
+
+```java
+package com.youthlql.consumer;
+
+public class DemoServiceListenerImpl implements DemoServiceListener {
+
+    @Override
+    public void changed(String msg) {
+        System.out.println("被回调了："+msg);
+    }
+}
+
+```
+
+
+
+```java
+package com.youthlql;
+
+public interface DemoServiceListener {
+    void changed(String msg);
+}
+```
+
+> provider项目
+
+```java
+package com.youthlql.provider.service;
+
+
+/**
+ * <p>
+ * 1.通过下面sayhello的方法注释，我们可以知道DemoService的sayHello方法的index=2的参数是回调对象，
+ * 这个回调对象DemoServiceListener是Dubbo给我们生成的代理对象。
+ * 2.那么Dubbo怎么知道，sayhello的index=2的参数是回调对象呢?为什么不可以是普通参数呢?
+ * dubbo又是怎样区分DemoService里的两个sayhello方法呢？
+ * 3.全都是通过@Service注解里的methods属性来标识的。通过methods属性指定name为sayHello的方法，
+ * 它的index=2的参数是回调对象。并且同时只支持callbacks = 3，3个回调，数目超过了会报错
+ * 3.version = "callback"  这个字符串是可以随便写的，version = "call"也行
+ * </p>
+ * @author https://github.com/youthlql
+ * @since 2021/8/7 - 18:32
+ */
+@Service(version = "callback", methods = {@Method(name = "sayHello", arguments = {@Argument(index = 2, callback = true)})}, callbacks = 3)
+public class CallBackDemoService implements DemoService {
+
+    private final Map<String, DemoServiceListener> listeners = new ConcurrentHashMap<String, DemoServiceListener>();
+
+    public CallBackDemoService() {
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    for (Map.Entry<String, DemoServiceListener> entry : listeners.entrySet()) {
+                        entry.getValue().changed(getChanged(entry.getKey()));
+                    }
+                    try {
+                        Thread.sleep(5000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        t.start();
+
+    }
+
+    public void addListener(String key, DemoServiceListener listener) {
+        listeners.put(key, listener);
+        listener.changed(getChanged(key)); // 发送变更通知
+    }
+
+    private String getChanged(String key) {
+        return "Changed: " + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+    }
+
+    @Override
+    public String sayHello(String name) {
+        return null;
+    }
+    
+    /**
+     * <p>
+     * @param name
+     * @param key
+     * 1.上面两参数肯定都是消费端那边传过来的，第三个参数DemoServiceListener
+     * 不可能是消费者那边传过来的一个空对象吧。它实际上是dubbo生成的代理对象。
+     * </p>
+     * @since 2021/8/7 - 18:17
+     */
+    @Override
+    public String sayHello(String name, String key, DemoServiceListener callback) {
+        System.out.println("执行了回调服务" + name);
+
+        callback.changed("xxxx");
+
+        listeners.put(key, callback);
+        URL url = RpcContext.getContext().getUrl();
+        return String.format("%s：%s, Hello, %s", url.getProtocol(), url.getPort(), name);  // 正常访问
+    }
+
+}
+
+```
+
+
+
+3. 因为Dubbo协议是基于长连接的，所以消费端在两次调用同一个方法时想指定不同的回调逻辑，那么就需要在调用时在指定一定key进行区分，这里就是d1,d2,d3。
+
+```java
+System.out.println(demoService.sayHello("周瑜", "d1", new DemoServiceListenerImpl1()));
+System.out.println(demoService.sayHello("周瑜", "d2", new DemoServiceListenerImpl2()));
+System.out.println(demoService.sayHello("周瑜", "d3", new DemoServiceListenerImpl3()));
+```
+
+
+
+  
+
+### 异步调用
+
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/async-call/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/async-call/)
+
+  
+
+理解起来比较容易，主要要理解[CompletableFuture](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/CompletableFuture.html)。只是说dubbo也可以支持java的CompletableFuture
+
+其他异步调用方式：[https://mp.weixin.qq.com/s/U3eyBUy6HBVy-xRw3LGbRQ](https://mp.weixin.qq.com/s/U3eyBUy6HBVy-xRw3LGbRQ)
+
+ 
+
+```java
+package com.youthlql;
+
+import java.util.concurrent.CompletableFuture;
+
+public interface DemoService {
+    // 同步调用方法
+    String sayHello(String name);
+
+    // 异步调用方法
+    default CompletableFuture<String> sayHelloAsync(String name) {
+        return null;
+    };
+
+    // 添加回调
+    default String sayHello(String name, String key, DemoServiceListener listener) {
+        return null;
+    };
+}
+```
+
+
+
+```java
+package com.youthlql.provider.service;
+
+
+@Service(version = "async")
+public class AsyncDemoService implements DemoService {
+
+    @Override
+    public String sayHello(String name) {
+        System.out.println("执行了同步服务" + name);
+        URL url = RpcContext.getContext().getUrl();
+        return String.format("%s：%s, Hello, %s", url.getProtocol(), url.getPort(), name);  // 正常访问
+    }
+
+    @Override
+    public CompletableFuture<String> sayHelloAsync(String name) {
+        System.out.println("执行了异步服务" + name);
+
+        return CompletableFuture.supplyAsync(() -> {
+            return sayHello(name);
+        });
+    }
+}
+```
+
+
+
+```java
+package com.youthlql.consumer;
+
+@EnableAutoConfiguration
+public class AsyncDubboConsumerDemo {
+
+    @Reference(version = "async")
+    private DemoService demoService;
+
+    public static void main(String[] args) throws IOException {
+        ConfigurableApplicationContext context = SpringApplication.run(AsyncDubboConsumerDemo.class);
+
+        DemoService demoService = context.getBean(DemoService.class);
+
+        // 调用直接返回CompletableFuture
+        CompletableFuture<String> future = demoService.sayHelloAsync("异步调用");  // 5
+
+        future.whenComplete((v, t) -> {
+            if (t != null) {
+                t.printStackTrace();
+            } else {
+                System.out.println("Response: " + v);
+            }
+        });
+
+        System.out.println("结束了");
+
+    }
+
+}
+```
+
+### 泛化调用
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/generic-reference/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/generic-reference/)
+
+  
+
+泛化调用可以用来做服务测试。
+
+
+
+1. 在Dubbo中，如果某个服务想要支持泛化调用，就可以将该服务的generic属性设置为true，那对于服务消费者来说，**就可以不用依赖该服务的接口**（pom.xml里都可以不用加这个依赖），直接利用GenericService接口来进行服务调用。
+2. GenericService是dubbo提供的
+
+```java
+package com.youthlql.consumer;
+
+
+@EnableAutoConfiguration
+public class GenericDubboConsumerDemo {
+
+
+    @Reference(id = "demoService", version = "default", interfaceName = "com.youthlql.DemoService", generic = true)
+    private GenericService genericService;
+
+    public static void main(String[] args) throws IOException {
+        ConfigurableApplicationContext context = SpringApplication.run(GenericDubboConsumerDemo.class);
+
+        GenericService genericService = (GenericService) context.getBean("demoService");
+
+        Object result = genericService.$invoke("sayHello", new String[]{"java.lang.String"}, new Object[]{"周瑜"});
+        System.out.println(result);
+
+
+    }
+
+}
+```
+
+### 泛化服务
+
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/generic-service/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/generic-service/)
+
+ 
+
+**作用：实现一个通用的远程服务 Mock 框架，可通过实现 GenericService 接口处理所有服务请求**
+
+实现了GenericService接口的就是泛化服务
+
+```java
+package com.youthlql.provider.service;
+
+import com.youthlql.DemoService;
+import org.apache.dubbo.config.annotation.Service;
+import org.apache.dubbo.rpc.service.GenericException;
+import org.apache.dubbo.rpc.service.GenericService;
+
+@Service(interfaceName = "com.youthlql.DemoService", version = "generic")
+public class GenericDemoService implements GenericService {
+    
+    /**
+     * <p>
+     * @param s 方法名字
+     * @param strings 参数类型数组
+     * @param objects 参数值数组
+     * </p>
+     * @since 2021/8/7 - 18:57
+     */
+    @Override
+    public Object $invoke(String s, String[] strings, Object[] objects) throws GenericException {
+        System.out.println("执行了generic服务");
+
+        return "执行的方法是" + s;
+    }
+}
+
+```
+
+意思就是实际暴露出去的服务依然是`com.youthlql.DemoService`，并且版本是generic。只是消费者调用的时候，最终执行的逻辑是这个`$invoke`方法。就是服务消费者你该怎么用还是怎么用，只是服务提供者后面真正执行逻辑不再是实现demoservice接口，实现sayhello方法了。而是GenericService的$invoke方法
+
+### Dubbo中的REST
+
+  
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/rest/](http://dubbo.apache.org/zh/docs/v2.7/user/rest/)
+
+  
+
+注意Dubbo的REST也是Dubbo所支持的一种**协议**。
+
+  
+
+当我们用Dubbo提供了一个服务后，如果消费者没有使用Dubbo也想调用服务，那么这个时候我们就可以让我们的服务支持REST协议，这样消费者就可以通过REST形式调用我们的服务了。
+
+注意：如果某个服务只有REST协议可用，那么该服务必须用@Path注解定义访问路径
+
+ 
+
+> application.properties   即支持dubbo协议，又支持rest协议
+
+```properties
+ # Spring boot application
+spring.application.name=dubbo-provider-demo
+server.port=8081
+
+# Base packages to scan Dubbo Component: @org.apache.dubbo.config.annotation.Service
+dubbo.scan.base-packages=com.youthlql.provider.service
+dubbo.application.name=${spring.application.name}
+
+
+## Dubbo Registry
+dubbo.registry.address=zookeeper://127.0.0.1:2181
+
+# Dubbo Protocol
+#dubbo.protocol.name=dubbo
+#dubbo.protocol.port=20880
+
+
+#dubbo.protocol.name=rest
+#dubbo.protocol.port=8083
+
+dubbo.protocols.p1.id=dubbo1
+dubbo.protocols.p1.name=dubbo
+dubbo.protocols.p1.port=20881
+dubbo.protocols.p1.host=0.0.0.0
+
+dubbo.protocols.p2.id=rest
+dubbo.protocols.p2.name=rest
+dubbo.protocols.p2.port=8083
+dubbo.protocols.p2.host=0.0.0.0
+
+#dubbo.protocols.p3.id=dubbo3
+#dubbo.protocols.p3.name=dubbo
+#dubbo.protocols.p3.port=20883
+#dubbo.protocols.p3.host=0.0.0.0
+```
+
+
+
+
+
+```java
+package com.youthlql.provider.service;
+
+
+@Service(version = "rest", protocol = "p2")
+@Path("demo")
+public class RestDemoService implements DemoService {
+
+    @GET
+    @Path("say")
+    @Produces({ContentType.APPLICATION_JSON_UTF_8, ContentType.TEXT_XML_UTF_8})
+    @Override
+    public String sayHello(@QueryParam("name") String name) {
+        System.out.println("执行了rest服务" + name);
+
+        URL url = RpcContext.getContext().getUrl();
+        return String.format("%s: %s, Hello, %s", url.getProtocol(), url.getPort(), name);  // 正常访问
+    }
+
+}
+```
+
+
+
+```java
+package com.youthlql.provider.service;
+
+import com.youthlql.DemoService;
+import org.apache.dubbo.common.URL;
+import org.apache.dubbo.config.annotation.Service;
+import org.apache.dubbo.rpc.RpcContext;
+
+import java.util.concurrent.CompletableFuture;
+
+@Service(version = "async", protocol = "p1")
+public class AsyncDemoService implements DemoService {
+
+    @Override
+    public String sayHello(String name) {
+        System.out.println("执行了同步服务" + name);
+        URL url = RpcContext.getContext().getUrl();
+        return String.format("%s：%s, Hello, %s", url.getProtocol(), url.getPort(), name);  // 正常访问
+    }
+
+    @Override
+    public CompletableFuture<String> sayHelloAsync(String name) {
+        System.out.println("执行了异步服务" + name);
+
+        return CompletableFuture.supplyAsync(() -> {
+            return sayHello(name);
+        });
+    }
+}
+```
+
+### 管理台
+
+github地址：[https://github.com/apache/dubbo-admin](https://github.com/apache/dubbo-admin)
+
+用户名和密码默认都是root
+
+
+
+1. Dubbo分为注册中心和配置中心，如果spring文件里没有明确写配置中心，配置中心默认就用注册中心。
+
+```properties
+dubbo.registry.address=zookeeper://127.0.0.1:2181
+dubbo.config-center.address=
+```
+
+2. 管理台的**配置管理**作用就是可以实时更改dubbo相关的配置，在这里面写了和在appliaction.properties里面写是一样的效果，这个还不用重启服务。如果appliaction.properties里和管理台写了相同的配置，以管理台的为主。
+
+<img src="https://unpkg.zhimg.com/youthlql@1.0.1/rpc/dubbo/v1/01_di_er_jie/0001.png"/>
+
+3. **动态配置**这里，也可以很方便的替代服务提供者@service注解上标注的那些配置。管理台是实时生效的，如果改代码里的@service还需要重启服务。
+
+<img src="https://unpkg.zhimg.com/youthlql@1.0.1/rpc/dubbo/v1/01_di_er_jie/0002.png"/>
+
+很多配置都可以在管理台上配。管理台上写的配置会持久化在**你配置的配置中心**里。只有注册中心里的服务提供者信息不持久化，如果注册中心是zookeeper，那么服务提供者在zk上就是临时节点。
+
+### 动态配置
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/config-rule/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/config-rule/)
+
+  
+
+注意动态配置修改的是服务**参数**，并不能修改服务的协议、IP、PORT、VERSION、GROUP，因为这5个信息是服务的标识信息，是服务的身份证号，是不能修改的。
+
+  
+
+### 服务路由
+
+官网地址：[http://dubbo.apache.org/zh/docs/v2.7/user/examples/routing-rule/](http://dubbo.apache.org/zh/docs/v2.7/user/examples/routing-rule/)
+
+> 注意所有的东西都要跟官网结合着看
+
+举个官网的例子，简单说下
+
+```yaml
+# app1的消费者只能消费所有端口为20880的服务实例
+# app2的消费者只能消费所有端口为20881的服务实例
+---
+scope: application
+force: true
+runtime: true
+enabled: true
+key: governance-conditionrouter-consumer
+conditions:
+  - application=app1 => address=*:20880 # 如果你的应用是app1，那么你只能访问20880这个端口的服务
+  - application=app2 => address=*:20881
+...
+```
+
+
+
+#### 标签路由
+
+```yaml
+# governance-tagrouter-provider应用增加了两个标签分组tag1和tag2
+# tag1包含一个实例 127.0.0.1:20880
+# tag2包含一个实例 127.0.0.1:20881
+---
+  force: false
+  runtime: true
+  enabled: true
+  key: governance-tagrouter-provider
+  tags:
+    - name: tag1
+      addresses: ["127.0.0.1:20880"]
+    - name: tag2
+      addresses: ["127.0.0.1:20881"]
+ ...
+```
+
+
+
+```java
+package com.youthlql.controller;
+
+import org.apache.dubbo.rpc.Constants;
+import org.apache.dubbo.rpc.RpcContext;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ConsumerInterceptor implements HandlerInterceptor {
+
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        // 测试账号
+        List<String> tester = new ArrayList<>();
+        tester.add("18888888888");
+
+        //标签路由
+        String account = request.getParameter("account");
+        if (tester.contains(account)) {
+            RpcContext.getContext().setAttachment("dubbo.tag", "tag1");
+        } else {
+            RpcContext.getContext().setAttachment("dubbo.tag", "tag2");
+        }
+        return true;
+    }
+}
+
+```
+
+1. 比如说现在服务上线，消费者去请求提供者，通过拦截器在发送请求之前，判断账号是不是内测用户账号，如果是就打一个tag1标签，否则就打tag2标签
+2. 那么如果打了tag1标签，内测账号就会访问"127.0.0.1:20880"这个服务器。
+3. 可以用来做灰度发布，比如新版本的服务只给内测用户群体用。
+
+
+
+#### 什么是蓝绿发布、灰度发布
+
+[https://zhuanlan.zhihu.com/p/42671353](https://zhuanlan.zhihu.com/p/42671353)
+
+ 
+
+### Zookeeper可视化客户端工具
+
+Zookeeper可视化客户端：ZooInspector
+
+## Dubbo与其他微服务组件整合
+
+sentinel： https://github.com/alibaba/Sentinel/tree/master/sentinel-demo/sentinel-demo-dubbo
+
+nacos: https://nacos.io/zh-cn/docs/use-nacos-with-dubbo.html
+
+seata: http://seata.io/zh-cn/docs/user/microservice.html
+
+
+
