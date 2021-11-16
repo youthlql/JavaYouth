@@ -6,7 +6,7 @@
 >4. 如果你要提交 issue 或者 pr 的话建议到 [Github](https://github.com/youthlql/JavaYouth) 提交。笔者会持续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**，你的**Star**是我创作的动力。
 > 5. 所有更新日志，写作计划，公告等均在此发布 ==> [时间轴](https://imlql.cn/timeline/)。
 
-
+> 2021.11.16网站备案中，备用地址：https://youthlql.gitee.io/javayouth/#/
 
 
 
