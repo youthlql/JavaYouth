@@ -1,12 +1,10 @@
 
 
-> 1. 文章会优先发布在[Github](https://github.com/youthlql/JavaYouth)，其它平台会晚一段时间。文章纠错与更新内容只在Github。
->2. 如果Github很卡，可以在[Gitee](https://gitee.com/youthlql/JavaYouth)，[电子书在线阅读](https://imlql.cn/JavaYouth/#/)，[个人博客](https://imlql.cn/)浏览。
+> 1. 文章会优先发布在[Github](https://github.com/youthlql/JavaYouth)，其它平台会晚一段时间，文章纠错与更新内容只在Github。如果Github很卡，可以在去[Gitee](https://gitee.com/youthlql/JavaYouth)克隆。
+> 2. 提供两种在线阅读方式：[电子书在线阅读](https://imlql.cn/JavaYouth/#/)，[个人博客](https://imlql.cn/)浏览。
 > 3. 转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境。
->4. 如果你要提交 issue 或者 pr 的话建议到 [Github](https://github.com/youthlql/JavaYouth) 提交。笔者会持续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**，你的**Star**是我创作的动力。
+> 4. 如果你要提交 issue 或者 pr 的话建议到 [Github](https://github.com/youthlql/JavaYouth) 提交。笔者会持续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**，你的**Star**是我创作的动力。
 > 5. 所有更新日志，写作计划，公告等均在此发布 ==> [时间轴](https://imlql.cn/timeline/)。
-
-> 2021.11.16网站备案中，备用地址：https://youthlql.gitee.io/javayouth/#/
 
 
 
@@ -142,7 +140,7 @@
 
 
 
-## 源码【预计11月或者12月更新】
+## 源码
 
 # Netty
 
