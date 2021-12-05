@@ -1,5 +1,4 @@
-- [首页](https://youthlql.gitee.io/javayouth/#/?id=%e7%9b%ae%e5%bd%95)
-
-- 平台
-  - [博客](https://imlql.cn/)
-  - [CSDN](https://blog.csdn.net/Youth_lql)
+- [首页](https://imlql.cn/JavaYouth/#/)
+- [Github](https://github.com/youthlql/JavaYouth)
+- [博客](https://imlql.cn/)
+- [CSDN](https://blog.csdn.net/Youth_lql)

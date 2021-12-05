@@ -10,50 +10,33 @@
 </head>
 <body>
   <div id="app"></div>
-  <!-- docsify-edit-on-github -->
-  <!-- <script src="//unpkg.zhimg.com/docsify-edit-on-github/index.js"></script> -->
   <script>
     window.$docsify = {
       name: 'JavaYouth',
-      repo: 'git@github.com:youthlql/JavaYouth.git',
       maxLevel: 6,//最大支持渲染的标题层级
       coverpage: true,
       auto2top: true,//切换页面后是否自动跳转到页面顶部
-	  loadNavbar: true,//导航栏
-      search: {
-        //maxAge: 86400000, // 过期时间，单位毫秒，默认一天
-        paths: 'auto',
-        placeholder: '搜索',
-        noData: '找不到结果',
-        // 搜索标题的最大程级, 1 - 6
-        depth: 6,
-      },
+	    loadNavbar: true,//导航栏
       // 字数统计
       count: {
         countable: true,
         fontsize: '0.9em',
         color: 'rgb(90,90,90)',
         language: 'chinese'
-      },
-      plugins: [
-        EditOnGithubPlugin.create('https://github.com/youthlql/JavaYouth')
-      ],
+      }
     }
   </script>
-  <!-- <script src="//unpkg.zhimg.com/docsify/lib/docsify.min.js"></script> -->
-  <!--Java代码高亮-->
-  <!-- <script src="//unpkg.zhimg.com/prismjs/components/prism-java.js"></script> -->
-  <!--全文搜索,直接用官方提供的无法生效-->
-  <!-- <script src="https://cdn.bootcss.com/docsify/4.5.9/plugins/search.min.js"></script> -->
-  <!-- 复制到剪贴板 -->
-  <!-- <script src="//unpkg.zhimg.com/docsify-copy-code"></script> -->
   <!-- 图片缩放 -->
-  <!-- <script src="//unpkg.zhimg.com/docsify/lib/plugins/zoom-image.js"></script> -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+  <!-- 复制到剪贴板 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code"></script>
+  <!--Java代码高亮-->
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
   <!-- 表情 -->
-  <!-- <script src="//unpkg.zhimg.com/docsify/lib/plugins/emoji.js"></script> -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
   <!-- 字数统计 -->
-  <!-- <script src="//unpkg.zhimg.com/docsify-count/dist/countable.js"></script>  -->
-  -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-count/dist/countable.js"></script> 
+  
   <!-- Docsify v4 -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
 </body>
