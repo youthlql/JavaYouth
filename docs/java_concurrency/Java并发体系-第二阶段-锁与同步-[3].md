@@ -9,7 +9,7 @@ categories:
   - 原理
 keywords: Java并发，原理，源码
 description: '万字系列长文讲解-Java并发体系-第二阶段,从C++和硬件方面讲解。'
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/logo_1.png'
+cover: 'https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/logo_1.png'
 abbrlink: 113a3931
 date: 2020-10-08 22:10:58
 ---
@@ -357,17 +357,17 @@ monitorexit释放锁。 monitorexit插入在方法结束处和异常处，JVM保
 
 术语参考: http://openjdk.java.net/groups/hotspot/docs/HotSpotGlossary.html 在JVM中，对象在内存中的布局分为三块区域：对象头、实例数据和对齐填充。如下图所示：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0021.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0021.png">
 
 ## 对象头
 
 当一个线程尝试访问synchronized修饰的代码块时，它首先要获得锁，那么这个锁到底存在哪里呢？是 存在锁对象的对象头中的。 HotSpot采用instanceOopDesc和arrayOopDesc来描述对象头，arrayOopDesc对象用来描述数组类型。instanceOopDesc的定义的在Hotspot源码的 instanceOop.hpp 文件中，另外，arrayOopDesc 的定义对应 arrayOop.hpp 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0022.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0022.png">
 
 从instanceOopDesc代码中可以看到 instanceOopDesc继承自oopDesc，oopDesc的定义载Hotspot 源码中的 oop.hpp 文件中。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0023.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0023.png">
 
 - 在普通实例对象中，oopDesc的定义包含两个成员，分别是 _mark 和 _metadata
 
@@ -383,21 +383,21 @@ monitorexit释放锁。 monitorexit插入在方法结束处和异常处，JVM保
 
 Mark Word用于存储对象自身的运行时数据，如哈希码（HashCode）、GC分代年龄、锁状态标志、 线程持有的锁、偏向线程ID、偏向时间戳等等，占用内存大小与虚拟机位长一致。Mark Word对应的类 型是 markOop 。源码位于 markOop.hpp 中。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0024.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0024.png">
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0025.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0025.png">
 
 在64位虚拟机下，Mark Word是64bit大小的，其存储结构如下：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0026.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0026.png">
 
 在32位虚拟机下，Mark Word是32bit大小的，其存储结构如下：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0027.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0027.png">
 
 再加一个图对比一下，有一丁点的补充
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0028.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0028.png">
 
 
 
@@ -447,7 +447,7 @@ Mark Word用于存储对象自身的运行时数据，如哈希码（HashCode）
 
 线程在执行同步块之前，JVM会先在当前的线程的栈帧中创建一个`Lock Record`，其包括一个用于存储对象头中的 `mark word`（官方称之为`Displaced Mark Word`）以及一个指向对象的指针。下图右边的部分就是一个`Lock Record`。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0029.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0029.png">
 
 
 
@@ -571,7 +571,7 @@ synchronized(obj){
 }
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0030.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0030.png">
 
 ## 轻量级锁什么时候升级为重量级锁？
 
@@ -608,7 +608,7 @@ synchronized(obj){
 
 - 重量级锁的状态下，对象的`mark word`为指向一个堆中monitor对象的指针。一个monitor对象包括这么几个关键字段：cxq（下图中的ContentionList），EntryList ，WaitSet，owner。其中cxq ，EntryList ，WaitSet都是由ObjectWaiter的链表结构，owner指向持有锁的线程。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0031.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0031.png">
 
 在HotSpot虚拟机中，monitor是由ObjectMonitor实现的。其源码是用c++来实现的，位于HotSpot虚 拟机源码ObjectMonitor.hpp文件中(src/share/vm/runtime/objectMonitor.hpp)。ObjectMonitor主 要数据结构如下：
 
@@ -661,7 +661,7 @@ ObjectMonitor() {
 
 1、执行monitorenter时，会调用InterpreterRuntime.cpp (位于：src/share/vm/interpreter/interpreterRuntime.cpp) 的 InterpreterRuntime::monitorenter函 数。具体代码可参见HotSpot源码。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0032.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0032.png">
 
 
 
@@ -1147,7 +1147,7 @@ if (TryLock(Self) > 0) break ;
 
 可以看到ObjectMonitor的函数调用中会涉及到Atomic::cmpxchg_ptr，Atomic::inc_ptr等内核函数， 执行同步代码块，没有竞争到锁的对象会park()被挂起，竞争到锁的线程会unpark()唤醒。这个时候就 会存在操作系统用户态和内核态的转换，这种切换会消耗大量的系统资源。所以synchronized是Java语 言中是一个重量级(Heavyweight)的操作。 用户态和和内核态是什么东西呢？要想了解用户态和内核态还需要先了解一下Linux系统的体系架构：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_concurrency/Source_code/Second_stage/0033.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0033.png">
 
 从上图可以看出，Linux操作系统的体系架构分为：用户空间（应用程序的活动空间）和内核。 内核：本质上可以理解为一种软件，控制计算机的硬件资源，并提供上层应用程序运行的环境。 用户空间：上层应用程序活动的空间。应用程序的执行必须依托于内核提供的资源，包括CPU资源、存 储资源、I/O资源等。 系统调用：为了使上层应用能够访问到这些资源，内核必须为上层应用提供访问的接口：即系统调用。
 

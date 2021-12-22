@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第3章-运行时数据区。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/logo.png'
+cover: 'https://unpkg.zhimg.com/youthlql@1.0.8/JVM/logo.png'
 abbrlink: a7ad3cab
 date: 2020-11-09 15:38:42
 ---
@@ -27,15 +27,15 @@ date: 2020-11-09 15:38:42
 
 本节主要讲的是运行时数据区，也就是下图这部分，它是在类加载完成后的阶段
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0001.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0001.png">
 
 当我们通过前面的：类的加载 --> 验证 --> 准备 --> 解析 --\> 初始化，这几个阶段完成后，就会用到执行引擎对我们的类进行使用，同时执行引擎将会使用到我们运行时数据区
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0002.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0002.png">
 
 类比一下也就是大厨做饭，我们把大厨后面的东西（切好的菜，刀，调料），比作是运行时数据区。而厨师可以类比于执行引擎，将通过准备的东西进行制作成精美的菜品。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0003.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0003.png">
 
 
 
@@ -50,7 +50,7 @@ date: 2020-11-09 15:38:42
 
 > 下图来自阿里巴巴手册JDK8
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0004.jpg">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0004.jpg">
 
 
 
@@ -62,7 +62,7 @@ date: 2020-11-09 15:38:42
    - 线程独有：独立包括程序计数器、栈、本地方法栈
    - 线程间共享：堆、堆外内存（永久代或元空间、代码缓存）
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0005.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0005.png">
 
 
 
@@ -70,7 +70,7 @@ date: 2020-11-09 15:38:42
 
 **每个JVM只有一个Runtime实例**。即为运行时环境，相当于内存结构的中间的那个框框：运行时环境。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0006.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0006.png">
 
 
 
@@ -114,7 +114,7 @@ PC寄存器介绍
 
 > 官方文档网址：https://docs.oracle.com/javase/specs/jvms/se8/html/index.html
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0007.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0007.png">
 
 1.  JVM中的程序计数寄存器（Program Counter Register）中，Register的命名源于CPU的寄存器，**寄存器存储指令相关的现场信息**。CPU只有把数据装载到寄存器才能够运行。
 2.  这里，并非是广义上所指的物理寄存器，或许将其翻译为PC计数器（或指令计数器）会更加贴切（也称为程序钩子），并且也不容易引起一些不必要的误会。**JVM中的PC寄存器是对物理PC寄存器的一种抽象模拟**。
@@ -132,7 +132,7 @@ PC寄存器介绍
 
 PC寄存器用来存储指向下一条指令的地址，也即将要执行的指令代码。由执行引擎读取下一条指令，并执行该指令。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0008.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0008.png">
 
 
 
@@ -268,7 +268,7 @@ SourceFile: "PCRegisterTest.java"
 
 *   左边的数字代表**指令地址（指令偏移）**，即 PC 寄存器中可能存储的值，然后执行引擎读取 PC 寄存器中的值，并执行该指令
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0009.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0009.png">
 
 
 
@@ -282,7 +282,7 @@ SourceFile: "PCRegisterTest.java"
 2.  JVM的字节码解释器就需要通过改变PC寄存器的值来明确下一条应该执行什么样的字节码指令
   
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0010.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0010.png">
 
 
 
@@ -306,7 +306,7 @@ CPU 时间片
 3.  但在微观上：由于只有一个CPU，一次只能处理程序要求的一部分，如何处理公平，一种方法就是引入时间片，**每个程序轮流执行**。
   
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0011.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0011.png">
 
 
 
@@ -314,7 +314,7 @@ CPU 时间片
 
 ## 本地方法
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0012.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0012.png">
 
 
 
@@ -393,7 +393,7 @@ Java使用起来非常方便，然而有些层次的任务用Java实现起来不
 4. 本地方法一般是使用C语言或C++语言实现的。
 5. 它的具体做法是Native Method Stack中登记native方法，在Execution Engine 执行时加载本地方法库。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_003/0013.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_003/0013.png">
 
 
 

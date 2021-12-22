@@ -8,7 +8,7 @@ categories:
   - Apollo
 keywords: Apollo，配置中心。
 description: Apollo简单入门及和SpringBoot集成。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/logo.png'
+cover: 'https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/logo.png'
 abbrlink: 10d32fba
 date: 2020-12-29 11:31:58
 ---
@@ -76,7 +76,7 @@ date: 2020-12-29 11:31:58
 
  不过，解决一个问题的同时，往往会诞生出很多新的问题，所以微服务化的过程中伴随着很多的挑战，其中一个挑战就是有关服务（应用）配置的。当系统从一个单体应用，被拆分成分布式系统上一个个服务节点后，配置文件也必须跟着迁移（分割），这样配置就分散了，不仅如此，分散中还包含着冗余，如下图：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0001.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0001.png"/>
 
 配置中心将配置从应用中剥离出来，统一管理，优雅的解决了配置的动态变更、持久化、运维成本等问题。
 
@@ -86,7 +86,7 @@ date: 2020-12-29 11:31:58
 
  在系统架构中，配置中心是整个微服务基础架构体系中的一个组件，如下图，它的功能看上去并不起眼，无非就是配置的管理和存取，但它是整个微服务架构中不可或缺的一环。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0002.jpg"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0002.jpg"/>
 
 
 
@@ -171,7 +171,7 @@ Apollo简介
 
 ### Apollo简介
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0003.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0003.png"/>
 
 **Apollo - A reliable configuration management system**
 
@@ -221,7 +221,7 @@ Apollo快速入门
 
 ### 执行流程
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0004.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0004.png"/>
 
 操作流程如下：
 
@@ -262,7 +262,7 @@ Apollo的表结构对`timestamp`使用了多个default声明，所以需要5.6.5
 
 2. 打开1.3发布链接，下载必须的安装包：[https://github.com/ctripcorp/apollo/releases/tag/v1.3.0](https://github.com/ctripcorp/apollo/releases/tag/v1.3.0)。三个都要下
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0005.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0005.png"/>
 
 解压安装包后将apollo-configservice-1.3.0.jar, apollo-adminservice-1.3.0.jar, apollo-portal-1.3.0.jar放置于apollo目录下
 
@@ -349,11 +349,11 @@ Apollo服务端共需要两个数据库：`ApolloPortalDB`和`ApolloConfigDB`，
 
 1.  也可以使用提供的runApollo.bat快速启动三个服务（修改数据库连接地址，数据库以及密码）
 
-       <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0006.png"/>
+       <img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0006.png"/>
        
     这里面是一个很简单的脚本
     
-    <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0007.png" />
+    <img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0007.png" />
 
 
 
@@ -385,29 +385,29 @@ start "ApolloPortal" java -Xms256m -Xmx256m -Dapollo_profile=github,auth -Ddev_m
 
 1.  打开[apollo](http://localhost:8070/) ：新建项目apollo-quickstart
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0008.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0008.png" />
 
 2. 新建配置项sms.enable
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0009.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0009.png" />
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0010.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0010.png" />
 
 确认提交配置项
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0011.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0011.png"/>
 
 
 
-![image-20201228102339176](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0012.png)
+![image-20201228102339176](https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0012.png)
 
 
 
 3. 发布配置项
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0013.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0013.png" />
 
 #### 应用读取配置
 
@@ -485,7 +485,7 @@ public class GetConfigTest {
 
     -Dapp.id=apollo-quickstart -Denv=DEV -Ddev_meta=http://localhost:8080
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0014.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0014.png" />
 
 运行GetConfigTest，打开控制台，观察输出结果
 
@@ -523,19 +523,19 @@ sma.enable: true
 
 2. 运行GetConfigTest观察输出结果
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0015.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0015.png"/>
 
 3. 在Apollo管理界面修改配置项
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0016.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0016.png"/>
 
 4. 发布配置
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0017.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0017.png"/>
 
 5. 在控制台查看详细情况：可以看到程序获取的sms.enable的值已由false变成了修改后的true
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0018.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0018.png" />
 
 
 
@@ -546,7 +546,7 @@ Apollo应用
 
 下图是Apollo架构模块的概览
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0019.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0019.png" />
 
 #### 各模块职责
 
@@ -601,7 +601,7 @@ Apollo应用
 
 它们的关系如下图所示：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0020.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0020.png"/>
 
 
 
@@ -615,15 +615,15 @@ apollo 默认部门有两个。要增加自己的部门，可在系统参数中�
 
 *   进入系统参数设置
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0021.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0021.png"/>
 
 
 
-![image-20201228103939300](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0022.png)
+![image-20201228103939300](https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0022.png)
 
 *   输入key查询已存在的部门设置：organizations
   
-    <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0023.png" />
+    <img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0023.png" />
     
 *   修改value值来添加新部门，下面添加一个微服务部门：
   
@@ -639,11 +639,11 @@ apollo默认提供一个超级管理员: apollo，可以自行添加用户
 
 *   新建用户张三
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0024.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0024.png"/>
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0025.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0025.png" />
 
 #### 创建项目
 
@@ -661,7 +661,7 @@ apollo默认提供一个超级管理员: apollo，可以自行添加用户
     *   应用名称：应用名，仅用于界面展示
     *   应用负责人：选择的人默认会成为该项目的管理员，具备项目权限管理、集群创建、Namespace创建等权限
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0026.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0026.png" />
 
 4. 点击提交,创建成功后，会自动跳转到项目首页
 
@@ -671,7 +671,7 @@ apollo默认提供一个超级管理员: apollo，可以自行添加用户
   
     *   使用管理员apollo将指定项目授权给用户张三
     
-    <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0027.png"/>
+    <img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0027.png"/>
     
     *   将修改和发布权限都授权给张三
     
@@ -731,7 +731,7 @@ Namespace作为配置的分类，可当成一个配置文件。
 
 进入项目首页，点击左下脚的“添加Namespace”，共包括两项：关联公共Namespace和创建Namespace，这里选择“创建Namespace”
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0028.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0028.png"/>
 
 2. 添加配置项
 
@@ -758,11 +758,11 @@ Namespace作为配置的分类，可当成一个配置文件。
 
 进入common-template项目管理页面：[http://localhost:8070/config.html?#/appid=common-template](http://localhost:8070/config.html?#/appid=common-template)
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0029.png" style="zoom:67%;" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0029.png" style="zoom:67%;" />
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0030.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0030.png" />
 
 1.  添加配置项并发布
 
@@ -786,11 +786,11 @@ Namespace作为配置的分类，可当成一个配置文件。
 2.  点击左侧的添加Namespace
 3.  添加Namespace
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0031.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0031.png"/>
 
 4. 根据需求可以覆盖引入公共Namespace中的配置，下面以覆盖server.servlet.context-path为例
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0032.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0032.png" />
 
 5. 修改server.servlet.context-path为：/account-service
 6. 发布修改的配置项
@@ -806,15 +806,15 @@ Namespace作为配置的分类，可当成一个配置文件。
 1.  点击页面左侧的“添加集群”按钮
 2.  输入集群名称SHAJQ，选择环境并提交：添加上海金桥数据中心为例
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0033.png"  />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0033.png"  />
 
 
 
-![image-20201228112150602](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0034.png)
+![image-20201228112150602](https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0034.png)
 
 3. 切换到对应的集群，修改配置并发布即可
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0035.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0035.png" />
 
 #### 同步集群配置
 
@@ -827,19 +827,19 @@ Namespace作为配置的分类，可当成一个配置文件。
     *   展开要同步的Namespace，点击同步配置
       
     
-    <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0036.png"  />
+    <img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0036.png"  />
     
     
     
-    ![image-20201228112603903](https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0037.png)
+    ![image-20201228112603903](https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0037.png)
     
     *   选择同步到的新集群，再选择要同步的配置
     
-    <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0038.png"/>
+    <img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0038.png"/>
     
     *   同步完成后，切换到SHAJQ集群，发布配置
     
-    <img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0039.png" />
+    <img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0039.png" />
 
 #### 读取配置
 
@@ -863,7 +863,7 @@ Namespace作为配置的分类，可当成一个配置文件。
 
 在配置中心中，一个重要的功能就是配置发布后实时推送到客户端。下面我们简要看一下这块是怎么设计实现的。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0040.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0040.png" />
 
 上图简要描述了配置发布的主要过程：
 
@@ -890,7 +890,7 @@ Admin Service在配置发布后，需要通知所有的Config Service有配置�
  SELECT * FROM ApolloConfigDB.ReleaseMessage
   ```
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0041.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0041.png" />
 
 
 
@@ -1012,7 +1012,7 @@ Admin Service在配置发布后，需要通知所有的Config Service有配置�
 
 4. NotificationControllerV2得到配置发布的AppId+Cluster+Namespace后，会通知对应的客户端
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0042.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0042.png"/>
 
 #### Config Service通知客户端
 
@@ -1268,7 +1268,7 @@ Apollo客户端会把从服务端获取到的配置在本地文件系统缓存�
    -Denv=DEV -Dapollo.cacheDir=/opt/data/apollo-config -Dapollo.cluster=DEFAULTbash
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0043.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0043.png"/>
 
 
 
@@ -1366,11 +1366,11 @@ public class AccountApplication {
 
 2. spring-http命名空间在之前已通过关联公共命名空间添加好了，现在来添加spring-boot-druid命名空间
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0044.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0044.png" />
 
 3. 添加本地文件中的配置到对应的命名空间，然后发布配置
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0045.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0045.png" />
 
 4. 在account-service/src/main/resources/application.properties中配置apollo.bootstrap.namespaces需要引入的命名空间(上面写过)
 
@@ -1458,7 +1458,7 @@ public class AccountController {
 
 *   访问[http://127.0.0.1:63000/account-service/db-url](http://127.0.0.1:63000/account-service/db-url)，显示结果
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0046.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0046.png"/>
 
 #### 创建其它项目
 
@@ -1474,7 +1474,7 @@ public class AccountController {
 
 具体如下图所示：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0047.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0047.png" />
 
 下面以添加生产环境部署为例
 
@@ -1523,7 +1523,7 @@ UPDATE ServerConfig SET `Value` = "http://localhost:8081/eureka/" WHERE `key` = 
 
 服务配置项统一存储在ApolloPortalDB.ServerConfig表中，可以通过`管理员工具 - 系统参数`页面进行配置：apollo.portal.envs - 可支持的环境列表
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0048.png"  />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0048.png"  />
 
 默认值是dev，如果portal需要管理多个环境的话，以逗号分隔即可（大小写不敏感），如：
 
@@ -1556,7 +1556,7 @@ Apollo Portal需要在不同的环境访问不同的meta service(apollo-configse
     
 1.  启动之后，点击account-service服务配置后会提示环境缺失，此时需要补全上边新增生产环境的配置
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0049.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0049.png" />
 
 3. 点击左下方的补缺环境
 
@@ -1564,7 +1564,7 @@ Apollo Portal需要在不同的环境访问不同的meta service(apollo-configse
 
 4. 补缺过生产环境后，切换到PRO环境后会提示有Namespace缺失，点击补缺
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0050.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0050.png" />
 
 5. 从dev环境同步配置到pro
 
@@ -1610,7 +1610,7 @@ apollo-quickstart项目有两个客户端：
 1.  172.16.0.160
 2.  172.16.0.170
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0051.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0051.png"/>
 
 **灰度目标**
 
@@ -1626,7 +1626,7 @@ apollo-quickstart项目有两个客户端：
 
 2. 点击确定后，灰度版本就创建成功了，页面会自动切换到`灰度版本`Tab
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0052.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0052.png"/>
 
 #### 灰度配置
 
@@ -1634,17 +1634,17 @@ apollo-quickstart项目有两个客户端：
 
 2. 在弹出框中填入要灰度的值：3000，点击提交
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0053.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0053.png"/>
 
 #### 配置灰度规则
 
 1.  切换到`灰度规则`Tab，点击`新增规则`按钮
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0054.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0054.png" />
 
 2. 在弹出框中`灰度的IP`下拉框会默认展示当前使用配置的机器列表，选择我们要灰度的IP，点击完成
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0055.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0055.png"/>
 
 如果下拉框中没找到需要的IP，说明机器还没从Apollo取过配置，可以点击手动输入IP来输入，输入完后点击添加按钮
 
@@ -1674,11 +1674,11 @@ vm options: `-Dapp.id=apollo-quickstart -Denv=DEV -Ddev_meta=http://localhost:80
    }
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0056.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0056.png"/>
 
 2. 切换到`配置`Tab，再次检查灰度的配置部分，如果没有问题，点击`灰度发布`
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0057.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0057.png" />
 
 3. 在弹出框中可以看到主版本的值是2000，灰度版本即将发布的值是3000。填入其它信息后，点击发布
 
@@ -1686,9 +1686,9 @@ vm options: `-Dapp.id=apollo-quickstart -Denv=DEV -Ddev_meta=http://localhost:80
 
 4. 发布后，切换到`灰度实例列表`Tab，就能看到172.16.0.160已经使用了灰度发布的值
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0058.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0058.png"/>
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.2.0/Apollo/Simple_Introduction/0059.png" />
+<img src="https://unpkg.zhimg.com/youthlql@1.0.9/Apollo/Simple_Introduction/0059.png" />
 
 
 

@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第2章-类加载子系统。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/logo.png'
+cover: 'https://unpkg.zhimg.com/youthlql@1.0.8/JVM/logo.png'
 abbrlink: 2e0079af
 date: 2020-11-02 21:31:58
 ---
@@ -25,19 +25,19 @@ date: 2020-11-02 21:31:58
 
 ### 简图
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0001.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0001.png">
 
 ### 详细图
 
 英文版
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0002.jpg">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0002.jpg">
 
 
 
 中文版
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0003.jpg">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0003.jpg">
 
 注意：方法区只有HotSpot虚拟机有，J9，JRockit都没有
 
@@ -59,7 +59,7 @@ date: 2020-11-02 21:31:58
 
 3.  **加载的类信息存放于一块称为方法区的内存空间**。除了类的信息外，方法区中还会存放运行时常量池信息，可能还包括字符串字面量和数字常量（这部分常量信息是Class文件中常量池部分的内存映射）
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0004.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0004.png">
 
 
 
@@ -71,7 +71,7 @@ date: 2020-11-02 21:31:58
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0005.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0005.png">
 
 类加载过程
 -------
@@ -96,11 +96,11 @@ public class HelloLoader {
 *   加载成功，则进行链接、初始化等操作。完成后调用 HelloLoader 类中的静态方法 main
 *   加载失败则抛出异常
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0006.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0006.png">
 
 完整的流程图如下所示：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0007.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0007.png">
 
 
 
@@ -142,7 +142,7 @@ public class HelloLoader {
 
 使用 BinaryViewer软件查看字节码文件，其开头均为 CAFE BABE ，如果出现不合法的字节码文件，那么将会验证不通过。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0008.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0008.png">
 
 #### 准备(Prepare)
 
@@ -185,7 +185,7 @@ public class HelloApp {
 
 *   反编译 class 文件后可以查看符号引用，下面带# 的就是符号引用
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0023.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0023.png"/>
 
 ### 初始化阶段
 
@@ -225,7 +225,7 @@ public class HelloApp {
 
 查看下面这个代码的字节码，可以发现有一个`<clinit>()`方法。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0009.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0009.png">
 
 ```java
 public class ClassInitTest {
@@ -277,15 +277,15 @@ public class ClassInitTest {
 
 **举例2：无 static 变量**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0010.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0010.png">
 
 加上之后就有了
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0011.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0011.png">
 
 #### 4说明 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0012.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0012.png">
 
 在构造器中：
 
@@ -296,7 +296,7 @@ public class ClassInitTest {
 
 若该类具有父类，JVM会保证子类的`<clinit>()`执行前，父类的`<clinit>()`已经执行完毕
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0013.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0013.png">
 
 如上代码，加载流程如下：
 
@@ -374,17 +374,17 @@ class DeadThread{
 
    
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0014.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0014.png">
 
 
 
 **ExtClassLoader**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0015.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0015.png">
 
 **AppClassLoader**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0016.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0016.png">
 
 
 
@@ -579,15 +579,15 @@ public class CustomClassLoader extends ClassLoader {
 
 ClassLoader类，它是一个抽象类，其后所有的类加载器都继承自ClassLoader（不包括启动类加载器）
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0017.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0017.png">
 
 sun.misc.Launcher 它是一个java虚拟机的入口应用
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0018.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0018.png">
 
 #### 获取ClassLoader途径
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0019.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0019.png">
 
 
 
@@ -640,7 +640,7 @@ Java虚拟机对class文件采用的是**按需加载**的方式，也就是说�
 3.  如果父类加载器可以完成类加载任务，就成功返回，倘若父类加载器无法完成此加载任务，子加载器才会尝试自己去加载，这就是双亲委派模式。
 4.  父类加载器一层一层往下分配任务，如果子类加载器能加载，则加载此类，如果将加载任务分配至系统类加载器也无法加载此类，则抛出异常
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0020.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0020.png">
 
 ### 双亲委派机制代码演示
 
@@ -707,7 +707,7 @@ public class String {
 }
 ```
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0021.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0021.png">
 
 由于双亲委派机制一直找父类，所以最后找到了Bootstrap ClassLoader，Bootstrap ClassLoader找到的是 JDK 自带的 String 类，在那个String类中并没有 main() 方法，所以就报了上面的错误。
 
@@ -765,7 +765,7 @@ Process finished with exit code 1
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/JVM/chapter_002/0022.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_002/0022.png">
 
 
 

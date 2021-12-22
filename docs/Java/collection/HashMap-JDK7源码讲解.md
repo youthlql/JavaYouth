@@ -8,7 +8,7 @@ categories:
   - HashMap
 keywords: Java集合，HashMap。
 description: HashMap-JDK7源码讲解。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/logo.png'
+cover: 'https://unpkg.zhimg.com/youthlql@1.0.8/Java_Basis/logo.png'
 abbrlink: f1f58db2
 date: 2020-11-01 10:21:58
 ---
@@ -202,7 +202,7 @@ hadoop2
 
 大致是这样的一个结构
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0001.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0001.png">
 
 - 每个链表就算哈希表的桶（bucket）
 - 链表的节点值就算一个键值对
@@ -398,7 +398,7 @@ static class Entry<K,V> implements Map.Entry<K,V> {
 
 `HashMap`中的数组元素 & 链表节点 采用 `Entry`类实现
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0001.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0001.png">
 
 1、一个正方形代表一个Entry对象，同时也代表一个键值对。
 
@@ -769,15 +769,15 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 大概画了一下图：
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0002.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0002.png"/>
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0003.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0003.png">
 
 
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0004.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0004.png">
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0005.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0005.png">
 
 
 
@@ -871,7 +871,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 **hashmap初始状态**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0006.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0006.png">
 
 
 
@@ -897,7 +897,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 **两个线程调用完毕之后，hashmap目前是这样的。**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0007.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0007.png">
 
 
 
@@ -918,9 +918,9 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 3、来看下此时内存里的状态
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0008.png"/>
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0008.png"/>
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0009.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0009.png">
 
 ## 步骤4
 
@@ -957,7 +957,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 2、线程2直接**扩容完毕**，那么完成后的状态是这样【假设e2和e3还是hash到同一个位置】
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0010.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0010.png">
 
 3、线程1还是原来的状态
 
@@ -967,11 +967,11 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 目前两个线程里的新数组是这样的
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0011.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0011.png">
 
 为了方便后面观看，我画成这样。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0012.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0012.png">
 
 
 
@@ -1015,7 +1015,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 也就变成了下面这个样子。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0013.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0013.png">
 
 
 
@@ -1061,7 +1061,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 执行完，变成这样。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0014.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0014.png">
 
 
 
@@ -1077,7 +1077,7 @@ void transfer(Entry[] newTable, boolean rehash) {
 
 3、执行pos_3： newTable[i] = e得到  newTable1[3] == e2
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK7/0015.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK7/0015.png">
 
 这样就形成了循环链表，再get()数据就会陷入死循环。
 

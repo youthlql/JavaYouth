@@ -8,7 +8,7 @@ categories:
   - HashMap
 keywords: Java集合，HashMap。
 description: HashMap-JDK8源码讲解及常见面试题。
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_Basis/logo.png'
+cover: 'https://unpkg.zhimg.com/youthlql@1.0.8/Java_Basis/logo.png'
 abbrlink: cbc5672a
 date: 2020-11-01 10:22:05
 ---
@@ -27,7 +27,7 @@ date: 2020-11-01 10:22:05
 
 在JDK8中，优化了HashMap的数据结构，引入了红黑树。即HashMap的数据结构：数组+链表+红黑树。HashMap变成了这样。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK8/0001.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK8/0001.png">
 
 ### 为什么要引入红黑树
 
@@ -456,7 +456,7 @@ Process finished with exit code 0
 
 JDK8 hash的运算原理：高位参与低位运算，使得hash更加均匀。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK8/0002.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK8/0002.png">
 
 
 
@@ -569,7 +569,7 @@ JDK8 hash的运算原理：高位参与低位运算，使得hash更加均匀。
 
 JDK8扩容时，数据在数组下标的计算方式
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/Java_collection/HashMap/JDK8/0003.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_collection/HashMap/JDK8/0003.png">
 
 * `JDK8`根据此结论作出的新元素存储位置计算规则非常简单，提高了扩容效率。
 
