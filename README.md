@@ -54,29 +54,29 @@
 
 ## 内存与垃圾回收篇
 
-1、[JVM系列-第1章-JVM与Java体系结构](docs/Java/JVM/JVM系列-第1章-JVM与Java体系结构.md)
+1、[JVM系列-第1章-JVM与Java体系结构](docs/JVM/JVM系列-第1章-JVM与Java体系结构.md)
 
-2、[JVM系列-第2章-类加载子系统](docs/Java/JVM/JVM系列-第2章-类加载子系统.md)
+2、[JVM系列-第2章-类加载子系统](docs/JVM/JVM系列-第2章-类加载子系统.md)
 
-3、[JVM系列-第3章-运行时数据区](docs/Java/JVM/JVM系列-第3章-运行时数据区.md)
+3、[JVM系列-第3章-运行时数据区](docs/JVM/JVM系列-第3章-运行时数据区.md)
 
-4、[JVM系列-第4章-虚拟机栈](docs/Java/JVM/JVM系列-第4章-虚拟机栈.md)
+4、[JVM系列-第4章-虚拟机栈](docs/JVM/JVM系列-第4章-虚拟机栈.md)
 
-5、[JVM系列-第5章-堆](docs/Java/JVM/JVM系列-第5章-堆.md)
+5、[JVM系列-第5章-堆](docs/JVM/JVM系列-第5章-堆.md)
 
-6、[JVM系列-第6章-方法区](docs/Java/JVM/JVM系列-第6章-方法区.md)
+6、[JVM系列-第6章-方法区](docs/JVM/JVM系列-第6章-方法区.md)
 
-7、[JVM系列-第7章-对象的实例化内存布局与访问定位](docs/Java/JVM/JVM系列-第7章-对象的实例化内存布局与访问定位.md)
+7、[JVM系列-第7章-对象的实例化内存布局与访问定位](docs/JVM/JVM系列-第7章-对象的实例化内存布局与访问定位.md)
 
-8、[JVM系列-第8章-执行引擎](docs/Java/JVM/JVM系列-第8章-执行引擎.md)
+8、[JVM系列-第8章-执行引擎](docs/JVM/JVM系列-第8章-执行引擎.md)
 
-9、[JVM系列-第9章-StringTable(字符串常量池)](docs/Java/JVM/JVM系列-第9章-StringTable(字符串常量池).md)
+9、[JVM系列-第9章-StringTable(字符串常量池)](docs/JVM/JVM系列-第9章-StringTable(字符串常量池).md)
 
-10、[JVM系列-第10章-垃圾回收概述和相关算法](docs/Java/JVM/JVM系列-第10章-垃圾回收概述和相关算法.md)
+10、[JVM系列-第10章-垃圾回收概述和相关算法](docs/JVM/JVM系列-第10章-垃圾回收概述和相关算法.md)
 
-11、[JVM系列-第11章-垃圾回收相关概念](docs/Java/JVM/JVM系列-第11章-垃圾回收相关概念.md)
+11、[JVM系列-第11章-垃圾回收相关概念](docs/JVM/JVM系列-第11章-垃圾回收相关概念.md)
 
-12、[JVM系列-第12章-垃圾回收器](docs/Java/JVM/JVM系列-第12章-垃圾回收器.md)
+12、[JVM系列-第12章-垃圾回收器](docs/JVM/JVM系列-第12章-垃圾回收器.md)
 
 > 内存与垃圾回收篇完结
 
