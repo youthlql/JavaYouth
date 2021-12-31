@@ -9,7 +9,7 @@ categories:
   - 操作系统
 keywords: 操作系统，IO，零拷贝
 description: 基本面试会问到的IO进行了详解，同时本篇文章也对面试以及平时工作中会看到的零拷贝进行了充分的解析。万字长文系列，读到就是赚到。
-cover: 'https://unpkg.zhimg.com/youthlql@1.0.0/os/os_logo.jpg'
+cover: 'https://unpkg.zhimg.com/youthlql@1.0.9/os/os_logo.jpg'
 abbrlink: e959db2e
 date: 2021-04-08 15:21:58
 ---
@@ -47,7 +47,7 @@ date: 2021-04-08 15:21:58
 3. 而在用户进程这边，整 个进程会被阻塞。当**内核**一直等到数据准备好了，它就会将数据从**内核**中拷贝到用户内存，然后**内核**返回果，用户进程才解除 block的状态，重新运行起来。
 4. **所以，blocking IO的特点就是在IO执行的两个阶段都被block了。**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/computer_network/summary/0003.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/computer_network/summary/0003.png">
 
 
 
@@ -58,7 +58,7 @@ date: 2021-04-08 15:21:58
 3. 虽然用户线程每次发起IO请求后可以立即返回，但是为了等到数据，仍需要不断地轮询、重复请求，消耗了大量的CPU的资源。一般很少直接使用这种模型，而是在其他IO模型中使用非阻塞IO这一特性。
 4. **所以，用户进程第一个阶段不是阻塞的,需要不断的主动询问内核数据好了没有；第二个阶段依然总是阻塞的。**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/computer_network/summary/0004.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/computer_network/summary/0004.png">
 
 
 
@@ -76,7 +76,7 @@ date: 2021-04-08 15:21:58
 2. 它的基本原理就是select /epoll这个函数会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程，正式发起read请求。
 3. 从流程上来看，使用select函数进行IO请求和同步阻塞模型没有太大的区别，甚至还多了添加监视socket，以及调用select函数的额外操作，效率更差。但是，使用select以后最大的优势是用户可以在一个线程内同时处理多个socket的IO请求。用户可以注册多个socket，然后不断地调用select读取被激活的socket(也就是数据准备好了的socket)，即可达到在同一个线程内同时处理多个IO请求的目的。而在同步阻塞模型中，必须通过多线程的方式才能达到这个目的。
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/computer_network/summary/0005.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/computer_network/summary/0005.png">
 
 **select函数**
 
@@ -106,7 +106,7 @@ date: 2021-04-08 15:21:58
 3. 而另一方面，从**内核**的角度，当它受到一个异步读之后，首先它会立刻返回，所以不会对用户进程产生任何阻塞。然后，内核会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都 完成之后，**内核**会给用户进程发送一个信号，告诉它read操作完成了，用户线程直接使用即可。 在这整个过程中，进程完全没有被阻塞。
 4. 异步IO模型使用了Proactor设计模式实现了这一机制。**(具体怎么搞得，看上面的文章链接)**
 
-<img src="https://cdn.jsdelivr.net/gh/youthlql/lqlp@v1.0.0/computer_network/summary/0007.png">
+<img src="https://unpkg.zhimg.com/youthlql@1.0.8/computer_network/summary/0007.png">
 
 
 
