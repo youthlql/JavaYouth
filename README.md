@@ -1,11 +1,6 @@
 
 
-> - 2022-01-21紧急：由于我所使用的图床暂时出了点问题，图片访问可能会有问题【没问题的话可以忽略这条消息】。批量替换比较麻烦，我想暂时等几天看看，官方没有恢复的话，我准备转移图床。如果有读者很急的话，可以访问图片源文件，我将所有的图片存到了网盘，将文章和图片下到本地然后放到对应的markdown文件夹下面，然后批量替换路径即可。
->
-> 阿里网盘：https://www.aliyundrive.com/s/43jcQbstUpX
->
-> 百度网盘：https://pan.baidu.com/s/1fb-Rt7Hq7C8Zo82jLANnuQ      提取码：u4sf 
-> 
+
 
 > 1. 文章会优先发布在[Github](https://github.com/youthlql/JavaYouth)，其它平台会晚一段时间，文章纠错与更新内容只在Github。如果Github很卡，可以在去[Gitee](https://gitee.com/youthlql/JavaYouth)克隆。
 > 2. 提供两种在线阅读方式：[电子书在线阅读](https://imlql.cn/JavaYouth/#/)，[个人博客](https://imlql.cn/)浏览。
@@ -143,7 +138,7 @@
 
 
 
-## 源码【01.01更新】
+## 源码【01.27更新】
 
 
 
@@ -152,6 +147,10 @@
 [02.第2章-后置工厂处理器和Bean生命周期](docs/spring-sourcecode-v1/02.第2章-后置工厂处理器和Bean生命周期.md)
 
 [03.第3章-后置处理器和Bean生命周期](docs/spring-sourcecode-v1/03.第3章-后置处理器和Bean生命周期.md)
+
+[04.第4章-Bean初始化流程](docs/spring-sourcecode-v1/04.第4章-Bean初始化流程.md)
+
+
 
 # Netty
 
