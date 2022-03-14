@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第11章-垃圾回收相关概念。
-cover: 'https://unpkg.zhimg.com/youthlql@1.0.8/JVM/logo.png'
+cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/jvm.png'
 abbrlink: 4d401a8b
 date: 2020-11-17 12:33:24
 ---
@@ -117,7 +117,7 @@ JVM参数：
 
 2、我也查过了大对象阈值的默认值
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0001.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0001.png">
 
 我不太懂这个默认值为啥是0，我猜测可能是代表什么比例，目前也没有搜到相关的东西。这个不太重要，暂时就没有太深究，希望读者有知道的可以告知我一声。
 
@@ -185,11 +185,11 @@ Heap
 
 1、来看看字节码：实例方法局部变量表第一个变量肯定是 this
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0002.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0002.png">
 
 2、你有没有看到，局部变量表的大小是 2。但是局部变量表里只有一个索引为0的啊？那索引为1的是哪个局部变量呢？实际上索引为1的位置是buffer在占用着，执行 System.gc() 时，栈中还有 buffer 变量指向堆中的字节数组，所以没有进行GC
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0003.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0003.png">
 
 3、那么这种代码块的情况，什么时候会被GC呢？我们来看第四个方法
 
@@ -217,11 +217,11 @@ A：局部变量表长度为 2 ，这说明了出了代码块时，buffer 就出
 
 > 这点看不懂的可以看我前面的文章：虚拟机栈 --> Slot的重复利用
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0004.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0004.png">
 
 
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0005.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0005.png">
 
 
 
@@ -302,7 +302,7 @@ Heap
 
 右边的图：后期有一些对象不用了，按道理应该断开引用，但是存在一些链没有断开（图示中的Forgotten Reference Memory Leak），从而导致没有办法被回收。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0006.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0006.png">
 
 
 
@@ -446,7 +446,7 @@ Process finished with exit code -1
 2.  并发不是真正意义上的“同时进行”，只是CPU把一个时间段划分成几个时间片段（时间区间），然后在这几个时间区间之间来回切换。由于CPU处理的速度非常快，只要时间间隔处理得当，即可让用户感觉是多个应用程序同时在进行
   
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0007.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0007.png">
 
 
 
@@ -461,7 +461,7 @@ Process finished with exit code -1
 3.  适合科学计算，后台处理等弱交互场景
   
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0008.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0008.png">
 
 > **并发与并行的对比**
 
@@ -482,7 +482,7 @@ Process finished with exit code -1
     *   相较于并行的概念，单线程执行。
     *   如果内存不够，则程序暂停，启动JVM垃圾回收器进行垃圾回收（单线程）
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0009.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0009.png">
 
 
 
@@ -492,7 +492,7 @@ Process finished with exit code -1
     - 比如用户程序在继续运行，而垃圾收集程序线程运行于另一个CPU上；
 2.  典型垃圾回收器：CMS、G1
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0010.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0010.png">
 
 
 
@@ -551,7 +551,7 @@ Process finished with exit code -1
 
 1、一般的垃圾回收算法至少会划分出两个年代，年轻代和老年代。但是单纯的分代理论在垃圾回收的时候存在一个巨大的缺陷：为了找到年轻代中的存活对象，却不得不遍历整个老年代，反过来也是一样的。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0011.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0011.png">
 
 2、如果我们从年轻代开始遍历，那么可以断定N, S, P, Q都是存活对象。但是，V却不会被认为是存活对象，其占据的内存会被回收了。这就是一个惊天的大漏洞！因为U本身是老年代对象，而且有外部引用指向它，也就是说U是存活对象，而U指向了V，也就是说V也应该是存活对象才是！而这都是因为我们只遍历年轻代对象！
 
@@ -599,7 +599,7 @@ Process finished with exit code -1
 4.  这4种引用强度依次逐渐减弱。除强引用外，其他3种引用均可以在java.lang.ref包中找到它们的身影。如下图，显示了这3种引用类型对应的类，开发人员可以在应用程序中直接使用它们。
   
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0012.png" >
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0012.png" >
 
 
 
@@ -661,7 +661,7 @@ Hello,尚硅谷
 
 `StringBuffer str = new StringBuffer("hello,尚硅谷");`
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/JVM/chapter_011/0013.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_011/0013.png">
 
 
 

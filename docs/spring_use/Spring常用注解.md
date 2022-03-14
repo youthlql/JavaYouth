@@ -8,7 +8,7 @@ categories:
   - 用法
 keywords: Spriong，框架
 description: 一些常用的注解
-cover: 'https://cdn.jsdelivr.net/gh/youthlql/youthlql/img/spring.png'
+cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/spring.png'
 abbrlink: 1a003b7b
 date: 2021-10-06 00:21:58
 ---

@@ -8,7 +8,7 @@ categories:
   - 原理
 keywords: Java并发，AQS源码
 description: '万字系列长文讲解-Java并发体系-第四阶段-AQS源码解读-[1]。'
-cover: 'https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/logo_1.png'
+cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/Java_concurrency.png'
 abbrlink: 92c4503d
 date: 2020-10-26 17:59:42
 ---
@@ -410,11 +410,11 @@ Process finished with exit code 0
 
 **技术翻译：**是用来构建锁或者其它同步器组件的重量级基础框架及整个JUC体系的基石， 通过内置的FIFO队列来完成资源获取线程的排队工作，并通过一个int类变量`state`表示持有锁的状态。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0001.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0001.png">
 
 
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0011.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0011.png">
 
 AbstractOwnableSynchronizer
 AbstractQueuedLongSynchronizer
@@ -426,7 +426,7 @@ AbstractQueuedSynchronizer
 
 AQS是一个抽象的父类，可以将其理解为一个框架。基于AQS这个框架，我们可以实现多种同步器，比如下方图中的几个Java内置的同步器。同时我们也可以基于AQS框架实现我们自己的同步器以满足不同的业务场景需求。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0002.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0002.png">
 
 
 
@@ -434,7 +434,7 @@ AQS是一个抽象的父类，可以将其理解为一个框架。基于AQS这�
 
 加锁会导致阻塞：有阻塞就需要排队，实现排队必然需要有某种形式的队列来进行管理
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0003.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0003.png">
 
 1、抢到资源的线程直接使用办理业务，抢占不到资源的线程的必然涉及一种**排队等候机制**，抢占资源失败的线程继续去等待(类似办理窗口都满了，暂时没有受理窗口的顾客只能去候客区排队等候)，仍然保留获取锁的可能且获取锁流程仍在继续(候客区的顾客也在等着叫号，轮到了再去受理窗口办理业务）。
 
@@ -515,7 +515,7 @@ Node 的数据结构其实也挺简单的，就是 thread + waitStatus + pre + n
 
 ## AQS队列基本结构
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0004.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0004.png">
 
 注意排队队列，不包括head（也就是后文要说的哨兵节点）。
 
@@ -583,7 +583,7 @@ public class AQSDemo {
 
 以这样的一个实际例子说明。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0005.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0005.png">
 
 
 
@@ -765,7 +765,7 @@ public class AQSDemo {
 
 2、C在if逻辑里准备入队，进行相应设置后，变成下面这样。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0006.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0006.png">
 
 
 
@@ -831,7 +831,7 @@ public class AQSDemo {
 
 此时队列变成了下面的样子：
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0007.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0007.png">
 
 3、然后if结束之后，继续空的for循环，B线程开始了第二轮循环。
 
@@ -843,11 +843,11 @@ public class AQSDemo {
 
 2、`node.prev = t`，进入if之后，让B节点的prev指针指向t，然后`compareAndSetTail(t, node)`设置尾节点
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0008.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0008.png">
 
 3、CAS设置尾节点成功之后，执行if里的逻辑
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0009.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0009.png">
 
 
 
@@ -1197,7 +1197,7 @@ protected final void setExclusiveOwnerThread(Thread thread) {
 
 
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0010.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Fourth_stage/0010.png">
 
 
 

@@ -9,7 +9,7 @@ categories:
   - 原理
 keywords: Java并发，原理，源码
 description: '万字系列长文讲解-Java并发体系-第二阶段,从C++和硬件方面讲解。'
-cover: 'https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/logo_1.png'
+cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/Java_concurrency.png'
 abbrlink: 230c5bb3
 date: 2020-10-06 22:09:58
 ---
@@ -291,7 +291,7 @@ d = e - f ;
 
   由于处理器使用缓存和读写缓存冲区，这使得加载(load)和存储(store)操作看上去可能是在乱序执行，因为三级缓存的存在，导致内存与缓存的数据同步存在时间差。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0001.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0001.png">
 
 
 
@@ -343,7 +343,7 @@ int c = a + b;
 
 冯诺依曼，提出计算机由五大组成部分，输入设备，输出设备存储器，控制器，运算器。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0002.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0002.png">
 
 输入设备：鼠标，键盘等等
 
@@ -367,7 +367,7 @@ int c = a + b;
 
 CPU的运算速度和内存的访问速度相差比较大。这就导致CPU每次操作内存都要耗费很多等待时间。内 存的读写速度成为了计算机运行的瓶颈。于是就有了在CPU和主内存之间增加缓存的设计。靠近CPU 的缓存称为L1，然后依次是 L2，L3和主内存，CPU缓存模型如图下图所示。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0003.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0003.png">
 
 CPU Cache分成了三个级别: L1， L2， L3。级别越小越接近CPU，速度也更快，同时也代表着容量越小。速度越快的价格越贵。
 
@@ -377,7 +377,7 @@ CPU Cache分成了三个级别: L1， L2， L3。级别越小越接近CPU，速�
 
 3、L3 Cache是三级缓存中大的一级，例如12MB，同时也是缓存中慢的一级，在同一个CPU插槽 之间的核共享一个L3 Cache。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0004.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0004.png">
 
 上面的图中有一个Latency指标。比如Memory这个指标为59.4ns，表示CPU在操作内存的时候有59.4ns的延迟，一级缓存最快只有1.2ns。
 
@@ -409,7 +409,7 @@ Cache的出现是为了解决CPU直接访问内存效率低下问题的。
 
 每一个线程有自己的工作内存，工作内存只存储该线程对共享变量的副本。线程对变量的所有的操 作(读，取)都必须在工作内存中完成，而不能直接读写主内存中的变量，不同线程之间也不能直接 访问对方工作内存中的变量。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0005.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0005.png">
 
 Java的线程不能直接在主内存中操作共享变量。而是首先将主内存中的共享变量赋值到自己的工作内存中，再进行操作，操作完成之后，刷回主内存。
 
@@ -424,7 +424,7 @@ Java内存模型是一套在多线程读写共享数据时，对共享数据的�
 
 JMM内存模型与CPU硬件内存架构的关系：
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0006.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0006.png">
 
 工作内存：可能对应CPU寄存器，也可能对应CPU缓存，也可能对应内存。
 
@@ -434,9 +434,9 @@ JMM内存模型与CPU硬件内存架构的关系：
 
 ## 再谈可见性
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0007.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0007.png">
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0008.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0008.png">
 
 1、图中所示是 个双核 CPU 系统架构 ，每个核有自己的控制器和运算器，其中控制器包含一组寄存器和操作控制器，运算器执行算术逻辅运算。每个核都有自己的1级缓存，在有些架构里面还有1个所有 CPU 共享的2级缓存。 那么 Java 内存模型里面的工作内存，就对应这里的 Ll 或者 L2 存或者 CPU 寄存器。
 
@@ -452,7 +452,7 @@ JMM内存模型与CPU硬件内存架构的关系：
 
 为了保证数据交互时数据的正确性，Java内存模型中定义了8种操作来完成这个交互过程，这8种操作本身都是原子性的。虚拟机实现时必须保证下面 提及的每一种操作都是原子的、不可再分的。
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0009.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0009.png">
 
 > (1)lock:作用于主内存的变量，它把一个变量标识为一条线程独占的状态。
 >
@@ -478,7 +478,7 @@ JMM内存模型与CPU硬件内存架构的关系：
 
 如果没有synchronized，那就是下面这样的
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0010.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0010.png">
 
 
 
@@ -589,7 +589,7 @@ volatile不保证原子性，只保证可见性和禁止指令重排
 
 ## CPU术语介绍
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0011.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0011.png">
 
 
 
@@ -717,7 +717,7 @@ public class VolatileExample {
 
 **1、下面是保守策略下，volatile写插入内存屏障后生成的指令序列示意图**
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0012.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0012.png">
 
 > 图中的StoreStore屏障可以保证在volatile写之前，其前面的所有普通写操作已经对任 意处理器可见了。这是因为StoreStore屏障将保障上面所有的普通写在volatile写之前刷新到主内存。这里比较有意思的是，volatile写后面的StoreLoad屏障。此屏障的作用是避免volatile写与 后面可能有的volatile读/写操作重排序。因为编译器常常无法准确判断在一个volatile写的后面 是否需要插入一个StoreLoad屏障（比如，一个volatile写之后方法立即return）。为了保证能正确 实现volatile的内存语义，JMM在采取了保守策略：在每个volatile写的后面，或者在每个volatile 读的前面插入一个StoreLoad屏障。从整体执行效率的角度考虑，JMM最终选择了在每个volatile写的后面插入一个StoreLoad屏障。因为volatile写-读内存语义的常见使用模式是：一个 写线程写volatile变量，多个读线程读同一个volatile变量。当读线程的数量大大超过写线程时， 选择在volatile写之后插入StoreLoad屏障将带来可观的执行效率的提升。从这里可以看到JMM在实现上的一个特点：首先确保正确性，然后再去追求执行效率
 
@@ -725,7 +725,7 @@ public class VolatileExample {
 
 **2、下面是在保守策略下，volatile读插入内存屏障后生成的指令序列示意图**
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0013.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0013.png">
 
 > 图中的LoadLoad屏障用来禁止处理器把上面的volatile读与下面的普通读重排序。 LoadStore屏障用来禁止处理器把上面的volatile读与下面的普通写重排序。 上述volatile写和volatile读的内存屏障插入策略非常保守。在实际执行时，只要不改变volatile写-读的内存语义，编译器可以根据具体情况省略不必要的屏障。
 
@@ -752,7 +752,7 @@ class VolatileBarrierExample {
 
 针对readAndWrite()方法，编译器在生成字节码时可以做如下的优化
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0014.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0014.png">
 
 ​	注意，最后的StoreLoad屏障不能省略。因为第二个volatile写之后，方法立即return。此时编译器可能无法准确断定后面是否会有volatile读或写，为了安全起见，编译器通常会在这里插入一个StoreLoad屏障。 
 
@@ -766,7 +766,7 @@ class VolatileBarrierExample {
 
 X86处理器仅会对写-读操作做重排序。X86不会对读-读、读-写和写-写操作 做重排序，因此在X86处理器中会省略掉这3种操作类型对应的内存屏障。在X86中，JMM仅需在volatile写后面插入一个StoreLoad屏障即可正确实现volatile写-读的内存语义。这意味着在X86处理器中，volatile写的开销比volatile读的开销会大很多（因为执行StoreLoad屏障开销会比较大）。 
 
-<img src="https://unpkg.zhimg.com/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0015.png">
+<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Second_stage/0015.png">
 
 
 
