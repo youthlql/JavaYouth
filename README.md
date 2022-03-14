@@ -3,9 +3,13 @@
 
 
 > 1. 文章会优先发布在[Github](https://github.com/youthlql/JavaYouth)，其它平台会晚一段时间，文章纠错与更新内容只在Github。如果Github很卡，可以在去[Gitee](https://gitee.com/youthlql/JavaYouth)克隆。
-> 2. 提供两种在线阅读方式：[个人博客【推荐】](https://imlql.cn/)，[电子书在线阅读](https://youthlql.gitee.io/javayouth)浏览。
+> 2. 提供在线阅读方式：[个人博客](https://imlql.cn/)。
 > 3. 转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境。
 > 4. 如果你要提交 issue 或者 pr 的话建议到 [Github](https://github.com/youthlql/JavaYouth) 提交。笔者会持续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**，你的**Star**是我创作的动力。
+> 5. 关于图片部分的说明：
+>    1. 因为更换了COS图床，文章图片比较多1000多张，原先的电子书不支持图片懒加载，为减少CDN流量现已关闭。不过仍然开放了[个人博客](https://imlql.cn/)的在线阅读
+>    2. 图床开启了防盗链，只能在[个人博客](https://imlql.cn/)看到图片。本地，github，gitee下均只能看到文字，图片显示不出来。
+>    3. 过几天就会提供所有文章的本地版本（typora可直接打开的）。以后会同时提供[个人博客](https://imlql.cn/)在线和本地两个阅读方式。
 
 
 
