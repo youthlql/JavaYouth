@@ -23,7 +23,7 @@ date: 2020-11-15 19:48:42
 
 
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0001.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0001.png">
 
 ### 执行引擎概述
 
@@ -34,7 +34,7 @@ date: 2020-11-15 19:48:42
 3.  JVM的主要任务是负责**装载字节码到其内部**，但字节码并不能够直接运行在操作系统之上，因为字节码指令并非等价于本地机器指令，它内部包含的仅仅只是一些能够被JVM所识别的字节码指令、符号表，以及其他辅助信息。
 4.  那么，如果想要让一个Java程序运行起来，执行引擎（Execution Engine）的任务就是**将字节码指令解释/编译为对应平台上的本地机器指令才可以**。简单来说，JVM中的执行引擎充当了将高级语言翻译为机器语言的译者。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0002.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0002.png">
 
 1、前端编译：从Java程序员-字节码文件的这个过程叫前端编译
 
@@ -51,7 +51,7 @@ date: 2020-11-15 19:48:42
 3.  当然方法在执行的过程中，执行引擎有可能会通过存储在局部变量表中的对象引用准确定位到存储在Java堆区中的对象实例信息，以及通过对象头中的元数据指针定位到目标对象的类型信息。
 4.  从外观上来看，所有的Java虚拟机的执行引擎输入、处理、输出都是一致的：输入的是字节码二进制流，处理过程是字节码解析执行、即时编译的等效过程，输出的是执行过程。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0003.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0003.png">
 
 
 
@@ -71,18 +71,18 @@ Java代码编译和执行过程
     
   
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0004.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0004.png">
     
 
 3. javac编译器（前端编译器）流程图如下所示：
 
-    <img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0005.png">
+    <img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0005.png">
 
     
 
 4. Java字节码的执行是由JVM执行引擎来完成，流程图如下所示
 
-    <img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0006.png">
+    <img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0006.png">
 
     
 
@@ -105,7 +105,7 @@ Java代码编译和执行过程
 
 **用图总结一下**
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0007.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0007.png">
 
 机器码 指令 汇编语言
 -------------
@@ -164,7 +164,7 @@ Java代码编译和执行过程
 
     
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0008.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0008.png">
 
 
 
@@ -193,7 +193,7 @@ Java代码编译和执行过程
 2.  汇编过程：实际上指把汇编语言代码翻译成目标机器指令的过程。
   
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0009.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0009.png">
 
 
 
@@ -211,7 +211,7 @@ Java代码编译和执行过程
 3.  当一条字节码指令被解释执行完成后，接着再根据PC寄存器中记录的下一条需要被执行的字节码指令执行解释操作。
   
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0010.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0010.png">
 
 
 
@@ -288,7 +288,7 @@ Java代码编译和执行过程
 2.  在生产环境发布过程中，以分批的方式进行发布，根据机器数量划分成多个批次，每个批次的机器数至多占到整个集群的1/8。曾经有这样的故障案例：某程序员在发布平台进行分批发布，在输入发布总批数时，误填写成分为两批发布。如果是热机状态，在正常情况下一半的机器可以勉强承载流量，但由于刚启动的JVM均是解释执行，还没有进行热点代码统计和JIT动态编译，导致机器启动之后，当前1/2发布成功的服务器马上全部宕机，此故障说明了JIT的存在。—**阿里团队**
   
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0011.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0011.png">
 
 
 
@@ -317,7 +317,7 @@ public class JITTest {
 
 通过 JVisualVM 查看 JIT 编译器执行的编译次数
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0012.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0012.png">
 
 
 
@@ -369,7 +369,7 @@ public class JITTest {
         *   如果已超过阈值，那么将会向即时编译器提交一个该方法的代码编译请求。
         *   如果未超过阈值，则使用解释器对字节码文件解释执行
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0013.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0013.png">
 
 
 
@@ -387,7 +387,7 @@ public class JITTest {
 
 它的作用是统计一个方法中循环体代码执行的次数，在字节码中遇到控制流向后跳转的指令称为“回边”（Back Edge）。显然，建立回边计数器统计的目的就是为了触发OSR编译。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0014.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0014.png">
 
 
 
@@ -401,7 +401,7 @@ public class JITTest {
 
 
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/JVM/chapter_008/0015.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_008/0015.png">
 
 
 

@@ -31,13 +31,13 @@ date: 2020-10-05 22:40:58
 概念：进程可进一步细化为线程，是一个程序内部的一条执行路径。
 说明：线程作为CPU调度和执行的单位，每个线程拥独立的运行栈和程序计数器(pc)，线程切换的开销小。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0001.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0001.png">
 
 
 
 补充：
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0002.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0002.png">
 
 进程可以细化为多个线程。
 每个线程，拥有自己独立的：栈、程序计数器
@@ -281,7 +281,7 @@ private void init(ThreadGroup g, Runnable target, String name,
 1、多线程的设计之中，使用了代理设计模式的结构，用户自定义的线程主体只是负责项目核心功能的实现，而所有的辅助实现全部交由Thread类来处理。
 2、在进行Thread启动多线程的时候调用的是start()方法，而后找到的是run()方法，但通过Thread类的构造方法传递了一个Runnable接口对象的时候，那么该接口对象将被Thread类中的target属性所保存，在start()方法执行的时候会调用Thread类中的run()方法。而这个run()方法去调用实现了Runnable接口的那个类所重写过run()方法，进而执行相应的逻辑。多线程开发的本质实质上是在于多个线程可以进行同一资源的抢占，那么Thread主要描述的是线程，而资源的描述是通过Runnable完成的。如下图所示：
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0003.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0003.png">
 
 
 
@@ -644,7 +644,7 @@ public void run() {
 
 1、如果直接调用run()方法，相当于就是简单的调用一个普通方法。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0004.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0004.png">
 
 2、run()的调用是在start0()这个Native C++方法里调用的
 
@@ -654,11 +654,11 @@ public void run() {
 
 Java 线程在运行的生命周期中的指定时刻只可能处于下面 6 种不同状态的其中一个状态，这几个状态在Java源码中用枚举来表示。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0005.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0005.png">
 
 线程在生命周期中并不是固定处于某一个状态而是随着代码的执行在不同状态之间切换。Java 线程状态变迁如下图所示。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0006.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0006.png">
 
 >  图中 wait到 runnable状态的转换中，`join`实际上是`Thread`类的方法，但这里写成了`Object`。
 
@@ -699,7 +699,7 @@ public static void main(String[] args) {
 
 2、当JVM启动后，实际有多个线程，但是至少有一个非守护线程（比如main线程）。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0007.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0007.png">
 
 - Finalizer：GC守护线程
 
@@ -1574,7 +1574,7 @@ volatile自己虽然不能保证原子性，但是和CAS结合起来就可以保
 
 
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0009.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0009.png">
 
 
 
@@ -1782,7 +1782,7 @@ public Unsafe getUnsafe() throws IllegalAccessException {
 
 Unsafe的功能如下图：
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0008.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/First_stage/0008.png">
 
 ## CAS相关
 

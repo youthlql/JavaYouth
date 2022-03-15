@@ -1869,7 +1869,7 @@ public class ForkJoinRecursiveAction {
 
 ForkJoinTask就是ForkJoinPool里面的每一个任务。他主要有两个子类：`RecursiveAction`和`RecursiveTask`。然后通过fork()方法去分配任务执行任务，通过join()方法汇总任务结果。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Third_stage/0001.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/Third_stage/0001.png">
 
 ## 小总结
 

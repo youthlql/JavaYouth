@@ -47,7 +47,7 @@ date: 2021-04-08 15:21:58
 3. 而在用户进程这边，整 个进程会被阻塞。当**内核**一直等到数据准备好了，它就会将数据从**内核**中拷贝到用户内存，然后**内核**返回果，用户进程才解除 block的状态，重新运行起来。
 4. **所以，blocking IO的特点就是在IO执行的两个阶段都被block了。**
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/computer_network/summary/0003.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/computer_network/summary/0003.png">
 
 
 
@@ -58,7 +58,7 @@ date: 2021-04-08 15:21:58
 3. 虽然用户线程每次发起IO请求后可以立即返回，但是为了等到数据，仍需要不断地轮询、重复请求，消耗了大量的CPU的资源。一般很少直接使用这种模型，而是在其他IO模型中使用非阻塞IO这一特性。
 4. **所以，用户进程第一个阶段不是阻塞的,需要不断的主动询问内核数据好了没有；第二个阶段依然总是阻塞的。**
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/computer_network/summary/0004.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/computer_network/summary/0004.png">
 
 
 
@@ -76,7 +76,7 @@ date: 2021-04-08 15:21:58
 2. 它的基本原理就是select /epoll这个函数会不断的轮询所负责的所有socket，当某个socket有数据到达了，就通知用户进程，正式发起read请求。
 3. 从流程上来看，使用select函数进行IO请求和同步阻塞模型没有太大的区别，甚至还多了添加监视socket，以及调用select函数的额外操作，效率更差。但是，使用select以后最大的优势是用户可以在一个线程内同时处理多个socket的IO请求。用户可以注册多个socket，然后不断地调用select读取被激活的socket(也就是数据准备好了的socket)，即可达到在同一个线程内同时处理多个IO请求的目的。而在同步阻塞模型中，必须通过多线程的方式才能达到这个目的。
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/computer_network/summary/0005.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/computer_network/summary/0005.png">
 
 **select函数**
 
@@ -90,7 +90,7 @@ date: 2021-04-08 15:21:58
 4. 通过Reactor的方式，可以将用户线程轮询IO操作状态的工作统一交给handle_events事件循环进行处理。用户线程注册事件处理器之后可以继续执行做其他的工作（异步），而Reactor线程负责调用内核的select函数检查socket状态。当有socket被激活时(就是数据准备好的时候)，则通知相应的用户线程（或执行用户线程的回调函数），执行handle_event进行数据读取、处理的工作。
 5. 由于select函数是阻塞的，因此多路IO复用模型也被称为异步阻塞IO模型。注意，这里的所说的阻塞是指select函数执行时线程被阻塞，而不是指socket。(一般在使用IO多路复用模型时，socket都是设置为NONBLOCK的，不过这并不会产生影响，因为用户发起IO请求时，数据已经到达了，用户线程一定不会被阻塞。)
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0001.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0001.png">
 
 
 
@@ -106,7 +106,7 @@ date: 2021-04-08 15:21:58
 3. 而另一方面，从**内核**的角度，当它受到一个异步读之后，首先它会立刻返回，所以不会对用户进程产生任何阻塞。然后，内核会等待数据准备完成，然后将数据拷贝到用户内存，当这一切都 完成之后，**内核**会给用户进程发送一个信号，告诉它read操作完成了，用户线程直接使用即可。 在这整个过程中，进程完全没有被阻塞。
 4. 异步IO模型使用了Proactor设计模式实现了这一机制。**(具体怎么搞得，看上面的文章链接)**
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/computer_network/summary/0007.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/computer_network/summary/0007.png">
 
 
 
@@ -196,7 +196,7 @@ date: 2021-04-08 15:21:58
 
 1. 来看一个标准设备（不是真实存在的，相当于一个逻辑上抽象的东西），通过它来帮助我们更好地理解设备交互的机制。可以看到一个包含两部分重要组件的设备。第一部分是向系统其他部分展现的硬件接口（interface）。同软件一样，硬件也需要一些接口，让系统软件来控制它的操作。因此，所有设备都有自己的特定接口以及典型交互的协议。
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0002.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0002.png"/>
 
 2. 第2部分是它的内部结构（internal structure）。这部分包含设备相关的特定实现，负责具体实现设备展示给系统的抽象接口。
 
@@ -231,11 +231,11 @@ While (STATUS == BUSY);//wait until device is done with your request
 
 1. 没有中断时：进程1在CPU上运行一段时间（对应CPU那一行上重复的1），然后发出一个读取数据的I/O请求给磁盘。如果没有中断，那么操作系统就会简单自旋，不断轮询设备状态，直到设备完成I/O操作（对应其中的p）。当设备完成请求的操作后，进程1又可以继续运行。
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0003.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0003.png"/>
 
 2. 有了中断后：中断允许计算与I/O重叠（overlap），这是提高CPU利用率的关键。我们利用中断并允许重叠，操作系统就可以在等待磁盘操作时做其他事情。
 
-   <img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0004.png"/>
+   <img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0004.png"/>
 
    - 在这个例子中，在磁盘处理进程1的请求时，操作系统在CPU上运行进程2。磁盘处理完成后，触发一个中断，然后操作系统唤醒进程1继续运行。这样，在这段时间，无论CPU还是磁盘都可以有效地利用。
 
@@ -243,7 +243,7 @@ While (STATUS == BUSY);//wait until device is done with your request
 
 中断仍旧存在的缺点：
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0005.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0005.png"/>
 
 IO过程简述：
 
@@ -268,7 +268,7 @@ IO过程简述：
 >
 > 标准协议还有一点需要我们注意。具体来说，如果使用编程的I/O将一大块数据传给设备，CPU又会因为琐碎的任务而变得负载很重，浪费了时间和算力，本来更好是用于运行其他进程。下面的时间线展示了这个问题：
 >
-> <img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0006.png"/>
+> <img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0006.png"/>
 >
 > 进程1在运行过程中需要向磁盘写一些数据，所以它开始进行I/O操作，将数据从内存拷贝到磁盘（其中标示c的过程）。**拷贝结束后，磁盘上的I/O操作开始执行，此时CPU才可以处理其他请求。**
 
@@ -278,13 +278,13 @@ IO过程简述：
 >
 > DMA工作过程如下。为了能够将数据传送给设备，操作系统会通过编程告诉DMA引擎数据在内存的位置，要拷贝的大小以及要拷贝到哪个设备。在此之后，操作系统就可以处理其他请求了。当DMA的任务完成后，DMA控制器会抛出一个中断来告诉操作系统自己已经完成数据传输。修改后的时间线如下：
 >
-> <img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0007.png"/>
+> <img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0007.png"/>
 >
 > 从时间线中可以看到，数据的拷贝工作都是由DMA控制器来完成的。因为CPU在此时是空闲的，所以操作系统可以让它做一些其他事情，比如此处调度进程2到CPU来运行。因此进程2在进程1再次运行之前可以使用更多的CPU。
 
 为了更好理解，看图：
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0008.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0008.png"/>
 
 过程：
 
@@ -302,7 +302,7 @@ IO过程简述：
 
 场景：将磁盘上的文件读取出来，然后通过网络协议发送给客户端。
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0009.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0009.png"/>
 
 1. 很明显发生了4次拷贝
 
@@ -326,7 +326,7 @@ IO过程简述：
 
 `read()` 系统调用的过程中会把内核缓冲区的数据拷贝到用户的缓冲区里，为了减少这一步开销，我们可以用 `mmap()` 替换 `read()` 系统调用函数。`mmap()` 系统调用函数会直接把内核缓冲区里的数据映射到用户空间，这样，操作系统内核与用户空间共享缓冲区，就不需要再进行任何的数据拷贝操作。
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0010.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0010.png"/>
 
 总的来说mmap减少了一次数据拷贝，总共4次上下文切换，3次数据拷贝
 
@@ -336,7 +336,7 @@ IO过程简述：
 
 `Linux2.1` 版本提供了 `sendFile` 函数，其基本原理如下：数据根本不经过用户态，直接从内核缓冲区进入到 `SocketBuffer`
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0011.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0011.png"/>
 
 总的来说有2次上下文切换，3次数据拷贝。
 
@@ -344,7 +344,7 @@ IO过程简述：
 
 `Linux在2.4` 版本中，做了一些修改，避免了从内核缓冲区拷贝到 `Socketbuffer` 的操作，直接拷贝到协议栈，从而再一次减少了数据拷贝
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/os/IO_and_Zero-copy/0012.png" />
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/os/IO_and_Zero-copy/0012.png" />
 
 
 

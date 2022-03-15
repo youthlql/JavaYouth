@@ -563,7 +563,7 @@ public int getUnarrivedParties()
 
   根据上面的代码，我们可以画出下面这个很简单的图：
 
- <img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Third_stage/0002.png">
+ <img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/Third_stage/0002.png">
 
   这棵树上有 7 个 phaser 实例，每个 phaser 实例在构造的时候，都指定了 parties 为 5，但是，对于每个拥有子节点的节点来说，每个子节点都是它的一个 party，我们可以通过 phaser.getRegisteredParties() 得到每个节点的 parties 数量：
 
@@ -952,7 +952,7 @@ public class ThreadPoolDemo {
 
 ## 线程池的底层工作流程
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Third_stage/0003.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/Third_stage/0003.png">
 
 1、创建线程池后，等待请求任务
 
@@ -1646,7 +1646,7 @@ public class ExecutorCompletionService<V> implements CompletionService<V> {
 
 **执行流程：**
 
-<img src="https://img.imlql.cn/youthlql@1.0.8/Java_concurrency/Source_code/Third_stage/0004.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/Java_concurrency/Source_code/Third_stage/0004.png">
 
 
 

@@ -29,7 +29,7 @@ date: 2021-04-15 14:21:58
 
 Netty is an asynchronous event-driven network application framework for rapid development of maintainable high performance protocol servers & clients.
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0001.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0001.png"/>
 
 ## Netty 的优点
 
@@ -80,7 +80,7 @@ Netty is an asynchronous event-driven network application framework for rapid de
 1. 当并发数很大，就会创建大量的线程，占用很大系统资源
 2. 连接创建后，如果当前线程暂时没有数据可读，该线程会阻塞在 Handler对象中的`read` 操作，导致上面的处理线程资源浪费
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0002.png" />
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0002.png" />
 
 ## Reactor 模式
 
@@ -97,7 +97,7 @@ Netty is an asynchronous event-driven network application framework for rapid de
 1. 基于线程池复用线程资源：不必再为每个连接创建线程，将连接完成后的业务处理任务分配给线程进行处理，一个线程可以处理多个连接的业务。（解决了当并发数很大时，会创建大量线程，占用很大系统资源）
 2. 基于 `I/O` 复用模型：多个客户端进行连接，先把连接请求给`ServiceHandler`。多个连接共用一个阻塞对象`ServiceHandler`。假设，当C1连接没有数据要处理时，C1客户端只需要阻塞于`ServiceHandler`，C1之前的处理线程便可以处理其他有数据的连接，不会造成线程资源的浪费。当C1连接再次有数据时，`ServiceHandler`根据线程池的空闲状态，将请求分发给空闲的线程来处理C1连接的任务。（解决了线程资源浪费的那个问题）
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0003.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0003.png"/>
 
 
 
@@ -105,7 +105,7 @@ Netty is an asynchronous event-driven network application framework for rapid de
 
 ### I/O 复用结合线程池，就是 Reactor 模式基本设计思想，如图
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0004.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0004.png"/>
 
 对上图说明：
 
@@ -132,7 +132,7 @@ Netty is an asynchronous event-driven network application framework for rapid de
 
 原理图，并使用 `NIO` 群聊系统验证
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0005.png" />
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0005.png" />
 
 ### 方案说明
 
@@ -155,7 +155,7 @@ Netty is an asynchronous event-driven network application framework for rapid de
 
 ### 方案说明
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0006.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0006.png"/>
 
 
 
@@ -178,11 +178,11 @@ Netty is an asynchronous event-driven network application framework for rapid de
 
 针对单 `Reactor` 多线程模型中，`Reactor` 在单线程中运行，高并发场景下容易成为性能瓶颈，可以让 `Reactor` 在多线程中运行
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0007.png" />
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0007.png" />
 
 
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0008.jpg" />
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0008.jpg" />
 
 > SubReactor是可以有多个的，如果只有一个SubReactor的话那和`单 Reactor 多线程`就没什么区别了。
 
@@ -197,7 +197,7 @@ Netty is an asynchronous event-driven network application framework for rapid de
 
 ###  Scalable IO in Java 对 Multiple Reactors 的原理图解
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0009.jpg"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0009.jpg"/>
 
 ### 方案优缺点说明
 
@@ -230,7 +230,7 @@ Netty is an asynchronous event-driven network application framework for rapid de
 
 `Netty` 主要基于主从 `Reactors` 多线程模型（如图）做了一定的改进，其中主从 `Reactor` 多线程模型有多个 `Reactor`
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0010.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0010.png"/>
 
 **对上图说明**
 
@@ -240,7 +240,7 @@ Netty is an asynchronous event-driven network application framework for rapid de
 
 ### 工作原理示意图2 - 进阶版
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0011.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0011.png"/>
 
 
 
@@ -248,7 +248,7 @@ Netty is an asynchronous event-driven network application framework for rapid de
 
 ### 工作原理示意图3 - 详细版
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0012.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0012.png"/>
 
 
 
@@ -669,9 +669,9 @@ public class NettyServerHandler extends ChannelInboundHandlerAdapter {
 
 下面第一张图就是管道，中间会经过多个handler
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0013.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0013.png"/>
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0014.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0014.png"/>
 
 说明：
 
@@ -917,11 +917,11 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 2. `ChannelHandler` 本身并没有提供很多方法，因为这个接口有许多的方法需要实现，方便使用期间，可以继承它的子类
 3. `ChannelHandler` 及其实现类一览图（后）
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0015.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0015.png"/>
 
 4. 我们经常需要自定义一个 `Handler` 类去继承 `ChannelInboundHandlerAdapter`，然后通过重写相应方法实现业务逻辑，我们接下来看看一般都需要重写哪些方法
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0016.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0016.png"/>
 
 ## Pipeline 和 ChannelPipeline
 
@@ -931,7 +931,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 2. `ChannelPipeline` 实现了一种高级形式的拦截过滤器模式，使用户可以完全控制事件的处理方式，以及 `Channel` 中各个的 `ChannelHandler` 如何相互交互
 3. 在 `Netty` 中每个 `Channel` 都有且仅有一个 `ChannelPipeline` 与之对应，它们的组成关系如下
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0017.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0017.png"/>
 
 4. 常用方法
    `ChannelPipeline addFirst(ChannelHandler... handlers)`，把一个业务处理类（`handler`）添加到链中的第一个位置`ChannelPipeline addLast(ChannelHandler... handlers)`，把一个业务处理类（`handler`）添加到链中的最后一个位置
@@ -940,7 +940,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 
 从head看一下debug
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0018.jpg"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0018.jpg"/>
 
 - `TestServerInitializer`和`HttpServerCodec`这些东西本身也是`handler`
 - 一般来说事件从客户端往服务器走我们称为出站，反之则是入站。
@@ -950,7 +950,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 1. 保存 `Channel` 相关的所有上下文信息，同时关联一个 `ChannelHandler` 对象
 2. 即 `ChannelHandlerContext` 中包含一个具体的事件处理器 `ChannelHandler`，同时 `ChannelHandlerContext` 中也绑定了对应的 `pipeline` 和 `Channel` 的信息，方便对 `ChannelHandler` 进行调用。
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0019.jpg"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0019.jpg"/>
 
 3. 常用方法
 
@@ -959,14 +959,14 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 - `ChannelFuture writeAndFlush(Object msg)`，将数据写到 
 - `ChannelPipeline` 中当前 `ChannelHandler` 的下一个 `ChannelHandler` 开始处理（出站）
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0020.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0020.png"/>
 
 ## ChannelOption
 
 1. `Netty` 在创建 `Channel` 实例后，一般都需要设置 `ChannelOption` 参数。
 2. `ChannelOption` 参数如下：
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0021.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0021.png"/>
 
 ## EventLoopGroup 和其实现类 NioEventLoopGroup
 
@@ -974,7 +974,7 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 2. `EventLoopGroup` 提供 `next` 接口，可以从组里面按照一定规则获取其中一个 `EventLoop` 来处理任务。在 `Netty` 服务器端编程中，我们一般都需要提供两个 `EventLoopGroup`，例如：`BossEventLoopGroup` 和 `WorkerEventLoopGroup`。
 3. 通常一个服务端口即一个 `ServerSocketChannel` 对应一个 `Selector` 和一个 `EventLoop` 线程。`BossEventLoop` 负责接收客户端的连接并将 `SocketChannel` 交给 `WorkerEventLoopGroup` 来进行 `IO` 处理，如下图所示
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0022.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0022.png"/>
 
 4. 常用方法
    `public NioEventLoopGroup()`，构造方法
@@ -985,11 +985,11 @@ public class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObjec
 1. `Netty` 提供一个专门用来操作缓冲区（即 `Netty` 的数据容器）的工具类
 2. 常用方法如下所示
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0023.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0023.png"/>
 
 3. 举例说明 `Unpooled` 获取 `Netty` 的数据容器 `ByteBuf` 的基本使用
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0024.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0024.png"/>
 
 案例 1
 
@@ -1096,7 +1096,7 @@ public class NettyByteBuf02 {
 
    
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0025.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0025.png"/>
 
 代码如下：
 
@@ -1523,7 +1523,7 @@ public class MyServerHandler extends ChannelInboundHandlerAdapter {
 4. 客户端浏览器和服务器端会相互感知，比如服务器关闭了，浏览器会感知，同样浏览器关闭了，服务器会感知
 5. 运行界面
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0026.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0026.png"/>
 
 
 
@@ -1724,7 +1724,7 @@ public class MyTextWebSocketFrameHandler extends SimpleChannelInboundHandler<Tex
 
 可以看到并不是发一次数据，连接就关闭了，而是可以继续发送。
 
-<img src="https://img.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_002/0027.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_002/0027.png"/>
 
 
 
