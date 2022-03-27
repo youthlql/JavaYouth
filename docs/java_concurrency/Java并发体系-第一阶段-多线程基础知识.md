@@ -9,7 +9,7 @@ categories:
   - 原理
 keywords: Java并发，原理，源码
 description: 万字系列长文讲解Java并发-第一阶段-多线程基础知识。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/Java_concurrency.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/Java_concurrency.png'
 abbrlink: efc79183
 date: 2020-10-05 22:40:58
 ---

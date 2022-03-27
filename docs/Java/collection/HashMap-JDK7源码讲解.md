@@ -8,7 +8,7 @@ categories:
   - HashMap
 keywords: Java集合，HashMap。
 description: HashMap-JDK7源码讲解。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/java.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/java.png'
 abbrlink: f1f58db2
 date: 2020-11-01 10:21:58
 ---

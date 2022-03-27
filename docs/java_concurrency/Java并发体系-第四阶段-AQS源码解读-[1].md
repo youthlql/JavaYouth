@@ -8,7 +8,7 @@ categories:
   - 原理
 keywords: Java并发，AQS源码
 description: '万字系列长文讲解-Java并发体系-第四阶段-AQS源码解读-[1]。'
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/Java_concurrency.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/Java_concurrency.png'
 abbrlink: 92c4503d
 date: 2020-10-26 17:59:42
 ---

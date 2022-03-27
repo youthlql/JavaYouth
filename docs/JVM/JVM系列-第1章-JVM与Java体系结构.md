@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第1章-JVM与Java体系结构。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/jvm.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/jvm.png'
 abbrlink: 8c954c6
 date: 2020-11-02 11:51:56
 ---

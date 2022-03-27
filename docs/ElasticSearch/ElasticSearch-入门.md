@@ -9,7 +9,7 @@ categories:
   - 用法
 keywords: ElasticSearch,全文检索
 description: ElasticSearch-入门篇，适合做入门，或者知识回顾。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/es.jpg'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/es.jpg'
 abbrlink: 7f60dde9
 date: 2020-02-03 13:11:45
 ---

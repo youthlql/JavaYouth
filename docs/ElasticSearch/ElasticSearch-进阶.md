@@ -9,7 +9,7 @@ categories:
   - 用法
 keywords: ElasticSearch,全文检索
 description: ElasticSearch-进阶篇，ElasticSearch的一些实战用法，集成SpringBoot。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/es.jpg'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/es.jpg'
 abbrlink: 50e81c79
 date: 2020-02-08 18:06:23
 ---

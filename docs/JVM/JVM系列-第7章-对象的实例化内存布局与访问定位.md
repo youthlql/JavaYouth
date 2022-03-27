@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第7章-对象的实例化内存布局与访问定位。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/jvm.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/jvm.png'
 abbrlink: debff71a
 date: 2020-11-14 19:38:42
 ---

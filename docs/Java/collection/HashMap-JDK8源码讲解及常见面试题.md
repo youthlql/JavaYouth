@@ -8,7 +8,7 @@ categories:
   - HashMap
 keywords: Java集合，HashMap。
 description: HashMap-JDK8源码讲解及常见面试题。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/java.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/java.png'
 abbrlink: cbc5672a
 date: 2020-11-01 10:22:05
 ---

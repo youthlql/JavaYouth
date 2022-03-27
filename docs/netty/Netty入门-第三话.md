@@ -7,7 +7,7 @@ categories:
   - 入门
 keywords: Netty
 description: 对前面两话一些迷惑的点进行细说，讲解handler调用机制，TCP粘包，以及用netty写一个十分简单的RPC。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/netty_logo.jpg'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/netty_logo.jpg'
 abbrlink: 429acc6d
 date: 2021-04-21 17:38:58
 ---

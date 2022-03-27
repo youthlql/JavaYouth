@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第3章-运行时数据区。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/jvm.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/jvm.png'
 abbrlink: a7ad3cab
 date: 2020-11-09 15:38:42
 ---

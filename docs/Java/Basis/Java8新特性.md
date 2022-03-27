@@ -9,7 +9,7 @@ categories:
   - 新特性
 keywords: Java8，新特性，JDK8
 description: 详解JDK8出现的新特性。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/java.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/java.png'
 abbrlink: de3879ae
 date: 2020-10-19 22:15:58
 ---

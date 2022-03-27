@@ -9,7 +9,7 @@ categories:
   - 操作系统
 keywords: 操作系统，IO，零拷贝
 description: 基本面试会问到的IO进行了详解，同时本篇文章也对面试以及平时工作中会看到的零拷贝进行了充分的解析。万字长文系列，读到就是赚到。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/os_logo.jpg'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/os_logo.jpg'
 abbrlink: e959db2e
 date: 2021-04-08 15:21:58
 ---

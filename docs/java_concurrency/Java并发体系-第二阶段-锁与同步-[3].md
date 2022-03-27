@@ -9,7 +9,7 @@ categories:
   - 原理
 keywords: Java并发，原理，源码
 description: '万字系列长文讲解-Java并发体系-第二阶段,从C++和硬件方面讲解。'
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/Java_concurrency.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/Java_concurrency.png'
 abbrlink: 113a3931
 date: 2020-10-08 22:10:58
 ---

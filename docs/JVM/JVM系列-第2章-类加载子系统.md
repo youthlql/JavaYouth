@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第2章-类加载子系统。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/jvm.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/jvm.png'
 abbrlink: 2e0079af
 date: 2020-11-02 21:31:58
 ---

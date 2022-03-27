@@ -7,7 +7,7 @@ categories:
   - 入门
 keywords: Netty
 description: 对Netty的架构进行了解析，主要是Reactor设计模式的多种解决方案。同时讲解了Netty的核心模块组件。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/netty_logo.jpg'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/netty_logo.jpg'
 abbrlink: f846f3f
 date: 2021-04-15 14:21:58
 ---

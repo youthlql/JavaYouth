@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第8章-执行引擎。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/jvm.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/jvm.png'
 abbrlink: 408712f4
 date: 2020-11-15 19:48:42
 ---

@@ -8,7 +8,7 @@ categories:
   - Apollo
 keywords: Apollo，配置中心。
 description: Apollo简单入门及和SpringBoot集成。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/apollo.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/apollo.png'
 abbrlink: 10d32fba
 date: 2020-12-29 11:31:58
 ---

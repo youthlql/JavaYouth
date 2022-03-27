@@ -9,7 +9,7 @@ categories:
   - 原理
 keywords: Java并发，原理，源码
 description: 万字系列长文讲解-Java并发体系-第三阶段-JUC并发包。JUC在高并发编程中使用频率非常高，这里会详细介绍其用法。
-cover: 'https://gitee.com/youthlql/randombg/raw/master/logo/Java_concurrency.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/Java_concurrency.png'
 abbrlink: 70c90e5d
 date: 2020-10-10 22:13:58
 ---
