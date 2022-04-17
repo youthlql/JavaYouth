@@ -1,4 +1,0 @@
-- [首页](https://imlql.cn/JavaYouth/#/)
-- [Github](https://github.com/youthlql/JavaYouth)
-- [博客](https://imlql.cn/)
-- [CSDN](https://blog.csdn.net/Youth_lql)
