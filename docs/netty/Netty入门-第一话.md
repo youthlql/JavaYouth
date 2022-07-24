@@ -7,7 +7,7 @@ categories:
   - 入门
 keywords: Netty
 description: 第一话对BIO和NIO进行了讲解，为后续做准备。
-cover: 'https://upyunimg.imlql.cn/lql_static@latest/logo/netty_logo.jpg'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/netty_logo.jpg'
 abbrlink: 3f9283e7
 date: 2021-04-08 14:21:58
 ---
@@ -33,7 +33,7 @@ date: 2021-04-08 14:21:58
 
 相对简单的一个体系图
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0001.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0001.png"/>
 
 ## Netty 的应用场景
 
@@ -67,7 +67,7 @@ date: 2021-04-08 14:21:58
 
 ## Netty 的学习资料参考
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0002.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0002.png"/>
 
 
 
@@ -97,11 +97,11 @@ date: 2021-04-08 14:21:58
 2. `Java` 共支持 `3` 种网络编程模型 `I/O` 模式：`BIO`、`NIO`、`AIO`。
 3. `Java BIO`：同步并阻塞（传统阻塞型），服务器实现模式为一个连接一个线程，即客户端有连接请求时服务器端就需要启动一个线程进行处理，如果这个连接不做任何事情会造成不必要的线程开销。【简单示意图】
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0003.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0003.png"/>
 
 4. `Java NIO`：同步非阻塞，服务器实现模式为一个线程处理多个请求（连接），即客户端发送的连接请求都会注册到多路复用器上，多路复用器轮询到连接有 `I/O` 请求就进行处理。【简单示意图】
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0004.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0004.png"/>
 
 5. `Java AIO(NIO.2)`：异步非阻塞，`AIO` 引入异步通道的概念，采用了 `Proactor` 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用。
 6. 我们依次展开讲解。
@@ -120,7 +120,7 @@ date: 2021-04-08 14:21:58
 
 ## Java BIO 工作机制
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0005.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0005.png"/>
 
 对 `BIO` 编程流程的梳理
 
@@ -207,7 +207,7 @@ public class BIOServer {
 }
 ```
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0006.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0006.png"/>
 
 
 
@@ -277,7 +277,7 @@ public class BasicBuffer {
 3. `BIO` 基于字节流和字符流进行操作，而 `NIO` 基于 `Channel`（通道）和 `Buffer`（缓冲区）进行操作，数据总是从通道读取到缓冲区中，或者从缓冲区写入到通道中。`Selector`（选择器）用于监听多个通道的事件（比如：连接请求，数据到达等），因此使用单个线程就可以监听多个客户端通道。
 4. Buffer和Channel之间的数据流向是双向的
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0007.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0007.png"/>
 
 ## NIO 三大核心原理示意图
 
@@ -287,7 +287,7 @@ public class BasicBuffer {
 
 关系图的说明:
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0008.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0008.png"/>
 
 1. 每个 `Channel` 都会对应一个 `Buffer`。
 2. `Selector` 对应一个线程，一个线程对应多个 `Channel`（连接）。
@@ -303,17 +303,17 @@ public class BasicBuffer {
 
 缓冲区（`Buffer`）：缓冲区本质上是一个**可以读写数据的内存块**，可以理解成是一个**容器对象（含数组）**，该对象提供了一组方法，可以更轻松地使用内存块，，缓冲区对象内置了一些机制，能够跟踪和记录缓冲区的状态变化情况。`Channel` 提供从文件、网络读取数据的渠道，但是读取或写入的数据都必须经由 `Buffer`，如图:【后面举例说明】
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0009.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0009.png"/>
 
 ### Buffer 类及其子类
 
 1. 在 `NIO` 中，`Buffer` 是一个顶层父类，它是一个抽象类，类的层级关系图：
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0010.png" />
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0010.png" />
 
 2. `Buffer` 类定义了所有的缓冲区都具有的四个属性来提供关于其所包含的数据元素的信息：
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0011.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0011.png"/>
 
 
 
@@ -321,13 +321,13 @@ public class BasicBuffer {
 
 3. `Buffer` 类相关方法一览
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0013.png" />
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0013.png" />
 
 ### ByteBuffer
 
 从前面可以看出对于 `Java` 中的基本数据类型（`boolean` 除外），都有一个 `Buffer` 类型与之相对应，最常用的自然是 `ByteBuffer` 类（二进制数据），该类的主要方法如下：
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0014.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0014.png"/>
 
 ## 通道（Channel）
 
@@ -343,7 +343,7 @@ public class BasicBuffer {
 5. `FileChannel` 用于文件的数据读写，`DatagramChannel` 用于 `UDP` 的数据读写，`ServerSocketChannel` 和 `SocketChannel` 用于 `TCP` 的数据读写。
 6. 图示
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0015.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0015.png"/>
 
 ### FileChannel 类
 
@@ -444,7 +444,7 @@ public class NIOFileChannel02 {
 2. 拷贝一个文本文件 `1.txt`，放在项目下即可
 3. 代码演示
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0016.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0016.png"/>
 
 ```java
 package com.atguigu.nio;
@@ -721,7 +721,7 @@ public class ScatteringAndGatheringTest {
 
 ### Selector 示意图和特点说明
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0017.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0017.png"/>
 
 说明如下：
 
@@ -733,7 +733,7 @@ public class ScatteringAndGatheringTest {
 
 ### Selector 类相关方法
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0018.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0018.png"/>
 
 ### 注意事项
 
@@ -748,7 +748,7 @@ public class ScatteringAndGatheringTest {
 
 `NIO` 非阻塞网络编程相关的（`Selector`、`SelectionKey`、`ServerScoketChannel` 和 `SocketChannel`）关系梳理图
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0019.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0019.png"/>
 
 对上图的说明：
 
@@ -938,21 +938,21 @@ public static final int OP_ACCEPT = 1 << 4;
 
 2. `SelectionKey` 相关方法
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0020.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0020.png"/>
 
 ### ServerSocketChannel
 
 1. `ServerSocketChannel` 在服务器端监听新的客户端 `Socket` 连接，负责监听，不负责实际的读写操作
 2. 相关方法如下
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0021.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0021.png"/>
 
 ### SocketChannel
 
 1. `SocketChannel`，网络 `IO` 通道，**具体负责进行读写操作**。`NIO` 把缓冲区的数据写入通道，或者把通道里的数据读到缓冲区。
 2. 相关方法如下
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0022.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0022.png"/>
 
 ## NIO网络编程应用实例 - 群聊系统
 
@@ -965,7 +965,7 @@ public static final int OP_ACCEPT = 1 << 4;
 5. 目的：进一步理解 `NIO` 非阻塞网络编程机制
 6. 示意图分析和代码
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0023.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0023.png"/>
 
 代码：
 
@@ -1243,7 +1243,7 @@ socket.getOutputStream().write(arr);
 
 ### 传统 IO 模型
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0024.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0024.png"/>
 
 **DMA**：`direct memory access` 直接内存拷贝（不使用 `CPU`）
 
@@ -1252,19 +1252,19 @@ socket.getOutputStream().write(arr);
 1. `mmap` 通过内存映射，将文件映射到内核缓冲区，同时，用户空间可以共享内核空间的数据。这样，在进行网络传输时，就可以减少内核空间到用户空间的拷贝次数。如下图
 2. `mmap` 示意图
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0025.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0025.png"/>
 
 ### sendFile 优化
 
 1. `Linux2.1` 版本提供了 `sendFile` 函数，其基本原理如下：数据根本不经过用户态，直接从内核缓冲区进入到 `SocketBuffer`，同时，由于和用户态完全无关，就减少了一次上下文切换
 2. 示意图和小结
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0026.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0026.png"/>
 
 3. 提示：零拷贝从操作系统角度，是没有 `cpu` 拷贝
 4. `Linux在2.4` 版本中，做了一些修改，避免了从内核缓冲区拷贝到 `Socketbuffer` 的操作，直接拷贝到协议栈，从而再一次减少了数据拷贝。具体如下图和小结：
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_001/0027.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_001/0027.png"/>
 
 5. 这里其实有一次 `cpu` 拷贝 `kernel buffer` -> `socket buffer` 但是，拷贝的信息很少，比如 `lenght`、`offset` 消耗低，可以忽略
 

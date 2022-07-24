@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第4章-虚拟机栈。
-cover: 'https://upyunimg.imlql.cn/lql_static@latest/logo/jvm.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/jvm.png'
 abbrlink: 5b1b6560
 date: 2020-11-10 10:38:42
 ---
@@ -31,7 +31,7 @@ date: 2020-11-10 10:38:42
 1. 首先栈是运行时的单位，而堆是存储的单位。
 2. 即：栈解决程序的运行问题，即程序如何执行，或者说如何处理数据。堆解决的是数据存储的问题，即数据怎么放，放哪里
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0001.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0001.png">
 
 
 
@@ -66,7 +66,7 @@ date: 2020-11-10 10:38:42
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0002.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0002.png">
 
 - 虚拟机栈的生命周期
   - 生命周期和线程一致，也就是线程结束了，该虚拟机栈也销毁了
@@ -90,7 +90,7 @@ date: 2020-11-10 10:38:42
 - 对于栈来说不存在垃圾回收问题
   - 栈不需要GC，但是可能存在OOM
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0003.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0003.png">
 
 ### 虚拟机栈的异常
 
@@ -164,7 +164,7 @@ Exception in thread "main" java.lang.StackOverflowError
 
 **设置栈参数之后**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0004.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0004.png">
 
 部分输出结果
 
@@ -202,7 +202,7 @@ Exception in thread "main" java.lang.StackOverflowError
 4.  如果在该方法中调用了其他方法，对应的新的栈帧会被创建出来，放在栈的顶端，成为新的当前帧。
   
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0005.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0005.png">
 
 1.  **不同线程中所包含的栈帧是不允许存在相互引用的**，即不可能在一个栈帧之中引用另外一个线程的栈帧。
 2.  如果当前方法调用了其他方法，方法返回之际，当前栈帧会传回此方法的执行结果给前一个栈帧，接着，虚拟机会丢弃当前栈帧，使得前一个栈帧重新成为当前栈帧。
@@ -230,11 +230,11 @@ Exception in thread "main" java.lang.StackOverflowError
 
 - 一些附加信息
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0006.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0006.png">
 
 并行每个线程下的栈都是私有的，因此每个线程都有自己各自的栈，并且每个栈里面都有很多栈帧，栈帧的大小主要由局部变量表 和 操作数栈决定的
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0007.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0007.png">
 
 局部变量表
 -------
@@ -312,7 +312,7 @@ public class LocalVariablesTest {
 }
 ```
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0008.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0008.png">
 
 看完字节码后，可得结论：所以局部变量表所需的容量大小是在编译期确定下来的。
 
@@ -324,29 +324,29 @@ public class LocalVariablesTest {
 
 1、0-15  也就是有16行字节码
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0009.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0009.png">
 
 
 
 2、方法异常信息表
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0010.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0010.png">
 
 3、Misc
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0011.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0011.png">
 
 4、行号表
 
 Java代码的行号和字节码指令行号的对应关系
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0012.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0012.png">
 
 
 
 5、注意：生效行数和剩余有效行数都是针对于字节码文件的行数
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0013.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0013.png">
 
 1、图中圈的东西表示该局部变量的作用域
 
@@ -370,7 +370,7 @@ Java代码的行号和字节码指令行号的对应关系
 6.  如果需要访问局部变量表中一个64bit的局部变量值时，只需要使用前一个索引即可。（比如：访问long或double类型变量）
 7.  如果当前帧是由构造方法或者实例方法创建的，那么**该对象引用this将会存放在index为0的slot处**，其余的参数按照参数表顺序继续排列。（this也相当于一个变量）
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0014.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0014.png">
 
 ### Slot代码示例
 
@@ -388,7 +388,7 @@ Java代码的行号和字节码指令行号的对应关系
 
 局部变量表：this 存放在 index = 0 的位置
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0015.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0015.png">
 
 
 
@@ -408,7 +408,7 @@ Java代码的行号和字节码指令行号的对应关系
 
 weight 为 double 类型，index 直接从 3 蹦到了 5
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0016.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0016.png">
 
 
 
@@ -451,7 +451,7 @@ this 不存在与 static 方法的局部变量表中，所以无法调用
 
 局部变量 c 重用了局部变量 b 的 slot 位置
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0017.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0017.png">
 
 
 
@@ -499,13 +499,13 @@ this 不存在与 static 方法的局部变量表中，所以无法调用
   - 比如：执行复制、交换、求和等操作
   
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0018.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0018.png">
 
 
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0019.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0019.png">
 
 
 
@@ -536,7 +536,7 @@ this 不存在与 static 方法的局部变量表中，所以无法调用
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0020.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0020.jpg">
 
 局部变量表就相当于食材
 
@@ -571,23 +571,23 @@ this 不存在与 static 方法的局部变量表中，所以无法调用
 10 return
 ```
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0021.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0021.png">
 
 ### 一步一步看流程
 
 1、首先执行第一条语句，PC寄存器指向的是0，也就是指令地址为0，然后使用bipush让操作数15入操作数栈。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0022.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0022.png">
 
 2、执行完后，PC寄存器往下移，指向下一行代码，下一行代码就是将操作数栈的元素存储到局部变量表1的位置（istore_1），我们可以看到局部变量表的已经增加了一个元素。并且操作数栈为空了
 
 *   解释为什么局部变量表索引从 1 开始，因为该方法为实例方法，局部变量表索引为 0 的位置存放的是 this
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0023.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0023.png">
 
 3、然后PC下移，指向的是下一行。让操作数8也入栈，同时执行store操作，存入局部变量表中
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0024.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0024.png">
 
 
 
@@ -595,11 +595,11 @@ this 不存在与 static 方法的局部变量表中，所以无法调用
 
 iload_1：取出局部变量表中索引为1的数据入操作数栈
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0025.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0025.png">
 
 5、然后将操作数栈中的两个元素执行相加操作，并存储在局部变量表3的位置
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0026.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0026.png">
 
 
 
@@ -607,7 +607,7 @@ iload_1：取出局部变量表中索引为1的数据入操作数栈
 
 **关于类型转换的说明**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0027.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0027.png">
 
 
 
@@ -616,7 +616,7 @@ iload_1：取出局部变量表中索引为1的数据入操作数栈
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0028.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0028.png">
 
 - m改成800之后，byte存储不了，就成了short型，sipush 800
 
@@ -645,11 +645,11 @@ iload_1：取出局部变量表中索引为1的数据入操作数栈
 
 getSum() 方法字节码指令：最后带着个 ireturn
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0029.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0029.png">
 
 testGetSum() 方法字节码指令：一上来就加载 getSum() 方法的返回值()
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0030.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0030.png">
 
 
 
@@ -841,7 +841,7 @@ SourceFile: "DynamicLinkingTest.java"
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0031.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0031.png">
 
 
 
@@ -1136,7 +1136,7 @@ interface MethodInterface {
 
 Son 类中 show() 方法的字节码指令如下
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0032.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0032.png">
 
 
 
@@ -1176,7 +1176,7 @@ public class Lambda {
 }
 ```
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0033.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0033.png">
 
 
 
@@ -1233,7 +1233,7 @@ Java：String info = "mogu blog";     		(Java是静态类型语言的，会先�
 
 如图所示：如果类中重写了方法，那么调用的时候，就会直接在该类的虚方法表中查找
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0034.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0034.png">
 
 1、比如说son在调用toString的时候，Son没有重写过，Son的父类Father也没有重写过，那就直接调用Object类的toString。那么就直接在虚方法表里指明toString直接指向Object类。
 
@@ -1243,24 +1243,24 @@ Java：String info = "mogu blog";     		(Java是静态类型语言的，会先�
 
 **例子2**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0035.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0035.png">
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0036.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0036.jpg">
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0037.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0037.jpg">
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0038.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0038.jpg">
 
 
 
 方法返回地址
 --------
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0039.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0039.png">
 
 > 在一些帖子里，方法返回地址、动态链接、一些附加信息  也叫做帧数据区
 
@@ -1309,7 +1309,7 @@ Java：String info = "mogu blog";     		(Java是静态类型语言的，会先�
 2.  方法执行过程中，抛出异常时的异常处理，存储在一个异常处理表，方便在发生异常的时候找到处理异常的代码
   
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0040.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0040.png">
 
 
 
@@ -1321,7 +1321,7 @@ Java：String info = "mogu blog";     		(Java是静态类型语言的，会先�
 *   target ：出现异常跳转至地址为 11 的指令执行
 *   type ：捕获异常的类型
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_004/0041.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_004/0041.png">
 
 
 

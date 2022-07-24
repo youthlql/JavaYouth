@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第10章-垃圾回收概述和相关算法。
-cover: 'https://upyunimg.imlql.cn/lql_static@latest/logo/jvm.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/jvm.png'
 abbrlink: d54daa0f
 date: 2020-11-16 18:14:02
 ---
@@ -20,7 +20,7 @@ date: 2020-11-16 18:14:02
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0001.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0001.png">
 
 1.  Java 和 C++语言的区别，就在于垃圾收集技术和内存动态分配上，C++语言没有垃圾收集技术，需要程序员手动的收集。
   
@@ -102,7 +102,7 @@ date: 2020-11-16 18:14:02
 
 **十几年前磁盘碎片整理的日子**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0002.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0002.jpg">
 
 
 
@@ -174,7 +174,7 @@ date: 2020-11-16 18:14:02
 
 ### 应该关心哪些区域的回收？
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0003.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0003.png">
 
 1.  垃圾收集器可以对年轻代回收，也可以对老年代回收，甚至是全栈和方法区的回收，
   1.  其中，**Java堆是垃圾收集器的工作重点**
@@ -216,7 +216,7 @@ date: 2020-11-16 18:14:02
 
 ### 循环引用
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0004.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0004.png">
 
 当p的指针断开的时候，内部的引用形成一个循环，计数器都还算1，无法被回收，这就是循环引用，从而造成内存泄漏
 
@@ -255,7 +255,7 @@ public class RefCountGC {
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0005.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0005.png">
 
 * 如果不小心直接把`obj1.reference`和`obj2.reference`置为null。则在Java堆中的两块内存依然保持着互相引用，无法被回收
 
@@ -353,7 +353,7 @@ Process finished with exit code 0
 3.  如果目标对象没有任何引用链相连，则是不可达的，就意味着该对象己经死亡，可以标记为垃圾对象。
 4.  在可达性分析算法中，只有能够被根对象集合直接或者间接连接的对象才是存活对象。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0006.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0006.png">
 
 
 
@@ -371,7 +371,7 @@ Process finished with exit code 0
     - 基本数据类型对应的Class对象，一些常驻的异常对象（如：NullPointerException、OutofMemoryError），系统类加载器。
 7.  反映java虚拟机内部情况的JMXBean、JVMTI中注册的回调、本地代码缓存等。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0007.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0007.png">
 
 
 
@@ -453,7 +453,7 @@ Object 类中 finalize() 源码
 
 **通过 JVisual VM 查看 Finalizer 线程**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0008.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0008.png">
 
 
 
@@ -579,7 +579,7 @@ MAT与JProfiler的GC Roots溯源
 
 **方式一：命令行使用 jmap**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0009.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0009.png">
 
 
 
@@ -631,23 +631,23 @@ public class GCRootsTest {
 
 1、先执行第一步，然后停下来，去生成此步骤dump文件
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0010.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0010.png">
 
 2、 点击【堆 Dump】
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0011.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0011.png">
 
 3、右键 --\> 另存为即可
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0012.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0012.jpg">
 
 4、输入命令，继续执行程序
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0013.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0013.png">
 
 5、我们接着捕获第二张堆内存快照
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0014.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0014.jpg">
 
 
 
@@ -657,19 +657,19 @@ public class GCRootsTest {
 
 > 点击Open Heap Dump也行
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0015.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0015.png">
 
 2、选择Java Basics --> GC Roots
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0016.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0016.png">
 
 3、第一次捕捉堆内存快照时，GC Roots 中包含我们定义的两个局部变量，类型分别为 ArrayList 和 Date，Total:21
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0017.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0017.jpg">
 
 4、打开第二个dump文件，第二次捕获内存快照时，由于两个局部变量引用的对象被释放，所以这两个局部变量不再作为 GC Roots ，从 Total Entries = 19 也可以看出（少了两个 GC Roots）
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0018.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0018.jpg">
 
 
 
@@ -716,13 +716,13 @@ public class GCRootsTest {
 
 1、
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0019.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0019.jpg">
 
 2、
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0020.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0020.png">
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0021.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0021.jpg">
 
 可以发现颜色变绿了，可以动态的看变化
 
@@ -730,11 +730,11 @@ public class GCRootsTest {
 
 3、右击对象，选择 Show Selection In Heap Walker，单独的查看某个对象
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0022.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0022.png">
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0023.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0023.png">
 
 
 
@@ -742,13 +742,13 @@ public class GCRootsTest {
 
 点击Show Paths To GC Roots，在弹出界面中选择默认设置即可
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0024.jpg">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0024.jpg">
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0025.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0025.png">
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0026.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0026.png">
 
 ### JProfiler 分析 OOM
 
@@ -798,11 +798,11 @@ count = 6
 
 1、看这个超大对象
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0027.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0027.png">
 
 2、揪出 main() 线程中出问题的代码
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0028.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0028.png">
 
 
 
@@ -837,7 +837,7 @@ count = 6
     *   注意：标记的是被引用的对象，也就是可达对象，并非标记的是即将被清除的垃圾对象
 2.  清除：Collector对堆内存从头到尾进行线性的遍历，如果发现某个对象在其Header中没有标记为可达对象，则将其回收
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0029.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0029.png">
 
 
 
@@ -876,7 +876,7 @@ count = 6
 
 将活着的内存空间分为两块，每次只使用其中一块，在垃圾回收时将正在使用的内存中的存活对象复制到未被使用的内存块中，之后清除正在使用的内存块中的所有对象，交换两个内存的角色，最后完成垃圾回收
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0030.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0030.png">
 
 新生代里面就用到了复制算法，Eden区和S0区存活对象整体复制到S1区
 
@@ -906,7 +906,7 @@ count = 6
 2.  老年代大量的对象存活，那么复制的对象将会有很多，效率会很低
 3.  在新生代，对常规应用的垃圾回收，一次通常可以回收70% - 99% 的内存空间。回收性价比很高。所以现在的商业虚拟机都是用这种收集算法回收新生代。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0031.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0031.png">
 
 
 
@@ -935,7 +935,7 @@ count = 6
 2.  第二阶段将所有的存活对象压缩到内存的一端，按顺序排放。之后，清理边界外所有的空间。
   
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0032.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0032.png">
 
 
 
@@ -1066,7 +1066,7 @@ A：无，没有最好的算法，只有最合适的算法
 1.  一般来说，在相同条件下，堆空间越大，一次GC时所需要的时间就越长，有关GC产生的停顿也越长。为了更好地控制GC产生的停顿时间，将一块大的内存区域分割成多个小块，根据目标的停顿时间，每次合理地回收若干个小区间，而不是整个堆空间，从而减少一次GC所产生的停顿。
 3.  分代算法将按照对象的生命周期长短划分成两个部分，分区算法将整个堆空间划分成连续的不同小区间。每一个小区间都独立使用，独立回收。这种算法的好处是可以控制一次回收多少个小区间。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_010/0033.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_010/0033.png">
 
 
 

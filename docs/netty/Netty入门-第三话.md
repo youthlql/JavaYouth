@@ -7,7 +7,7 @@ categories:
   - 入门
 keywords: Netty
 description: 对前面两话一些迷惑的点进行细说，讲解handler调用机制，TCP粘包，以及用netty写一个十分简单的RPC。
-cover: 'https://upyunimg.imlql.cn/lql_static@latest/logo/netty_logo.jpg'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/netty_logo.jpg'
 abbrlink: 429acc6d
 date: 2021-04-21 17:38:58
 ---
@@ -25,7 +25,7 @@ date: 2021-04-21 17:38:58
 1. 编写网络应用程序时，因为数据在网络中传输的都是二进制字节码数据，在发送数据时就需要编码，接收数据时就需要解码[示意图]
 2. `codec`（编解码器）的组成部分有两个：`decoder`（解码器）和 `encoder`（编码器）。`encoder` 负责把业务数据转换成字节码数据，`decoder` 负责把字节码数据转换成业务数据
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0001.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0001.png"/>
 
 ## Netty 本身的编码解码的机制和问题分析
 
@@ -54,7 +54,7 @@ date: 2021-04-21 17:38:58
 8. 然后通过 `protoc.exe` 编译器根据 `.proto` 自动生成 `.java` 文件
 9. `protobuf` 使用示意图
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0002.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0002.png"/>
 
 ## Protobuf 快速入门实例
 
@@ -91,7 +91,7 @@ message Student { //会在 StudentPOJO 外部类生成一个内部类 Student，
 protoc.exe --java_out=.Student.proto
 将生成的 StudentPOJO 放入到项目使用
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0003.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0003.png"/>
 
 生成的StudentPOJO代码太长就不贴在这里了
 
@@ -676,7 +676,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 2. `ChannelHandler` 充当了处理入站和出站数据的应用程序逻辑的容器。例如，实现 `ChannelInboundHandler` 接口（或 `ChannelInboundHandlerAdapter`），你就可以接收入站事件和数据，这些数据会被业务逻辑处理。当要给客户端发送响应时，也可以从 `ChannelInboundHandler` 冲刷数据。业务逻辑通常写在一个或者多个 `ChannelInboundHandler` 中。`ChannelOutboundHandler` 原理一样，只不过它是用来处理出站数据的
 3. `ChannelPipeline` 提供了 `ChannelHandler` 链的容器。以客户端应用程序为例，如果事件的运动方向是从客户端到服务端的，那么我们称这些事件为出站的，即客户端发送给服务端的数据会通过 `pipeline` 中的一系列 `ChannelOutboundHandler`，并被这些 `Handler` 处理，反之则称为入站的
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0004.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0004.png"/>
 
 > 出站，入站如果搞不清楚，看下面的**Netty的handler链的调用机制**，通过一个例子和图讲清楚
 
@@ -689,12 +689,12 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
 1. 关系继承图
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0005.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0005.png"/>
 
 2. 由于不可能知道远程节点是否会一次性发送一个完整的信息，`tcp` 有可能出现粘包拆包的问题，这个类会对入站数据进行缓冲，直到它准备好被处理.【后面有说TCP的粘包和拆包问题】
 3. 一个关于 `ByteToMessageDecoder` 实例分析
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0006.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0006.png"/>
 
 
 
@@ -710,7 +710,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
 
 >  读者可以看下这个图，带着这个图去看下面的例子。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0007.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0007.png"/>
 
 
 
@@ -978,11 +978,11 @@ public class MyLongToByteEncoder extends MessageToByteEncoder<Long> {
 
 ### 效果
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0008.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0008.png"/>
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0009.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0009.png"/>
 
 
 
@@ -1002,7 +1002,7 @@ public class MyLongToByteEncoder extends MessageToByteEncoder<Long> {
 
 ​	    
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0007.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0007.png"/>
 
 
 
@@ -1086,13 +1086,13 @@ public class MyByteToLongDecoder extends ByteToMessageDecoder {
 
 如下图验证结果：
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0010.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0010.png"/>
 
 
 
 2. 同时又引出了一个小问题
 
-   <img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0011.png"/>
+   <img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0011.png"/>
 
    当我们`MyClientHandler`传一个Long时，会调用我们的`MyLongToByteEncoder`的编码器。那么控制台就会打印这样一句话：**MyLongToByteEncoder encode 被调用**。但是这里并没有调用编码器，这是为什么呢？
 
@@ -1145,7 +1145,7 @@ public class MyByteToLongDecoder extends ByteToMessageDecoder {
 ctx.writeAndFlush(Unpooled.copiedBuffer("abcdabcdabcdabcd",CharsetUtil.UTF_8));
 ```
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0012.png" />
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0012.png" />
 
 
 
@@ -1194,7 +1194,7 @@ public class MyByteToLongDecoder2 extends ReplayingDecoder<Void> {
 
 ## 其它编解码器
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0013.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0013.png"/>
 
 
 
@@ -1245,7 +1245,7 @@ log4j.appender.stdout.layout.ConversionPattern=[%p]%C{1}-%m%n
 
 3. 演示整合
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0014.jpg"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0014.jpg"/>
 
 
 
@@ -1257,7 +1257,7 @@ log4j.appender.stdout.layout.ConversionPattern=[%p]%C{1}-%m%n
 2. 由于 `TCP` 无消息保护边界,需要在接收端处理消息边界问题，也就是我们所说的粘包、拆包问题,看一张图
 3.  `TCP` 粘包、拆包图解
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0015.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0015.png"/>
 
 
 假设客户端分别发送了两个数据包 `D1` 和 `D2` 给服务端，由于服务端一次读取到字节数是不确定的，故可能存在以下四种情况：
@@ -1498,11 +1498,11 @@ public class MyClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
 **Client**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0016.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0016.png"/>
 
 **Server**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0017.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0017.png"/>
 
 
 
@@ -1510,13 +1510,13 @@ public class MyClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 
 **Client**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0018.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0018.png"/>
 
 
 
 **Server**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0019.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0019.png"/>
 
 
 
@@ -1534,7 +1534,7 @@ public class MyClientHandler extends SimpleChannelInboundHandler<ByteBuf> {
 1. 要求客户端发送 `5` 个 `Message` 对象，客户端每次发送一个 `Message` 对象
 2. 服务器端每次接收一个 `Message`，分 `5` 次进行解码，每读取到一个 `Message`，会回复一个 `Message` 对象给客户端。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0020.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0020.png"/>
 
 
 
@@ -1992,7 +1992,7 @@ MyMessageEncoder encode 方法被调用
 1. `RPC（Remote Procedure Call）`—远程过程调用，是一个计算机通信协议。该协议允许运行于一台计算机的程序调用另一台计算机的子程序，而程序员无需额外地为这个交互作用编程
 2. 两个或多个应用程序都分布在不同的服务器上，它们之间的调用都像是本地方法调用一样(如图)
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0021.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0021.png"/>
 
 过程：
 
@@ -2014,11 +2014,11 @@ MyMessageEncoder encode 方法被调用
 
 3. 常见的 `RPC` 框架有：比较知名的如阿里的 `Dubbo`、`Google` 的 `gRPC`、`Go` 语言的  `rpcx`、`Apache` 的 `thrift`，`Spring` 旗下的 `SpringCloud`。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0022.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0022.png"/>
 
 ## 我们的RPC 调用流程图
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0023.png"/>
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0023.png"/>
 
 **RPC 调用流程说明**
 
@@ -2048,7 +2048,7 @@ MyMessageEncoder encode 方法被调用
 3. 创建一个消费者，该类需要透明的调用自己不存在的方法，内部需要使用 `Netty` 请求提供者返回数据
 4. 开发的分析图
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.0/netty/introduction/chapter_003/0024.png" />
+<img src="https://npm.elemecdn.com/youthlql@1.0.0/netty/introduction/chapter_003/0024.png" />
 
 
 

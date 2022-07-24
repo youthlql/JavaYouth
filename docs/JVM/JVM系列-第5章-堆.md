@@ -8,7 +8,7 @@ categories:
   - 1.内存与垃圾回收篇
 keywords: JVM，虚拟机。
 description: JVM系列-第5章-堆。
-cover: 'https://upyunimg.imlql.cn/lql_static@latest/logo/jvm.png'
+cover: 'https://npm.elemecdn.com/lql_static@latest/logo/jvm.png'
 abbrlink: 50ac3a1c
 date: 2020-11-11 20:38:42
 ---
@@ -27,7 +27,7 @@ date: 2020-11-11 20:38:42
 1.  堆针对一个JVM进程来说是唯一的。也就是**一个进程只有一个JVM实例**，一个JVM实例中就有一个运行时数据区，一个运行时数据区只有一个堆和一个方法区。
 2.  但是**进程包含多个线程，他们是共享同一堆空间的**。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0001.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0001.png">
 
 
 
@@ -68,7 +68,7 @@ public class SimpleHeap {
 }
 ```
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0002.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0002.png">
 
 
 
@@ -88,13 +88,13 @@ public class SimpleHeap {
 
 约定：新生区 <–> 新生代 <–> 年轻代 、 养老区 <–> 老年区 <–> 老年代、 永久区 <–\> 永久代
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0003.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0003.png">
 
 
 
 2.  堆空间内部结构，JDK1.8之前从永久代 替换成 元空间
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0004.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0004.png">
 
 
 
@@ -122,17 +122,17 @@ public class HeapDemo {
 
 1、双击jdk目录下的这个文件
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0005.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0005.png">
 
 
 
 2、工具 -> 插件 -> 安装Visual GC插件
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0006.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0006.png">
 
 3、运行上面的代码
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0007.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0007.png">
 
 
 
@@ -215,7 +215,7 @@ public class HeapSpaceInitial {
 
 设置下参数再看
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0008.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0008.png">
 
 ```java
 public class HeapSpaceInitial {
@@ -250,7 +250,7 @@ public class HeapSpaceInitial {
 
 **方式一： jps   /  jstat -gc 进程id**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0009.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0009.png">
 
 > jps：查看java进程
 >
@@ -285,7 +285,7 @@ OU: 老年代使用的量
 
  **方式二：-XX:+PrintGCDetails**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0010.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0010.png">
 
 
 
@@ -333,11 +333,11 @@ Process finished with exit code 1
 
 2、堆内存变化图
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0011.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0011.png">
 
 3、原因：大对象导致堆内存溢出
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0012.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0012.png">
 
 
 
@@ -357,9 +357,9 @@ Process finished with exit code 1
 
 3、其中年轻代又可以划分为Eden空间、Survivor0空间和Survivor1空间（有时也叫做from区、to区）
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0013.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0013.png">
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0014.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0014.png">
 
 - 配置新生代与老年代在堆结构的占比
 
@@ -383,7 +383,7 @@ Process finished with exit code 1
 
    
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0015.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0015.png">
 
 
 
@@ -439,7 +439,7 @@ public class EdenSurvivorTest {
 
 1、我们创建的对象，一般都是存放在Eden区的，**当我们Eden区满了后，就会触发GC操作**，一般被称为 YGC / Minor GC操作
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0016.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0016.png">
 
 2、当我们进行一次垃圾收集后，红色的对象将会被回收，而绿色的独享还被占用着，存放在S0(Survivor From)区。同时我们给每个对象设置了一个年龄计数器，经过一次回收后还存在的对象，将其年龄加 1。
 
@@ -453,11 +453,11 @@ public class EdenSurvivorTest {
 >
 > 3、也就是说s0区和s1区在互相转换。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0017.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0017.png">
 
 4、我们继续不断的进行对象生成和垃圾回收，当Survivor中的对象的年龄达到15的时候，将会触发一次 Promotion 晋升的操作，也就是将年轻代中的对象晋升到老年代中
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0018.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0018.png">
 
 关于垃圾回收：频繁在新生区收集，很少在养老区收集，几乎不在永久区/元空间收集。
 
@@ -475,7 +475,7 @@ public class EdenSurvivorTest {
     *   那万一老年代都放不下，则先触发FullGC ，再看看能不能放下，放得下最好，但如果还是放不下，那只能报 OOM 
 3.  如果 Eden 区满了，将对象往幸存区拷贝时，发现幸存区放不下啦，那只能便宜了某些新对象，让他们直接晋升至老年区
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0019.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0019.png">
 
 ### 常用调优工具
 
@@ -528,7 +528,7 @@ GC分类
 3.  Minor GC会引发STW（Stop The World），暂停其它用户的线程，等垃圾回收结束，用户线程才恢复运行
   
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0020.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0020.png">
 
 
 
@@ -649,7 +649,7 @@ Heap
 *   新生代：有Eden、两块大小相同的survivor（又称为from/to或s0/s1）构成，to总为空。
 *   老年代：存放新生代中经历多次GC仍然存活的对象。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0021.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0021.png">
 
 
 
@@ -661,7 +661,7 @@ Heap
 
 
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0022.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0022.png">
 
 
 
@@ -711,7 +711,7 @@ TLAB（Thread Local Allocation Buffer）
 2.  多线程同时分配内存时，使用TLAB可以避免一系列的非线程安全问题，同时还能够提升内存分配的吞吐量，因此我们可以将这种内存分配方式称之为**快速分配策略**。
 3.  据我所知所有OpenJDK衍生出来的JVM都提供了TLAB的设计。
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0023.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0023.png">
 
 1、每个线程都有一个TLAB空间
 
@@ -741,7 +741,7 @@ TLAB（Thread Local Allocation Buffer）
 
 **TLAB 分配过程**
 
-<img src="https://upyunimg.imlql.cn/youthlql@1.0.8/JVM/chapter_005/0024.png">
+<img src="https://npm.elemecdn.com/youthlql@1.0.8/JVM/chapter_005/0024.png">
 
 
 
