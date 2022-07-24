@@ -2,11 +2,10 @@
 
 
 
-> 1. 文章会优先发布在[Github](https://github.com/youthlql/JavaYouth)，其它平台会晚一段时间，文章纠错与更新内容只在Github。如果Github很卡，可以在去[Gitee](https://gitee.com/youthlql/JavaYouth)克隆。
-> 2. 提供在线阅读方式：[个人博客](https://imlql.cn/)。原先的电子书已关闭
+> 1. 提供在线阅读方式：[个人自建博客](https://imlql.cn/)，[CSDN博客](https://blog.csdn.net/Youth_lql)。目前图床开了防盗链，只可以在CSDN，自建博客，Github上在线看文章，下载到本地是无法看到图片的。
 > 3. 转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境。
 > 4. 如果你要提交 issue 或者 pr 的话建议到 [Github](https://github.com/youthlql/JavaYouth) 提交。笔者会持续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**，你的**Star**是我创作的动力。
-> 5. 提供所有文章的本地版本【Typora可直接打开】
+> 5. 提供所有文章的本地版本【Typora可直接打开,可以看到图片】
 >    1. 阿里云盘：https://www.aliyundrive.com/s/ZNAPANQg54A 
 >    2. 百度云盘：https://pan.baidu.com/s/1V20nKp4TQai-SVwMAfSZtQ  提取码：4ozs 
 
@@ -87,16 +86,6 @@
 
 
 
-
-# 计算机网络
-
-**总结篇**
-
-[计算机网络-总结-秋招篇](docs/Computer_NetWork/计算机网络-总结.md)
-
-
-
-[计算机网络-概述](docs/Computer_NetWork/计算机网络-概述.md)
 
 
 
@@ -189,17 +178,3 @@
 6. [Dubbo服务调用源码解析](docs/dubbo-sourcecode-v1/07.Dubbo源码系列V1-Dubbo第七节-服务调用源码解析.md)
 
    
-
-
-
-# Apollo
-
-[Apollo简单入门](docs/Apollo/Apollo简单入门.md)
-
-# ElasticSearch
-
-## 用法
-
-1、[ElasticSearch-入门](docs/ElasticSearch/usage/ElasticSearch-入门.md)
-
-2、[ElasticSearch-进阶](docs/ElasticSearch/usage/ElasticSearch-进阶.md)
