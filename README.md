@@ -2,7 +2,7 @@
 
 
 
-> 1. 提供在线阅读方式：[个人自建博客](https://imlql.cn/)，[CSDN博客](https://blog.csdn.net/Youth_lql)。目前图床开了防盗链，只可以在CSDN，自建博客看到图片。Github上和本地**可能**无法看到图片。
+> 1. 提供在线阅读方式：[个人自建博客](https://imlql.cn/)，[CSDN博客](https://blog.csdn.net/Youth_lql)。
 > 3. 转载须知：转载请注明GitHub出处，让我们一起维护一个良好的技术创作环境。
 > 4. 如果你要提交 issue 或者 pr 的话建议到 [Github](https://github.com/youthlql/JavaYouth) 提交。笔者会持续更新，如果对你有所帮助，不妨[Github](https://github.com/youthlql/JavaYouth)点个**Star~**，你的**Star**是我创作的动力。
 > 5. 提供所有文章的本地版本【Typora可直接打开,可以看到图片】
